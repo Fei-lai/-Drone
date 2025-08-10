@@ -50,12 +50,17 @@
   </div>
 </section>
 <section class="section">
-  <h2>STAFF/h2>
+  <h2>STAFF</h2>
   <div class="staff-list">
     <div class="staff-card">
       <img src="naomichi.jpg" alt="飛来直道">
       <h3>飛来 直道</h3>
       <p>CEO/パイロット 一等無人航空機操縦士</p>
+    </div>
+    <div class="staff-card">
+      <img src="shine.png" alt="Shineちゃん">
+      <h3>Shineちゃん</h3>
+      <p>広報担当＆進行役キャラクター</p>
     </div>
   </div>
 </section>
@@ -66,6 +71,12 @@
     <a href="https://www.facebook.com/" target="_blank">Facebook</a>
   </div>
 </section>
+<script>
+  document.querySelectorAll('.social-links a').forEach(link => {
+    link.addEventListener('mouseover', () => link.style.color = '#ffdd00');
+    link.addEventListener('mouseout', () => link.style.color = '#90e0ef');
+  });
+</script>
 <footer class="footer">© 2025 飛行冒険會 - All Rights Reserved.</footer>
 </body>
 </html>
