@@ -50,6 +50,11 @@
   </div>
 </section>
 <section class="section">
+  <h2>撮影動画ギャラリー</h2>
+  <input type="file" id="videoUpload" accept="video/*" multiple>
+  <div class="gallery" id="videoGallery"></div>
+</section>
+<section class="section">
   <h2>STAFF</h2>
   <div class="staff-list">
     <div class="staff-card">
@@ -75,6 +80,18 @@
   document.querySelectorAll('.social-links a').forEach(link => {
     link.addEventListener('mouseover', () => link.style.color = '#ffdd00');
     link.addEventListener('mouseout', () => link.style.color = '#90e0ef');
+  });
+
+  document.getElementById('videoUpload').addEventListener('change', function(event) {
+    const files = event.target.files;
+    const gallery = document.getElementById('videoGallery');
+    gallery.innerHTML = '';
+    Array.from(files).forEach(file => {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.src = URL.createObjectURL(file);
+      gallery.appendChild(video);
+    });
   });
 </script>
 <footer class="footer">© 2025 飛行冒険會 - All Rights Reserved.</footer>
