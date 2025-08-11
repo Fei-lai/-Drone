@@ -17,8 +17,6 @@
     .staff-card { background:#1a1a1a; border-radius:8px; padding:1rem; text-align:center; width:200px; }
     .staff-card img { width:100%; border-radius:50%; }
     .social-links a { color:#90e0ef; margin:0 0.5rem; text-decoration:none; font-size:1.2rem; }
-    .qr-container { text-align:center; margin-top:1.5rem; }
-    .qr-container img { max-width:60%; height:auto; border-radius:8px; }
     @media (max-width:600px){ .staff-card {width:100%;} .gallery img, .gallery video {max-width:100%;} }
   </style>
 </head>
@@ -27,19 +25,15 @@
   <h1>飛行冒険會</h1>
   <p>未来を空から見つめる冒険者たち</p>
 </header>
-
-<!-- ヒーロームービー -->
 <div class="hero-video">
   <video autoplay muted loop playsinline>
-    <source src="videos/seasonal-hero.mp4" type="video/mp4">
+    <source src="seasonal-hero.mov" type="video/mp4">
   </video>
   <div class="overlay">
     <h2>ようこそ、飛行冒険會へ</h2>
     <p>四季折々の空を旅する、ドローンの冒険団</p>
   </div>
 </div>
-
-<!-- サービス紹介 -->
 <section class="section">
   <h2>空から課題を解決します</h2>
   <ul>
@@ -55,22 +49,17 @@
     <img src="ad.jpg" alt="ドローンチラシ" style="max-width:50%; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1);" />
   </div>
 </section>
-
-<!-- 動画ギャラリー -->
 <section class="section">
   <h2>撮影動画ギャラリー（常設）</h2>
   <div class="gallery">
     <video controls>
       <source src="videos/sample-flight.mp4" type="video/mp4">
-      お使いのブラウザは動画再生に対応していません。
     </video>
     <video controls>
       <source src="videos/spring-view.mp4" type="video/mp4">
     </video>
   </div>
 </section>
-
-<!-- スタッフ紹介 -->
 <section class="section">
   <h2>STAFF</h2>
   <div class="staff-list">
@@ -86,37 +75,19 @@
     </div>
   </div>
 </section>
-
-<!-- お問い合わせ -->
 <section class="section" style="text-align:center;">
   <h2>お問い合わせ</h2>
-  <p>電話番号: <a href="tel:08021157568">080-2115-7568</a><br>
-     メール: <a href="mailto:hirai@centralbase26.com">hirai@centralbase26.com</a>
-  </p>
-  
-  <!-- Facebookリンク -->
+  <p>電話番号: <a href="tel:08021157568">080-2115-7568</a><br>メール: <a href="mailto:hirai@centralbase26.com">hirai@centralbase26.com</a></p>
   <div class="social-links">
     <a href="https://www.facebook.com/" target="_blank">Facebook</a>
   </div>
-
-  <!-- Facebook QRコード（手動配置用） -->
-  <div class="qr-container">
-    <img src="facebook-qr.jpg" alt="Facebook QRコード">
-  </div>
-
-  <!-- セントラルベース26へのリンク -->
-  <p style="margin-top:1rem;">
-    <a href="https://centralbase26.com" target="_blank" style="color:#90e0ef;">セントラルベース26株式会社 公式サイト</a>
-  </p>
 </section>
-
 <script>
   document.querySelectorAll('.social-links a').forEach(link => {
     link.addEventListener('mouseover', () => link.style.color = '#ffdd00');
     link.addEventListener('mouseout', () => link.style.color = '#90e0ef');
   });
 </script>
-
 <footer class="footer">© 2025 飛行冒険會 - All Rights Reserved.</footer>
 </body>
 </html>
