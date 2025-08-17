@@ -31,7 +31,7 @@
 <body>
 <header>
   <h1>飛行冒険會</h1>
-  <p>～未来を空から見つめる冒険者たち～</p>
+  <p>未来を空から見つめる冒険者たち</p>
 </header>
 
 <!-- ヒーロー動画 -->
@@ -71,7 +71,6 @@
     <video controls>
       <source src="videos/spring-view.mp4" type="video/mp4">
     </video>
-    <!-- 新しく追加した動画 -->
     <video controls>
       <source src="videos/gallery-flight.mp4" type="video/mp4">
     </video>
@@ -103,7 +102,6 @@
     <a href="https://www.facebook.com/share/16YgQHhknE/?mibextid=wwXIfr" target="_blank">Facebook</a> |
     <a href="https://www.centralbase26.com/company/" target="_blank">合同会社セントラルベース26</a>
   </div>
-  <!-- Facebook QRコード -->
   <div style="margin-top:1rem;">
     <a href="https://www.facebook.com/share/16YgQHhknE/?mibextid=wwXIfr" target="_blank">
       <img src="facebook-qr.jpg" alt="Facebook QRコード" class="qr-code">
@@ -120,21 +118,36 @@
   const modal = document.getElementById('modal');
   const modalContent = document.getElementById('modal-content');
 
-  document.querySelectorAll('.hero-video video, .ad-image').forEach(item => {
+  // ヒーロー動画クリックで拡大再生
+  document.getElementById('heroVideo').addEventListener('click', (e) => {
+    modalContent.innerHTML = '';
+    const newVideo = document.createElement('video');
+    newVideo.src = e.target.querySelector('source').src;
+    newVideo.controls = true;
+    newVideo.autoplay = true;
+    newVideo.style.maxWidth = "90%";
+    newVideo.style.maxHeight = "90%";
+    modalContent.appendChild(newVideo);
+    modal.style.display = 'flex';
+  });
+
+  // チラシ画像クリックで拡大
+  document.querySelectorAll('.ad-image').forEach(item => {
     item.addEventListener('click', () => {
       modalContent.innerHTML = '';
       const clone = item.cloneNode(true);
-      clone.removeAttribute('autoplay');
-      clone.controls = true;
       modalContent.appendChild(clone);
       modal.style.display = 'flex';
     });
   });
 
+  // モーダルを閉じる
   modal.addEventListener('click', () => {
     modal.style.display = 'none';
+    modalContent.innerHTML = '';
   });
 
+  // SNSリンク色変化
   document.querySelectorAll('.social-links a').forEach(link => {
     link.addEventListener('mouseover', () => link.style.color = '#ffdd00');
     link.addEventListener('mouseout', () => link.style.color = '#90e0ef');
