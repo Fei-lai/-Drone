@@ -121,8 +121,9 @@
   // ヒーロー動画クリックで拡大再生
   document.getElementById('heroVideo').addEventListener('click', (e) => {
     modalContent.innerHTML = '';
+    const videoSrc = e.target.querySelector('source').src;
     const newVideo = document.createElement('video');
-    newVideo.src = e.target.querySelector('source').src;
+    newVideo.src = videoSrc;
     newVideo.controls = true;
     newVideo.autoplay = true;
     newVideo.style.maxWidth = "90%";
@@ -136,6 +137,7 @@
     item.addEventListener('click', () => {
       modalContent.innerHTML = '';
       const clone = item.cloneNode(true);
+      clone.style.width = "90%";
       modalContent.appendChild(clone);
       modal.style.display = 'flex';
     });
