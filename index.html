@@ -7,37 +7,54 @@
   <style>
     body { margin:0; font-family:'Segoe UI', sans-serif; background-color:#000; color:#f5f5f5; }
     header, .footer { background:rgba(0,0,0,0.7); color:white; text-align:center; padding:1rem; }
-    .hero-video { position:relative; overflow:hidden; display:flex; justify-content:center; align-items:center; }
-    .hero-video video { width:78%; height:auto; object-fit:contain; filter:contrast(110%) saturate(120%) blur(1px); }
-    .hero-video .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-shadow:1px 1px 4px #000; }
+
     .section { max-width:960px; margin:auto; padding:2rem 1rem; }
     h2 { color:#90e0ef; border-bottom:2px solid #90e0ef; padding-bottom:0.3rem; }
+
+    /* メディア共通 */
+    .media-box { position:relative; display:flex; justify-content:center; align-items:center; }
+    .media-box > * { display:block; }
+    .wm-layer { position:absolute; inset:0; pointer-events:none; opacity:.18; mix-blend-mode:overlay; background-size:300px 200px; background-repeat:repeat; }
+
+    .hero-video { position:relative; overflow:hidden; display:flex; justify-content:center; align-items:center; }
+    .hero-video video { width:78%; height:auto; object-fit:contain; filter:contrast(110%) saturate(120%) blur(1px); }
+    .hero-video .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-shadow:1px 1px 4px #000; }
+
     .gallery, .staff-list { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
     .gallery img, .gallery video { width:100%; max-width:300px; border-radius:8px; }
     .staff-card { background:#1a1a1a; border-radius:8px; padding:1rem; text-align:center; width:200px; }
     .staff-card img { width:100%; border-radius:50%; }
     .social-links a { color:#90e0ef; margin:0 0.5rem; text-decoration:none; font-size:1.2rem; }
+
+    /* セキュリティ補助 */
+    img, video { -webkit-user-drag:none; user-drag:none; }
     @media (max-width:600px){ .staff-card {width:100%;} .gallery img, .gallery video {max-width:100%;} }
+
     /* モーダル */
     .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:1000; }
     .modal video, .modal img { max-width:90%; max-height:90%; }
     .modal.active { display:flex; }
+    .modal-close { position:absolute; top:16px; right:20px; font-size:2rem; color:#fff; cursor:pointer; }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 <header>
   <h1>飛行冒険會</h1>
   <p>～未来を空から見つめる冒険者たち～</p>
 </header>
-<div class="hero-video">
-  <video autoplay muted loop playsinline id="heroVideo">
+
+<!-- ヒーロー動画（透かし付） -->
+<div class="hero-video media-box">
+  <video autoplay muted loop playsinline id="heroVideo" controlsList="nodownload">
     <source src="seasonal-hero.mov" type="video/mp4">
   </video>
+  <div class="wm-layer" data-wm="© 飛行冒険會｜No unauthorized use"></div>
   <div class="overlay">
     <h2>ようこそ、飛行冒険會へ</h2>
     <p>四季折々の空を旅する、ドローンの冒険団</p>
   </div>
 </div>
+
 <section class="section">
   <h2>空から課題を解決します</h2>
   <ul>
@@ -50,36 +67,55 @@
     「山全体がすぐに分かって助かった」<br>— 愛媛県西宇和郡伊方町名取の農家様の声
   </blockquote>
 </section>
-<section class="section" style="text-align:center;">
-  <img src="ad.jpg" alt="ドローンチラシ" style="max-width:50%; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top:2rem;" />
+
+<!-- 広告（中央・透かし付） -->
+<section class="section">
+  <div class="media-box" style="justify-content:center;">
+    <img src="ad.jpg" alt="ドローンチラシ" style="max-width:50%; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top:2rem;" />
+    <div class="wm-layer" data-wm="© 飛行冒険會｜広告画像"></div>
+  </div>
 </section>
+
+<!-- 動画ギャラリー（透かし付） -->
 <section class="section">
   <h2>撮影動画ギャラリー（常設）</h2>
   <div class="gallery">
-    <video controls>
-      <source src="videos/sample-flight.mp4" type="video/mp4">
-    </video>
-    <video controls>
-      <source src="videos/spring-view.mp4" type="video/mp4">
-      <source src="spring-view.mov" type="video/quicktime">
-    </video>
+    <div class="media-box">
+      <video controls controlsList="nodownload" playsinline>
+        <source src="videos/sample-flight.mp4" type="video/mp4">
+      </video>
+      <div class="wm-layer" data-wm="© 飛行冒険會"></div>
+    </div>
+    <div class="media-box">
+      <video controls controlsList="nodownload" playsinline>
+        <source src="videos/spring-view.mp4" type="video/mp4">
+        <source src="spring-view.mov" type="video/quicktime">
+      </video>
+      <div class="wm-layer" data-wm="© 飛行冒険會"></div>
+    </div>
   </div>
 </section>
+
+<!-- スタッフ（透かし付） -->
 <section class="section">
   <h2>STAFF</h2>
   <div class="staff-list">
-    <div class="staff-card">
+    <div class="staff-card media-box">
       <img src="naomichi.jpg" alt="飛来直道">
+      <div class="wm-layer" data-wm="© 飛行冒険會｜Staff"></div>
       <h3>飛来 直道</h3>
       <p>CEO/パイロット 一等無人航空機操縦士</p>
     </div>
-    <div class="staff-card">
+    <div class="staff-card media-box">
       <img src="shine.png" alt="Shineちゃん">
+      <div class="wm-layer" data-wm="© 飛行冒険會｜Shine"></div>
       <h3>Shineちゃん</h3>
       <p>広報担当＆進行役キャラクター</p>
     </div>
   </div>
 </section>
+
+<!-- お問い合わせ（QRにも透かし） -->
 <section class="section" style="text-align:center;">
   <h2>お問い合わせ</h2>
   <p>電話番号: <a href="tel:08021157568">080-2115-7568</a><br>メール: <a href="mailto:hirai@centralbase26.com">hirai@centralbase26.com</a></p>
@@ -87,32 +123,82 @@
     <a href="https://www.facebook.com/share/16YgQHhknE/?mibextid=wwXIfr" target="_blank">Facebook</a> |
     <a href="https://www.centralbase26.com/company/" target="_blank">合同会社セントラルベース26</a>
   </div>
-  <div style="margin-top:1rem;">
-    <img src="facebook-qr.jpg" alt="Facebook QRコード" style="width:1.5cm; height:1.5cm;">
+  <div class="media-box" style="margin-top:1rem; display:inline-flex;">
+    <img src="facebook-qr.jpg" alt="Facebook QRコード" style="width:1.5cm; height:1.5cm;" />
+    <div class="wm-layer" data-wm="© 飛行冒険會"></div>
   </div>
 </section>
 
 <!-- モーダル -->
 <div class="modal" id="modal">
-  <span id="closeModal" style="position:absolute;top:20px;right:30px;font-size:2rem;color:white;cursor:pointer;">&times;</span>
-  <video controls id="modalVideo"></video>
+  <span class="modal-close" id="closeModal">&times;</span>
+  <video controls id="modalVideo" controlsList="nodownload"></video>
   <img id="modalImg" />
 </div>
 
 <script>
-  // モーダル処理
+  // ===== 右クリック禁止 & 長押し保存対策（簡易） =====
+  document.addEventListener('dragstart', e => e.preventDefault());
+
+  // ===== 透かし生成：小さなタイル画像をCanvasで作り、背景として敷き詰め =====
+  function createWatermarkDataURL(text = '© HikoBoukenKai', fg = 'rgba(255,255,255,0.25)') {
+    const w = 300, h = 200; // タイルサイズ
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+
+    // 背景は透明
+    ctx.clearRect(0, 0, w, h);
+
+    // 斜めテキストを敷き詰め
+    ctx.translate(w/2, h/2);
+    ctx.rotate(-Math.PI / 6); // -30deg
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '700 18px Segoe UI, system-ui, sans-serif';
+    ctx.fillStyle = fg;
+
+    const step = 90; // テキスト間隔
+    for (let y = -h; y <= h; y += step) {
+      for (let x = -w; x <= w; x += step) {
+        ctx.fillText(text, x, y);
+      }
+    }
+    return c.toDataURL('image/png');
+  }
+
+  function applyWatermarks() {
+    const patternCache = new Map();
+    document.querySelectorAll('.wm-layer').forEach(layer => {
+      const text = layer.getAttribute('data-wm') || '© 飛行冒険會';
+      if (!patternCache.has(text)) {
+        patternCache.set(text, createWatermarkDataURL(text));
+      }
+      layer.style.backgroundImage = `url("${patternCache.get(text)}")`;
+    });
+  }
+
+  // 初期化
+  applyWatermarks();
+  window.addEventListener('resize', applyWatermarks);
+
+  // ===== モーダル処理（拡大表示） =====
   const modal = document.getElementById('modal');
   const modalVideo = document.getElementById('modalVideo');
   const modalImg = document.getElementById('modalImg');
   const closeModal = document.getElementById('closeModal');
 
-  document.querySelectorAll('video, img').forEach(el => {
+  // クリックで拡大（広告・スタッフ画像・ギャラリー動画・ヒーロー動画）
+  document.querySelectorAll('.media-box img, .media-box video').forEach(el => {
     el.addEventListener('click', () => {
       modal.classList.add('active');
       if (el.tagName === 'VIDEO') {
-        modalVideo.src = el.querySelector('source').src;
+        // ソース決定：<source>があれば最初のもの、なければcurrentSrc
+        const source = el.querySelector('source');
+        modalVideo.src = source ? source.src : el.currentSrc;
         modalVideo.style.display = 'block';
         modalImg.style.display = 'none';
+        modalVideo.play();
       } else {
         modalImg.src = el.src;
         modalImg.style.display = 'block';
@@ -121,19 +207,14 @@
     });
   });
 
-  closeModal.addEventListener('click', () => {
+  function closeModalFn(){
     modal.classList.remove('active');
     modalVideo.pause();
-    modalVideo.src = "";
-  });
+    modalVideo.src = '';
+  }
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-      modalVideo.pause();
-      modalVideo.src = "";
-    }
-  });
+  closeModal.addEventListener('click', closeModalFn);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFn(); });
 </script>
 
 <footer class="footer">© 2025 飛行冒険會 - All Rights Reserved.</footer>
