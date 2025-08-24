@@ -22,10 +22,39 @@
     #gate h2 { font-size:2rem; cursor:pointer; padding:1rem 2rem; background:rgba(0,0,0,0.6); border-radius:12px; transition:0.3s; }
     #gate h2:hover { background:rgba(255,255,255,0.2); }
 
-    /* スマホ版（縦画面向け調整） */
+    /* Shine吹き出し演出 */
+    .shine-container { position:absolute; bottom:15%; right:10%; display:flex; align-items:flex-end; gap:0.5rem; animation:fadeIn 2s ease-in forwards; opacity:0; }
+    .shine-container img { width:100px; border-radius:50%; }
+    .speech-bubble {
+      position:relative;
+      background:#fff;
+      color:#000;
+      padding:0.5rem 1rem;
+      border-radius:12px;
+      font-size:1rem;
+      font-weight:bold;
+      animation:bounce 2s infinite;
+    }
+    .speech-bubble::after {
+      content:"";
+      position:absolute;
+      bottom:-10px;
+      left:20px;
+      border-width:10px;
+      border-style:solid;
+      border-color:#fff transparent transparent transparent;
+    }
+
+    @keyframes fadeIn { to { opacity:1; } }
+    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);} }
+
+    /* スマホ版 */
     @media (max-width:600px) {
       #gate video { width:100%; height:auto; object-fit:cover; }
       #gate h2 { font-size:1.5rem; padding:0.8rem 1.2rem; }
+      .shine-container { bottom:10%; right:5%; }
+      .shine-container img { width:70px; }
+      .speech-bubble { font-size:0.9rem; }
     }
 
     /* モーダル */
@@ -46,7 +75,7 @@
   </style>
 </head>
 <body>
-  <!-- オープニングゲート -->
+  <!-- ゲート -->
   <div id="gate">
     <video autoplay muted loop playsinline>
       <source src="seasonal-hero.mov" type="video/mp4">
@@ -54,12 +83,18 @@
     <div class="overlay">
       <h2 id="enterBtn">ようこそ、飛行冒険會へ！</h2>
       <p>タッチして冒険の世界へ</p>
+      <div class="shine-container">
+        <div class="speech-bubble">ここをタッチ！</div>
+        <img src="shine.png" alt="Shineちゃん">
+      </div>
     </div>
   </div>
 
-  <!-- 本編（最初は非表示） -->
-  <div id="mainContent" style="display:none;">
+  <!-- プロペラ回転開始音（Base64埋め込み例） -->
+  <audio id="armingSound" preload="auto" src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA...（ここにBase64化したmp3を入れる）"></audio>
 
+  <!-- 本編 -->
+  <div id="mainContent" style="display:none;">
     <header>
       <h1>飛行冒険會</h1>
       <p>～未来を空から見つめる冒険者たち～</p>
@@ -73,26 +108,10 @@
         <li>✔️ 生育状況のモニタリング</li>
         <li>✔️ 災害状況の把握</li>
       </ul>
-      <blockquote style="background:#f4f4f4; padding:1rem; border-left:5px solid #2a9d8f; color:#000; max-width:80%; margin:auto;">
-        「山全体がすぐに分かって助かった」<br>— 愛媛県西宇和郡伊方町名取の農家様の声
-      </blockquote>
     </section>
 
     <section class="section" style="text-align:center;">
-      <img src="ad.jpg" alt="ドローンチラシ" style="max-width:50%; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top:2rem;" />
-    </section>
-
-    <section class="section">
-      <h2>撮影動画ギャラリー（常設）</h2>
-      <div class="gallery">
-        <video controls>
-          <source src="videos/sample-flight.mp4" type="video/mp4">
-        </video>
-        <video controls>
-          <source src="videos/spring-view.mp4" type="video/mp4">
-          <source src="spring-view.mov" type="video/quicktime">
-        </video>
-      </div>
+      <img src="ad.jpg" alt="ドローンチラシ" style="max-width:50%; border-radius:12px; margin-top:2rem;" />
     </section>
 
     <section class="section">
@@ -118,69 +137,27 @@
         <a href="https://www.facebook.com/share/16YgQHhknE/?mibextid=wwXIfr" target="_blank">Facebook</a> |
         <a href="https://www.centralbase26.com/company/" target="_blank">合同会社セントラルベース26</a>
       </div>
-      <div style="margin-top:1rem;">
-        <img src="facebook-qr.jpg" alt="Facebook QRコード" style="width:1.5cm; height:1.5cm;">
-      </div>
     </section>
 
     <footer class="footer">© 2025 飛行冒険會 - All Rights Reserved.</footer>
   </div>
 
-  <!-- モーダル -->
-  <div class="modal" id="modal">
-    <span id="closeModal" style="position:absolute;top:20px;right:30px;font-size:2rem;color:white;cursor:pointer;">&times;</span>
-    <video controls id="modalVideo"></video>
-    <img id="modalImg" />
-  </div>
-
-<script>
-  // ゲート処理
-  document.getElementById("enterBtn").addEventListener("click", () => {
-    document.getElementById("gate").style.display = "none";
-    document.getElementById("mainContent").style.display = "block";
-  });
-
-  // モーダル処理
-  const modal = document.getElementById('modal');
-  const modalVideo = document.getElementById('modalVideo');
-  const modalImg = document.getElementById('modalImg');
-  const closeModal = document.getElementById('closeModal');
-
-  document.querySelectorAll('#mainContent video, #mainContent img').forEach(el => {
-    el.addEventListener('click', () => {
-      modal.classList.add('active');
-      if (el.tagName === 'VIDEO') {
-        modalVideo.src = el.querySelector('source').src;
-        modalVideo.style.display = 'block';
-        modalImg.style.display = 'none';
-      } else {
-        modalImg.src = el.src;
-        modalImg.style.display = 'block';
-        modalVideo.style.display = 'none';
-      }
+  <script>
+    // ゲート処理
+    document.getElementById("enterBtn").addEventListener("click", () => {
+      const sound = document.getElementById("armingSound");
+      sound.currentTime = 0;
+      sound.play();
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
     });
-  });
 
-  closeModal.addEventListener('click', () => {
-    modal.classList.remove('active');
-    modalVideo.pause();
-    modalVideo.src = "";
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-      modalVideo.pause();
-      modalVideo.src = "";
-    }
-  });
-
-  // コピー禁止（右クリック & Ctrl+C 対策）
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('copy', e => {
-    e.preventDefault();
-    alert("コピーは禁止されています。");
-  });
-</script>
+    // コピー禁止
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => {
+      e.preventDefault();
+      alert("コピーは禁止されています。");
+    });
+  </script>
 </body>
 </html>
