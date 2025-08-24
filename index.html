@@ -19,12 +19,17 @@
     #gate { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; justify-content:center; align-items:center; }
     #gate video { width:78%; height:auto; object-fit:contain; }
     #gate .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-shadow:1px 1px 4px #000; }
-    #gate h2 { font-size:2rem; cursor:pointer; padding:1rem 2rem; background:rgba(0,0,0,0.6); border-radius:12px; transition:0.3s; }
-    #gate h2:hover { background:rgba(255,255,255,0.2); }
+    #enterBtn { font-size:2rem; cursor:pointer; padding:1rem 2rem; background:rgba(0,0,0,0.6); border-radius:12px; transition:0.3s; }
+    #enterBtn:hover { background:rgba(255,255,255,0.2); }
 
-    /* Shine吹き出し演出 */
-    .shine-container { position:absolute; bottom:15%; right:10%; display:flex; align-items:flex-end; gap:0.5rem; animation:fadeIn 2s ease-in forwards; opacity:0; }
-    .shine-container img { width:100px; border-radius:50%; }
+    /* Shine吹き出し演出（タイトルの右上へ） */
+    .shine-container {
+      position:absolute;
+      top:30%; left:65%; /* タイトル右斜め上 */
+      display:flex; flex-direction:column; align-items:center;
+      animation:fadeIn 2s ease-in forwards; opacity:0;
+    }
+    .shine-container img { width:90px; }
     .speech-bubble {
       position:relative;
       background:#fff;
@@ -33,34 +38,35 @@
       border-radius:12px;
       font-size:1rem;
       font-weight:bold;
-      animation:bounce 2s infinite;
+      margin-bottom:0.5rem;
     }
     .speech-bubble::after {
       content:"";
       position:absolute;
-      bottom:-10px;
-      left:20px;
+      top:100%; left:20px;
       border-width:10px;
       border-style:solid;
       border-color:#fff transparent transparent transparent;
     }
 
+    /* 矢印アニメーション */
+    .arrow {
+      font-size:2rem;
+      color:#ff0;
+      animation:blink 1s infinite;
+    }
+    @keyframes blink { 50% { opacity:0; } }
+
     @keyframes fadeIn { to { opacity:1; } }
-    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);} }
 
     /* スマホ版 */
     @media (max-width:600px) {
       #gate video { width:100%; height:auto; object-fit:cover; }
-      #gate h2 { font-size:1.5rem; padding:0.8rem 1.2rem; }
-      .shine-container { bottom:10%; right:5%; }
+      #enterBtn { font-size:1.5rem; padding:0.8rem 1.2rem; }
+      .shine-container { top:25%; left:60%; }
       .shine-container img { width:70px; }
       .speech-bubble { font-size:0.9rem; }
     }
-
-    /* モーダル */
-    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:1000; }
-    .modal video, .modal img { max-width:90%; max-height:90%; }
-    .modal.active { display:flex; }
 
     /* 透かし */
     body::after {
@@ -82,16 +88,17 @@
     </video>
     <div class="overlay">
       <h2 id="enterBtn">ようこそ、飛行冒険會へ！</h2>
-      <p>タッチして冒険の世界へ</p>
+      <!-- Shine演出 -->
       <div class="shine-container">
         <div class="speech-bubble">ここをタッチ！</div>
+        <div class="arrow">⬇️</div>
         <img src="shine.png" alt="Shineちゃん">
       </div>
     </div>
   </div>
 
-  <!-- プロペラ回転開始音（Base64埋め込み例） -->
-  <audio id="armingSound" preload="auto" src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA...（ここにBase64化したmp3を入れる）"></audio>
+  <!-- プロペラ回転開始音（差し替え可） -->
+  <audio id="armingSound" preload="auto" src="data:audio/mp3;base64,//uQZAAA...（ここにBase64音声を差し替え）"></audio>
 
   <!-- 本編 -->
   <div id="mainContent" style="display:none;">
