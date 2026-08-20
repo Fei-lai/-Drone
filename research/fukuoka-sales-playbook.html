@@ -1,0 +1,875 @@
+<title>福岡ドローン営業プレイブック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --pb-ground:#edeef1;
+  --pb-surface:#ffffff;
+  --pb-surface2:#f4f5f8;
+  --pb-ink:#14161f;
+  --pb-ink2:#3c4152;
+  --pb-muted:#6b7185;
+  --pb-line:#d6d8e0;
+  --pb-line2:#b4b8c6;
+  --pb-navy:#1d2440;
+  --pb-seal:#c0392b;
+  --pb-seal-bg:#f7e6e3;
+  --pb-spray:#2f6b46;
+  --pb-spray-bg:#e0ece5;
+  --pb-move:#2b5878;
+  --pb-move-bg:#e0e9f0;
+  --pb-warn:#8a6410;
+  --pb-warn-bg:#f6ecd6;
+  --pb-shadow:0 1px 2px rgba(20,22,31,.05),0 10px 26px -20px rgba(20,22,31,.5);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pb-ground:#0d0f14;
+    --pb-surface:#161923;
+    --pb-surface2:#1d212d;
+    --pb-ink:#e9ebf1;
+    --pb-ink2:#bfc4d2;
+    --pb-muted:#8b91a4;
+    --pb-line:#2a2f3d;
+    --pb-line2:#3d4356;
+    --pb-navy:#aab6dc;
+    --pb-seal:#e8705f;
+    --pb-seal-bg:#33201d;
+    --pb-spray:#82c39a;
+    --pb-spray-bg:#18291f;
+    --pb-move:#7fb2d6;
+    --pb-move-bg:#16242e;
+    --pb-warn:#d9b455;
+    --pb-warn-bg:#2b2417;
+    --pb-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+  }
+}
+:root[data-theme="dark"]{
+  --pb-ground:#0d0f14;
+  --pb-surface:#161923;
+  --pb-surface2:#1d212d;
+  --pb-ink:#e9ebf1;
+  --pb-ink2:#bfc4d2;
+  --pb-muted:#8b91a4;
+  --pb-line:#2a2f3d;
+  --pb-line2:#3d4356;
+  --pb-navy:#aab6dc;
+  --pb-seal:#e8705f;
+  --pb-seal-bg:#33201d;
+  --pb-spray:#82c39a;
+  --pb-spray-bg:#18291f;
+  --pb-move:#7fb2d6;
+  --pb-move-bg:#16242e;
+  --pb-warn:#d9b455;
+  --pb-warn-bg:#2b2417;
+  --pb-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--pb-ground);color:var(--pb-ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Zen Old Mincho","Hiragino Mincho ProN",serif;font-weight:600;line-height:1.45;text-wrap:balance;margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--pb-seal);outline-offset:3px}
+.pb-wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.pb-prose{max-width:68ch}
+.pb-mono{font-family:"Roboto Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* masthead */
+.pb-mast{background:var(--pb-navy);color:#f2f3f7;padding:52px 0 38px;position:relative;overflow:hidden}
+:root[data-theme="dark"] .pb-mast,
+:root:not([data-theme="light"]) .pb-mast{background:#11131c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .pb-mast{background:var(--pb-navy)}}
+.pb-mast .pb-eyebrow{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.24em;color:#9aa3c4;text-transform:uppercase}
+.pb-mast h1{font-size:clamp(28px,5.2vw,50px);color:#fff;margin:14px 0 0;letter-spacing:.02em}
+.pb-mast .pb-lede{margin:18px 0 0;max-width:60ch;color:#ccd1e2;font-size:clamp(15px,1.5vw,17px)}
+.pb-stamp{display:inline-flex;align-items:baseline;gap:10px;margin-top:26px;border:2px solid var(--pb-seal);color:#fff;background:rgba(192,57,43,.22);padding:8px 16px;border-radius:3px}
+.pb-stamp b{font-family:"Roboto Mono",monospace;font-size:20px;letter-spacing:.06em;font-weight:500}
+.pb-stamp span{font-size:12.5px;color:#e6c9c4}
+
+/* nav */
+.pb-nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--pb-ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--pb-line)}
+.pb-nav ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto}
+.pb-nav a{display:block;white-space:nowrap;padding:11px 15px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--pb-muted);text-decoration:none;border-bottom:2px solid transparent}
+.pb-nav a:hover{color:var(--pb-ink);border-bottom-color:var(--pb-seal)}
+
+/* sections */
+.pb-sec{padding:58px 0;border-bottom:1px solid var(--pb-line)}
+.pb-sec:last-of-type{border-bottom:0}
+.pb-h{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+.pb-h .pb-no{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--pb-seal);flex:none}
+.pb-h .pb-rule{flex:1;height:1px;background:var(--pb-line2)}
+.pb-sec h2{font-size:clamp(21px,2.9vw,29px);margin-bottom:18px}
+.pb-sec h3{font-size:18px;margin:34px 0 12px}
+p{margin:0 0 15px}
+.pb-stack{display:flex;flex-direction:column;gap:15px}
+ul.pb-list{margin:0 0 15px;padding-left:1.2em;display:flex;flex-direction:column;gap:9px}
+
+/* chips */
+.pb-chip{display:inline-block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap}
+.pb-chip.sp{color:var(--pb-spray);border-color:var(--pb-spray);background:var(--pb-spray-bg)}
+.pb-chip.mv{color:var(--pb-move);border-color:var(--pb-move);background:var(--pb-move-bg)}
+.pb-chip.sl{color:var(--pb-seal);border-color:var(--pb-seal);background:var(--pb-seal-bg)}
+.pb-chip.nu{color:var(--pb-muted);border-color:var(--pb-line2);background:var(--pb-surface2)}
+
+/* key points */
+.pb-keys{display:grid;gap:1px;background:var(--pb-line);border:1px solid var(--pb-line);margin:26px 0}
+.pb-key{background:var(--pb-surface);padding:18px 20px;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+.pb-key .pb-kn{font-family:"Zen Old Mincho",serif;font-size:24px;color:var(--pb-seal);line-height:1.1}
+.pb-key h3{margin:0 0 5px;font-size:17px}
+.pb-key p{margin:0;font-size:14.5px;color:var(--pb-ink2)}
+
+/* tables */
+.pb-tw{overflow-x:auto;margin:22px 0;border:1px solid var(--pb-line);background:var(--pb-surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--pb-line);vertical-align:top;line-height:1.7}
+thead th{background:var(--pb-surface2);font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.06em;color:var(--pb-muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.pb-num{text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+caption{caption-side:bottom;text-align:left;padding:10px 13px;font-size:12.5px;color:var(--pb-muted);border-top:1px solid var(--pb-line);background:var(--pb-surface2)}
+
+/* calendar */
+.pb-cal{margin:22px 0;border:1px solid var(--pb-line);background:var(--pb-surface);overflow-x:auto}
+.pb-calin{min-width:860px}
+.pb-crow{display:grid;grid-template-columns:212px repeat(12,1fr);align-items:center;border-bottom:1px solid var(--pb-line)}
+.pb-crow:last-child{border-bottom:0}
+.pb-crow.pb-chead{background:var(--pb-surface2)}
+.pb-clab{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 12px;font-size:13px;font-weight:700;border-right:1px solid var(--pb-line)}
+.pb-cm{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--pb-muted);text-align:center;padding:7px 0}
+.pb-cm.pb-now{color:var(--pb-seal);font-weight:500}
+.pb-cc{padding:8px 3px}
+.pb-b{height:13px;border-radius:1px}
+.pb-b.do-sp{background:var(--pb-spray)}
+.pb-b.se-sp{background:repeating-linear-gradient(135deg,var(--pb-spray) 0 3px,transparent 3px 6px);border:1px solid var(--pb-spray)}
+.pb-b.do-mv{background:var(--pb-move)}
+.pb-b.se-mv{background:repeating-linear-gradient(135deg,var(--pb-move) 0 3px,transparent 3px 6px);border:1px solid var(--pb-move)}
+.pb-legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:12px;font-size:13px;color:var(--pb-ink2);align-items:center}
+.pb-legend span{display:inline-flex;align-items:center;gap:7px}
+.pb-legend i{width:26px;height:11px;display:inline-block;border-radius:1px}
+
+/* cards */
+.pb-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:15px;margin-top:22px}
+.pb-card{background:var(--pb-surface);border:1px solid var(--pb-line);box-shadow:var(--pb-shadow);padding:20px;display:flex;flex-direction:column;gap:11px}
+.pb-card h3{margin:0;font-size:17px}
+.pb-card p{margin:0;font-size:14px;color:var(--pb-ink2)}
+.pb-card .pb-foot{margin-top:auto;padding-top:11px;border-top:1px solid var(--pb-line);font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--pb-muted)}
+
+/* steps */
+.pb-steps{border:1px solid var(--pb-line);background:var(--pb-surface);margin-top:22px}
+.pb-step{display:grid;grid-template-columns:96px 1fr;border-bottom:1px solid var(--pb-line)}
+.pb-step:last-child{border-bottom:0}
+.pb-step .pb-sn{padding:18px;border-right:1px solid var(--pb-line);background:var(--pb-surface2)}
+.pb-step .pb-sn em{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pb-muted);font-style:normal;display:block}
+.pb-step .pb-sn b{font-family:"Zen Old Mincho",serif;font-size:25px;color:var(--pb-navy);font-weight:600;display:block;margin-top:2px}
+:root[data-theme="dark"] .pb-step .pb-sn b,:root:not([data-theme="light"]) .pb-step .pb-sn b{color:var(--pb-navy)}
+.pb-step .pb-sb{padding:18px 20px}
+.pb-step h3{margin:0 0 7px;font-size:17px}
+.pb-step ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:6px}
+
+/* objections */
+.pb-obj{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.pb-o{border:1px solid var(--pb-line);background:var(--pb-surface);display:grid;grid-template-columns:1fr 1.35fr}
+.pb-o .pb-oq{padding:17px 19px;background:var(--pb-surface2);border-right:1px solid var(--pb-line)}
+.pb-o .pb-oq b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pb-muted);margin-bottom:6px;font-weight:500}
+.pb-o .pb-oq q{font-size:15.5px;font-weight:700;font-style:normal}
+.pb-o .pb-oa{padding:17px 19px;font-size:14.5px}
+.pb-o .pb-oa b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pb-seal);margin-bottom:6px;font-weight:500}
+
+/* notes */
+.pb-note{border-left:3px solid var(--pb-navy);background:var(--pb-surface);padding:16px 19px;margin:22px 0;font-size:14.5px}
+.pb-note.ng{border-left-color:var(--pb-seal);background:var(--pb-seal-bg)}
+.pb-note.wn{border-left-color:var(--pb-warn);background:var(--pb-warn-bg)}
+.pb-note b.pb-lab{display:block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--pb-muted);margin-bottom:6px;font-weight:500}
+.pb-note p:last-child{margin-bottom:0}
+
+/* NG list */
+.pb-ng{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--pb-line);border:1px solid var(--pb-line);margin-top:22px}
+.pb-ngi{background:var(--pb-surface);padding:15px 18px;display:grid;grid-template-columns:26px 1fr;gap:11px;align-items:start;font-size:14px}
+.pb-ngi .pb-x{color:var(--pb-seal);font-family:"Roboto Mono",monospace;font-size:15px;line-height:1.6}
+
+/* checklist */
+.pb-check{border:1px solid var(--pb-line);background:var(--pb-surface);margin-top:22px}
+.pb-ci{display:flex;gap:13px;align-items:flex-start;padding:13px 18px;border-bottom:1px solid var(--pb-line)}
+.pb-ci:last-child{border-bottom:0}
+.pb-ci input{margin-top:5px;width:17px;height:17px;flex:none;accent-color:var(--pb-seal)}
+.pb-ci label{font-size:14.5px;cursor:pointer;line-height:1.75}
+.pb-ci .pb-when{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--pb-muted);display:block;margin-bottom:2px}
+.pb-ci input:checked+label{color:var(--pb-muted);text-decoration:line-through;text-decoration-thickness:1px}
+
+/* sources */
+.pb-c{font-family:"Roboto Mono",monospace;font-size:10.5px;vertical-align:super;line-height:0;color:var(--pb-seal);text-decoration:none;padding:0 1px}
+.pb-c:hover{text-decoration:underline}
+ol.pb-src{font-family:"Roboto Mono",monospace;font-size:12.5px;line-height:1.9;color:var(--pb-muted);padding-left:2.2em;display:flex;flex-direction:column;gap:4px}
+ol.pb-src a{color:var(--pb-ink2);text-decoration:none;border-bottom:1px solid var(--pb-line2);word-break:break-word}
+ol.pb-src a:hover{color:var(--pb-seal);border-bottom-color:var(--pb-seal)}
+.pb-books{display:flex;flex-direction:column;gap:20px;margin-top:22px}
+.pb-bgrp h3{font-size:16px;margin:0 0 10px}
+.pb-bgrp ul{margin:0;padding-left:1.2em;font-size:14px;display:flex;flex-direction:column;gap:9px}
+.pb-bgrp a{color:var(--pb-ink2)}
+
+footer{padding:36px 0 60px;font-size:12.5px;color:var(--pb-muted);font-family:"Roboto Mono",monospace}
+
+@media (max-width:640px){
+  body{font-size:15px}
+  .pb-sec{padding:44px 0}
+  .pb-step{grid-template-columns:1fr}
+  .pb-step .pb-sn{border-right:0;border-bottom:1px solid var(--pb-line);display:flex;align-items:baseline;gap:11px;padding:12px 18px}
+  .pb-step .pb-sn b{margin-top:0;font-size:20px}
+  .pb-o{grid-template-columns:1fr}
+  .pb-o .pb-oq{border-right:0;border-bottom:1px solid var(--pb-line)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="pb-mast">
+  <div class="pb-wrap">
+    <div class="pb-eyebrow">Sales Playbook ／ Fukuoka ／ Central Base 26</div>
+    <h1>福岡ドローン営業プレイブック</h1>
+    <p class="pb-lede">散布代行（農薬・遮光剤・追肥）と輸送で、福岡県のシェアを取りにいくための現場用資料。誰に、いつ、何を、いくらで、どう言うか。そして絶対にやってはいけないこと。</p>
+    <div class="pb-stamp"><b>9.12</b><span>営業開始／九州メンバー合流</span></div>
+  </div>
+</header>
+
+<nav class="pb-nav">
+  <div class="pb-wrap">
+    <ul>
+      <li><a href="#pb-core">作戦</a></li>
+      <li><a href="#pb-goods">商材</a></li>
+      <li><a href="#pb-cal">カレンダー</a></li>
+      <li><a href="#pb-target">誰に会うか</a></li>
+      <li><a href="#pb-rival">競合と価格</a></li>
+      <li><a href="#pb-flow">商談の型</a></li>
+      <li><a href="#pb-obj">切り返し</a></li>
+      <li><a href="#pb-ng">絶対NG</a></li>
+      <li><a href="#pb-move">輸送</a></li>
+      <li><a href="#pb-money">補助金</a></li>
+      <li><a href="#pb-act">初動</a></li>
+      <li><a href="#pb-read">読む物</a></li>
+      <li><a href="#pb-src">出典</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section class="pb-sec" id="pb-core">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">CORE</span><span class="pb-rule"></span></div>
+    <h2>9月12日開始は、遅くない。むしろ最良のタイミング</h2>
+    <p class="pb-prose">水稲の防除は9月で終わる。だから「今季の散布を売る」には遅い。しかし福岡は水田率81%の二毛作地帯で、<strong>11月に麦を播き、3〜4月に赤かび病防除と穂揃い期追肥が来る</strong>。9月から動けば、この麦の需要に完全に間に合う。加えて自治体の次年度予算は秋に固まる。9月は「今を売る月」ではなく、<strong>冬と来季を先に押さえる月</strong>だ。</p>
+
+    <div class="pb-keys">
+      <div class="pb-key">
+        <div class="pb-kn">1</div>
+        <div>
+          <h3>狙うのは「減る農家」ではなく「増える法人」</h3>
+          <p>九州の農業経営体は5年で20.1%減って131,414。だが<strong>法人経営体は6.8%増えて5,871</strong>。市場全体は縮んでいるのに法人だけが増えている。シェアを取るなら、増えている側だけを訪問先にする。<a class="pb-c" href="#s-census">[1]</a></p>
+        </div>
+      </div>
+      <div class="pb-key">
+        <div class="pb-kn">2</div>
+        <div>
+          <h3>福岡の勝ち筋は「麦」。競合が薄く、冬の稼働が作れる</h3>
+          <p>耕地78,000ha・水田率81%（全国54%）、小麦生産量は全国2位。JAたがわは毎年3〜4月に「麦管理情報」で穂揃い期追肥と赤かび病防除の適期を出している。<strong>この時期に動ける散布業者は少ない</strong>。<a class="pb-c" href="#s-fukuoka">[2]</a><a class="pb-c" href="#s-tagawa">[3]</a></p>
+        </div>
+      </div>
+      <div class="pb-key">
+        <div class="pb-kn">3</div>
+        <div>
+          <h3>9月に即金になるのは遮光剤</h3>
+          <p>あまおうの育苗・定植期は8〜9月。ドローン専用遮光剤は希釈不要で<strong>1缶19,800円・約500m²を約10分</strong>で吹ける。屋根に上がる高所作業を丸ごと消せるのが売り文句。<a class="pb-c" href="#s-achilles">[4]</a></p>
+        </div>
+      </div>
+      <div class="pb-key">
+        <div class="pb-kn">4</div>
+        <div>
+          <h3>単価では勝負しない。福岡の最安は10a 1,800円</h3>
+          <p>県内で単価を公表している業者は1,800〜2,750円/10aのレンジ。ここに価格で突っ込むと消耗する。<strong>記録納品・保険・有資格者・事前周知の手順書</strong>を可視化している業者が見当たらないので、そこで差をつける。<a class="pb-c" href="#s-rival">[5]</a></p>
+        </div>
+      </div>
+      <div class="pb-key">
+        <div class="pb-kn">5</div>
+        <div>
+          <h3>輸送は農業法人に売る商材ではない</h3>
+          <p>ドローン物流で商用単独黒字の公表事例は見当たらない。能古島の実証は配送料110円という実証価格だった。<strong>金を出すのは自治体・地域物流事業者・医療</strong>。散布の商談に混ぜると話が濁る。訪問先を分ける。<a class="pb-c" href="#s-nokono">[6]</a></p>
+        </div>
+      </div>
+      <div class="pb-key">
+        <div class="pb-kn">6</div>
+        <div>
+          <h3>自社にはすでに福岡の実績がある</h3>
+          <p>久留米市で苗木のドローン輸送を実施済み。<strong>「福岡で飛ばしたことがある会社」</strong>という一行は、初回訪問の空気を変える。名刺と一緒に出せる形にしておく。<a class="pb-c" href="#s-cb26">[7]</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-goods">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">01 ／ GOODS</span><span class="pb-rule"></span></div>
+    <h2>売る物を5つに絞る</h2>
+    <p class="pb-prose">「何でもやります」は何も売れない。訪問前に、その相手にどれを出すか1つ決めてから行く。</p>
+    <div class="pb-tw">
+      <table>
+        <thead><tr><th>商材</th><th>主な相手</th><th>実施時期</th><th>単価の目安</th><th>刺さる一言</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="pb-chip sp">散布</span><br><strong>水稲の防除</strong></td>
+            <td>農業法人／集落営農法人／大規模個人</td>
+            <td>6〜9月（穂いもち・カメムシは8〜9月）</td>
+            <td class="pb-num">10a 1,800〜2,500円</td>
+            <td>「真夏に動噴を背負う日を、今年で終わりにしませんか」</td>
+          </tr>
+          <tr>
+            <td><span class="pb-chip sp">散布</span><br><strong>麦の防除＋穂揃い期追肥</strong></td>
+            <td>筑後・筑豊の二毛作法人／JA部会</td>
+            <td>3月下旬〜4月中旬（赤かび病＋追肥）</td>
+            <td class="pb-num">10a 1,800〜2,500円</td>
+            <td>「穂揃い期は数日しかない。その数日に確実に入る体制を売ります」</td>
+          </tr>
+          <tr>
+            <td><span class="pb-chip sp">散布</span><br><strong>遮光剤・遮熱剤</strong></td>
+            <td>いちご（あまおう）・なす・トマトの施設園芸法人</td>
+            <td>4〜9月（いちご育苗・定植は8〜9月）</td>
+            <td class="pb-num">要個別見積（特殊作業扱い）</td>
+            <td>「屋根に上がる作業を、地上から10分で終わらせます」</td>
+          </tr>
+          <tr>
+            <td><span class="pb-chip sp">散布</span><br><strong>追肥（水稲・麦）</strong></td>
+            <td>水稲・麦の大規模経営体</td>
+            <td>水稲=穂肥/実肥、麦=茎立〜穂揃い期</td>
+            <td class="pb-num">10a 1,500〜2,500円</td>
+            <td>「10aを3〜5分。動噴比で作業時間5〜9割減という実証があります」<a class="pb-c" href="#s-fukui">[8]</a></td>
+          </tr>
+          <tr>
+            <td><span class="pb-chip mv">輸送</span><br><strong>運搬・物流</strong></td>
+            <td>市町村／地域物流事業者／森林組合／医療・薬局</td>
+            <td>予算年度に従う（提案は秋）</td>
+            <td class="pb-num">補助事業ベース</td>
+            <td>「配送そのものより、実証の運営と申請の伴走を売ります」</td>
+          </tr>
+        </tbody>
+        <caption>単価は県内他社の公表値と全国相場から置いたレンジ。薬剤・資材代の内外、出張費の扱いを最初に明示しないと必ず揉める。</caption>
+      </table>
+    </div>
+
+    <div class="pb-note wn">
+      <b class="pb-lab">遮光剤の扱いは事前に確認</b>
+      <p>ドローン用遮光剤は農薬登録品ではないとみられるが、「農薬取締法の対象外」と明記した一次資料は確認できていない。また内容物にかかわらず<strong>航空法上の物件投下・散布に該当し得る</strong>。九州農政局と大阪航空局（福岡空港事務所）に一度確認を取り、その回答を営業資料に載せると、それ自体が差別化になる。<a class="pb-c" href="#s-maff-drone">[9]</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-cal">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">02 ／ CALENDAR</span><span class="pb-rule"></span></div>
+    <h2>営業は、需要の3〜5か月前に打つ</h2>
+    <p class="pb-prose">下の表が本プレイブックの背骨。塗りつぶしが<strong>作業が発生する月</strong>、斜線が<strong>営業をかける月</strong>。9月に立っている斜線＝いま動けば取れる案件。</p>
+
+    <div class="pb-cal">
+      <div class="pb-calin">
+        <div class="pb-crow pb-chead">
+          <div class="pb-clab pb-mono" style="font-size:11px;letter-spacing:.1em;color:var(--pb-muted);font-weight:400">MONTH</div>
+          <div class="pb-cm pb-now">9</div><div class="pb-cm">10</div><div class="pb-cm">11</div><div class="pb-cm">12</div><div class="pb-cm">1</div><div class="pb-cm">2</div><div class="pb-cm">3</div><div class="pb-cm">4</div><div class="pb-cm">5</div><div class="pb-cm">6</div><div class="pb-cm">7</div><div class="pb-cm">8</div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip sp">散布</span>麦 防除・追肥</div>
+          <div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"></div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip sp">散布</span>水稲 防除</div>
+          <div class="pb-cc"></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip sp">散布</span>大豆 防除</div>
+          <div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip sp">散布</span>施設園芸 遮光剤</div>
+          <div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip sp">散布</span>果樹・茶 防除</div>
+          <div class="pb-cc"></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"><div class="pb-b se-sp"></div></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div><div class="pb-cc"><div class="pb-b do-sp"></div></div>
+        </div>
+        <div class="pb-crow">
+          <div class="pb-clab"><span class="pb-chip mv">輸送</span>自治体・物流</div>
+          <div class="pb-cc"><div class="pb-b se-mv"></div></div><div class="pb-cc"><div class="pb-b se-mv"></div></div><div class="pb-cc"><div class="pb-b se-mv"></div></div><div class="pb-cc"><div class="pb-b se-mv"></div></div><div class="pb-cc"><div class="pb-b se-mv"></div></div><div class="pb-cc"></div><div class="pb-cc"></div><div class="pb-cc"><div class="pb-b do-mv"></div></div><div class="pb-cc"><div class="pb-b do-mv"></div></div><div class="pb-cc"><div class="pb-b do-mv"></div></div><div class="pb-cc"><div class="pb-b do-mv"></div></div><div class="pb-cc"><div class="pb-b do-mv"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pb-legend">
+      <span><i class="pb-b do-sp" style="width:26px"></i>作業が発生する月</span>
+      <span><i class="pb-b se-sp" style="width:26px"></i>営業をかける月</span>
+      <span><i class="pb-b do-mv" style="width:26px"></i>輸送の実施</span>
+      <span><i class="pb-b se-mv" style="width:26px"></i>輸送の提案（次年度予算）</span>
+    </div>
+
+    <div class="pb-note">
+      <b class="pb-lab">この表から読むべきこと</b>
+      <p>9月〜1月は<strong>散布の作業がほぼ空く一方、営業の斜線が5本走っている</strong>。つまりこの5か月は「売上が立たない時期」ではなく「翌年の売上を全部決める時期」。ここで麦・水稲・果樹の契約と自治体の次年度予算提案を取り切れるかで、来期が決まる。逆に4〜9月に営業をしようとしても、相手も自分も現場に出ていて会えない。</p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-target">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">03 ／ TARGET</span><span class="pb-rule"></span></div>
+    <h2>誰に会うか</h2>
+    <p class="pb-prose">個人農家を100軒回るより、<strong>面積を持っている法人を20社</strong>回る。福岡の農業の中心は筑後（久留米・八女・うきは・大川・広川・筑後）で、米・麦・大豆の二毛作水田といちご・なす・トマトの施設園芸、柿・ぶどう・八女茶が同じ圏内に密集している。ここを主戦場に置く。<a class="pb-c" href="#s-chikugo">[10]</a></p>
+
+    <div class="pb-cards">
+      <div class="pb-card">
+        <span class="pb-chip sl">A層／本命</span>
+        <h3>水田の農業法人・集落営農法人</h3>
+        <p>筑後・筑豊の米麦大豆。面積が大きく、麦・水稲・大豆で年3〜5回の作業が発生する。1社取れば年間契約になる。<strong>ここに営業時間の6割を投下する。</strong></p>
+        <div class="pb-foot">狙う商材：麦防除＋追肥 → 水稲防除</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip sl">B層／即金</span>
+        <h3>いちご・なす・トマトの施設園芸法人</h3>
+        <p>あまおうの育苗・定植は8〜9月。遮光剤は<strong>いま需要が立っている</strong>唯一の商材。単価は面積でなくハウス棟数で組む。</p>
+        <div class="pb-foot">狙う商材：遮光剤 → 翌年のハウス周辺防除</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip sl">C層／面で取る</span>
+        <h3>JA・生産部会</h3>
+        <p>調査上もっとも効果が高いとされるルート。<strong>JAに認められた業者として紹介されると信頼が一気に立つ</strong>。県内18JAの管内から、まず筑後の生産部会に当たる。</p>
+        <div class="pb-foot">狙い方：個社でなく部会単位の年間契約</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip nu">D層／輸送</span>
+        <h3>市町村・森林組合・地域物流</h3>
+        <p>散布とは別行程で回る。既に実証実績のあるうきは市・添田町の<strong>隣接自治体</strong>が最も話が早い。前例があると担当者が動きやすいため。</p>
+        <div class="pb-foot">狙う時期：次年度予算が固まる9〜12月</div>
+      </div>
+    </div>
+
+    <h3>リストの作り方（確認済みの入手源）</h3>
+    <ul class="pb-list">
+      <li><strong>福岡県農業法人協会</strong>（TEL 092-711-5070）に会員名簿の入手可否を確認する。会員紹介ページが存在する。<a class="pb-c" href="#s-fnk-hojin">[11]</a></li>
+      <li><strong>日本農業法人協会</strong>の九州地区会員一覧・正会員名簿ページ。<a class="pb-c" href="#s-hojin">[12]</a></li>
+      <li><strong>JAグループ福岡</strong>の18JA一覧から、筑後の管内JA（福岡くるめ・ふくおか八女・みなみ筑後・柳川・みづま・福岡大城・筑前あさくら等）を特定し、営農指導課へ。<a class="pb-c" href="#s-ja">[13]</a></li>
+      <li><strong>国税庁法人番号公表サイト</strong>で「農事組合法人」「ファーム」等を県内名称検索し、機械的に候補を洗い出す。</li>
+      <li><strong>福岡県農業振興推進機構（農地中間管理機構）</strong>に、農地の受け手＝規模拡大中の経営体の情報提供が可能か照会する。<a class="pb-c" href="#s-fap">[14]</a></li>
+    </ul>
+    <div class="pb-note wn">
+      <b class="pb-lab">この調査で取り切れなかったこと</b>
+      <p>福岡県単独の法人経営体数、集落営農組織数、規模別の分布は、行政サイトへのアクセス制限で確定値を取れていない。<strong>初週に九州農政局統計部と福岡県農林水産部へ電話し、公表資料をもらうこと。</strong>認定農業者数は平成30年3月末時点で県内6,113経営体（うち法人674）という値までは確認できたが年次が古い。最新値は要取得。<a class="pb-c" href="#s-nintei">[15]</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-rival">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">04 ／ RIVALS</span><span class="pb-rule"></span></div>
+    <h2>競合と価格</h2>
+    <div class="pb-tw">
+      <table>
+        <thead><tr><th>事業者</th><th>類型</th><th>エリア</th><th>公表単価（10a）</th><th>特徴</th></tr></thead>
+        <tbody>
+          <tr><td>株式会社青空ミツバチ</td><td>散布専業（新興）</td><td>福岡県南部・大分県西部</td><td class="pb-num">1,800円（薬剤別）</td><td>県内で確認できた最安値。マッチング型プラットフォームにも登録</td></tr>
+          <tr><td>福岡ドローンステーション</td><td>スクール併設</td><td>福岡市</td><td class="pb-num">2,000円（税込）</td><td>スクール運営と代行の兼業</td></tr>
+          <tr><td>株式会社5wins</td><td>散布専業</td><td>福岡・九州一円</td><td class="pb-num">2,750円</td><td>水稲・麦・除草粒剤・肥料まで多品目対応</td></tr>
+          <tr><td>マゼックス九州特約店</td><td>販売店系</td><td>福岡〜北九州</td><td class="pb-num">非公表</td><td>機体販売が主軸、代行は付帯</td></tr>
+          <tr><td>オプティム</td><td>全国マッチング</td><td>全国</td><td class="pb-num">非公表</td><td>年間約26,000haの請負防除実績。案件紹介を受ける側にもなれる</td></tr>
+        </tbody>
+        <caption>各社サイトの公表値。条件（薬剤込み/別、最低面積、出張費）が揃っていないため単純比較はできない。JAの共同防除・無人ヘリの県内料金は今回確認できず、初週にJAへ直接ヒアリングすること。<a class="pb-c" href="#s-rival">[5]</a><a class="pb-c" href="#s-optim">[16]</a></caption>
+      </table>
+    </div>
+    <div class="pb-note">
+      <b class="pb-lab">価格の使い方</b>
+      <p>1,800円を下回る提示はしない。<strong>この市場で価格の下限を作った会社は、翌年その価格から上げられなくなる。</strong>代わりに「薬剤込みの総額」「年間の作業日数」「記録納品」「保険の証券コピー」を並べ、相手が比較する土俵そのものを変える。県内の公表情報を見る限り、記録や保険を前面に出している業者は見当たらない。</p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-flow">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">05 ／ FLOW</span><span class="pb-rule"></span></div>
+    <h2>初回訪問から受注までの型</h2>
+    <div class="pb-steps">
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>0</b></div>
+        <div class="pb-sb">
+          <h3>行く前に調べる（15分でいい）</h3>
+          <ul>
+            <li>作目・作型・おおよその面積・法人形態を、HPと法人番号サイトで押さえる。</li>
+            <li>その相手の<strong>次の作業が何月に来るか</strong>をカレンダーで確認し、話の入口を1つに決める。</li>
+            <li>服装は作業着。スーツで圃場に立つと、それだけで「現場を知らない人」に見える。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>1</b></div>
+        <div class="pb-sb">
+          <h3>初回は売らない。3つだけ聞く</h3>
+          <ul>
+            <li>①いま防除・追肥を<strong>誰が</strong>やっているか（自社／JA／外注／無人ヘリ）</li>
+            <li>②一番きつい作業は何月の何か</li>
+            <li>③来年、人は足りるか</li>
+            <li>訪問時間は日中の休憩帯。早朝・夕方の作業時間は外す。<a class="pb-c" href="#s-sales">[17]</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>2</b></div>
+        <div class="pb-sb">
+          <h3>圃場を一緒に歩く</h3>
+          <ul>
+            <li>電線・住宅・水路・隣接圃場・養蜂箱の位置をその場で確認する。これは見積の前提であり、同時に<strong>「この人は事故のことを先に考える」という信用</strong>になる。</li>
+            <li>隣に有機・特別栽培の圃場があるかは必ず聞く。後で最大の火種になる。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>3</b></div>
+        <div class="pb-sb">
+          <h3>デモは「相手の圃場」でやる</h3>
+          <ul>
+            <li>業界の慣行として、デモ会は申込者の圃場・近隣の空き地で、水を使い、無料で行う。<a class="pb-c" href="#s-demo">[18]</a></li>
+            <li>他所のデモ映像では決まらない。<strong>自分の田んぼの上を飛ぶのを見せた時にだけ話が動く。</strong></li>
+            <li>小面積の試験散布まで持ち込めれば、実績不足という最大の断り理由が消える。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>4</b></div>
+        <div class="pb-sb">
+          <h3>見積は「反単価」でなく「年間の総額と作業日数」</h3>
+          <ul>
+            <li>反単価だけを出すと、必ず1円単位の比較になる。年3〜5回分をまとめた総額、薬剤の内外、想定作業日数、天候延期の扱いをセットで出す。</li>
+            <li>費用対効果は数字で。追肥は10a 3〜5分、動噴比で作業時間5〜9割減という実証がある。<a class="pb-c" href="#s-fukui">[8]</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pb-step">
+        <div class="pb-sn"><em>STEP</em><b>5</b></div>
+        <div class="pb-sb">
+          <h3>契約で先に決めておく</h3>
+          <ul>
+            <li>風速・降雨の<strong>中止基準</strong>と延期の回数・期限、キャンセル料</li>
+            <li>面積の実測方法と差異の精算ルール</li>
+            <li>薬剤の選定責任（相手指定か当方提案か）を書面で明確化</li>
+            <li>近隣周知を誰がやるか</li>
+            <li>保険の補償範囲を提示し、書面に残す<a class="pb-c" href="#s-trouble">[19]</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-obj">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">06 ／ OBJECTIONS</span><span class="pb-rule"></span></div>
+    <h2>断り文句と切り返し</h2>
+    <p class="pb-prose">調査で挙がった断りの理由は、上から<strong>実績不足・費用対効果・前例主義・JAとの関係・失敗への恐れ</strong>。ほぼこの5つに収束する。<a class="pb-c" href="#s-reject">[20]</a></p>
+    <div class="pb-obj">
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 01</b><q>おたく、うちの地域でやった実績あると？</q></div>
+        <div class="pb-oa"><b>ANSWER</b>最大の壁で、正面から答えるしかない。久留米市で苗木のドローン輸送を行った実績を出し、その上で<strong>「まず1枚だけ、無料で試させてください」</strong>と小面積の試験散布に持ち込む。実績は語るものではなく、その場で作るもの。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 02</b><q>自分でやるけん、いらん</q></div>
+        <div class="pb-oa"><b>ANSWER</b>否定しない。<strong>「全部は要りません。8月の一番暑い週と、麦の穂揃い期だけ」</strong>と、相手が一番きつい数日に限定して提案する。全面代行を売ろうとすると断られるが、ピークの数日なら通る。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 03</b><q>高い。反いくらね？</q></div>
+        <div class="pb-oa"><b>ANSWER</b>反単価の勝負に乗らない。<strong>「反いくらではなく、年間で何日空くかで見てください」</strong>。動噴での延べ作業時間、人を雇った場合の日当、熱中症で1人倒れた時の損失。ここに補助金の話を重ねる。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 04</b><q>JAに頼んどるけん</q></div>
+        <div class="pb-oa"><b>ANSWER</b>JAと競合しにいかない。<strong>「JAさんが手を回しきれない時期と場所だけ埋めます」</strong>——傾斜地、小区画、飛び地、日程が集中して後回しになる圃場。むしろJAの営農指導課に先に挨拶し、紹介される側に回るのが最短。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 05</b><q>近所から苦情が来るとやなかね</q></div>
+        <div class="pb-oa"><b>ANSWER</b>これは実は<strong>最大の受注チャンス</strong>。散布7〜10日前の周知文の雛形、回覧の手順、養蜂家への連絡、風速の中止基準を1枚にまとめて持参する。「苦情対応まで含めてうちがやります」と言える業者は少ない。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 06</b><q>補助金が出るなら自分で買う</q></div>
+        <div class="pb-oa"><b>ANSWER</b>止めない。<strong>買う支援に回る。</strong>申請を手伝い、機体選定に付き合い、そのうえで「飛ばす人」と「繁忙期の応援」「年次点検」を売る。機体を買った法人ほど、翌年オペレーター不足で困る。</div>
+      </div>
+      <div class="pb-o">
+        <div class="pb-oq"><b>OBJECTION 07</b><q>来年考えるわ</q></div>
+        <div class="pb-oa"><b>ANSWER</b>「来年」は多くの場合そのまま消える。<strong>その場で圃場マップを無料で作る約束をして、次の訪問理由を作る。</strong>マップを渡す＝相手の圃場情報を預かる関係になる、ということでもある。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-ng">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">07 ／ NEVER</span><span class="pb-rule"></span></div>
+    <h2>絶対にやってはいけないこと</h2>
+    <p class="pb-prose">国土交通省への無人航空機の事故報告は令和2年度71件から令和3年度139件へ倍増している。2015〜2021年の448件を分析した研究では<strong>78%が人的要因、複合要因事故の82%に飛行計画の不備が関与</strong>していた。事故は機体ではなく段取りで起きる。<a class="pb-c" href="#s-trouble">[19]</a></p>
+
+    <div class="pb-ng">
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>無人航空機での散布に<strong>適用登録のない農薬</strong>を使う</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>ラベルの<strong>希釈倍数・使用時期・総使用回数</strong>を外す</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div><strong>事前周知なし</strong>で散布する（住宅・学校・病院・隣接圃場、特に有機／特別栽培）</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div><strong>養蜂家への連絡なし</strong>で蜜源の開花期・訪花時間帯に散布する</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>強風時に「今日しかないから」と<strong>散布を強行</strong>する（目安3m/s超は中止・要確認）</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>隣接圃場際で<strong>緩衝距離を取らず</strong>にドリフトを放置する</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div><strong>機体登録・登録記号表示</strong>なしで飛ばす</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div><strong>飛行許可・承認、飛行計画の通報</strong>を欠いたまま飛ばす</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div><strong>飛行日誌・散布記録</strong>を作らない・残さない</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>事故・インシデントを<strong>国交省と顧客に報告しない</strong></div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>営業で<strong>「100%安全」「必ず増収」</strong>と言う</div></div>
+      <div class="pb-ngi"><span class="pb-x">✕</span><div>他社・JAの<strong>悪口</strong>を言う／顧客の圃場情報を他所で話す</div></div>
+    </div>
+
+    <div class="pb-note ng">
+      <b class="pb-lab">保険は必ず先に確認する</b>
+      <p><strong>農薬散布作業そのものが補償対象外の保険商品が存在する。</strong>農林水産用ドローン専用の商品（対人・対物、風で隣接農地に飛散した農薬ドリフト被害を含むものがある）に入っているか、補償上限と免責条件を約款で確認し、証券のコピーを営業カバンに入れて持ち歩くこと。年間の維持費は点検込みで10〜15万円程度という目安情報がある。<a class="pb-c" href="#s-hoken">[21]</a></p>
+    </div>
+
+    <div class="pb-note wn">
+      <b class="pb-lab">誰が「農薬使用者」になるのか</b>
+      <p>実際に散布する受託事業者に責任が帰属するのが基本とみられるが、契約形態・実態により解釈が分かれ、<strong>情報源によって表現に揺れがある</strong>。農薬の選定を誰がしたかで揉めやすいので、指示書を必ず書面化する。条文レベルの確認は九州農政局と行政書士に取ること。<a class="pb-c" href="#s-qa">[22]</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-move">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">08 ／ LOGISTICS</span><span class="pb-rule"></span></div>
+    <h2>輸送は、相手も売り物も違う</h2>
+    <p class="pb-prose">調査の結論は明快だった。<strong>ドローン物流で商用単独の黒字事例は公表されていない。</strong>能古島の実証（ANA×セブン-イレブン×アイン薬局、2022年）は配送料110円だが、これは実証としての体験価格で原価を反映していない。実際の商流の起点は、ほぼすべて<strong>自治体の予算か補助事業の採択</strong>にある。<a class="pb-c" href="#s-nokono">[6]</a></p>
+
+    <div class="pb-cards">
+      <div class="pb-card">
+        <span class="pb-chip mv">売り先</span>
+        <h3>市町村</h3>
+        <p>過疎・買物弱者対策として包括連携協定を結び、事業費を負担する主体。<strong>予算要求の秋が唯一の商談期。</strong></p>
+        <div class="pb-foot">接触先：企画政策課／過疎対策／防災</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip mv">売り先</span>
+        <h3>地域の物流事業者</h3>
+        <p>うきは市では西久大運輸倉庫が主体。エアロネクストは自治体直営型と、地域物流会社へ機体・システムを提供する型の2形態を展開している。</p>
+        <div class="pb-foot">売り物：運行の受託と機体・オペレーター</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip mv">売り先</span>
+        <h3>森林組合・インフラ事業者</h3>
+        <p>添田町では森林組合等が急傾斜地へ林業資材計4トンを空輸した実証がある（2025年3月、FlyCart30）。<strong>配送より「重量物の運搬」の方が実需に近い。</strong></p>
+        <div class="pb-foot">売り物：資材運搬・点検の複合</div>
+      </div>
+      <div class="pb-card">
+        <span class="pb-chip nu">売らない</span>
+        <h3>農業法人には売らない</h3>
+        <p>農業法人・JAは散布ドローンの買い手であって、輸送サービスの買い手としての事例はほぼ見当たらない。<strong>収穫物運搬の商用事例も確認できなかった。</strong>過剰約束は禁物。</p>
+        <div class="pb-foot">農業現場の運搬はまだ実証段階</div>
+      </div>
+    </div>
+
+    <div class="pb-note">
+      <b class="pb-lab">福岡での現実的な切り口</b>
+      <p>①すでに実証が行われた<strong>うきは市・添田町・福岡市（能古島）の隣接自治体</strong>に横展開を持ちかける。前例がある案件は担当者が庁内を通しやすい。②森林組合・電力インフラ事業者へ「配送」ではなく<strong>重量物運搬</strong>を提案する。売り物は配送そのものではなく、<strong>実証の運営能力と補助事業の申請伴走</strong>だと割り切る。<a class="pb-c" href="#s-soeda">[23]</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-money">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">09 ／ SUBSIDY</span><span class="pb-rule"></span></div>
+    <h2>補助金は「相手のため」であり、こちらの武器でもある</h2>
+    <p class="pb-prose">農業営業で最も歓迎される手土産は、値引きではなく<strong>補助金情報</strong>だ。制度は毎年変わり、取りに行った者だけが知っている構造になっている。そして重要なのは——<strong>散布代行業者である自社が使える補助もある</strong>ということ。</p>
+
+    <h3>顧客（農業者）に持っていく制度</h3>
+    <div class="pb-tw">
+      <table>
+        <thead><tr><th>制度</th><th>補助率・上限</th><th>ドローンの扱い</th><th>動く時期</th></tr></thead>
+        <tbody>
+          <tr><td><strong>スマート農業技術活用促進法</strong><br>生産方式革新実施計画</td><td class="pb-num">融資・税制</td><td>認定で日本公庫の長期低利融資（償還25年以内・据置5年以内）、特別償却（機械装置32%等）、補助事業でのポイント加算・優先採択。<strong>農業者が主体で、サービス事業体は連携者として入る</strong></td><td>通年（地方農政局への事前相談から）</td></tr>
+          <tr><td><strong>強い農業づくり総合支援交付金</strong><br>農業支援サービス事業支援タイプ</td><td class="pb-num">1/2・上限1,500万円</td><td>ドローン等の取得・リース費が対象（令和6年度実績で確認）</td><td>1月下旬〜2月／4月中旬に公募回</td></tr>
+          <tr><td><strong>スマート農業・農業支援サービス事業<br>加速化総合対策</strong></td><td class="pb-num">事業により異なる</td><td>「農業支援サービスの立上げ・事業拡大支援」メニューあり</td><td>春に公募開始（令和8年度は5月末に公募開始との情報）</td></tr>
+          <tr><td><strong>みどりの食料システム戦略<br>推進総合対策</strong></td><td class="pb-num">確認できず</td><td>ドローンによる農薬散布・施肥管理を含む技術体系転換が対象例に挙がる</td><td>確認できず</td></tr>
+        </tbody>
+        <caption>行政サイトへの直接アクセスができない環境での調査のため、上表は二次情報の要約を含む。<strong>令和8年度の継続有無・補助率・公募期間は、必ず九州農政局と福岡県の窓口で公募要領を確認してから顧客に提示すること。</strong><a class="pb-c" href="#s-hojo">[24]</a></caption>
+      </table>
+    </div>
+
+    <div class="pb-note">
+      <b class="pb-lab">自社が主語になれる制度</b>
+      <p><strong>福岡県スマート農業機械利用拡大推進事業</strong>は、令和7年度の実績として<strong>サービス事業者が対象・補助率1/2以内・上限1,500万円（機械導入を含む場合3,000万円）</strong>という内容だった。散布代行業者そのものを支援する県単独事業であり、機体の増設や体制構築に直結する。令和8年度の実施有無を<strong>初週に県農林水産部へ確認</strong>すること。あわせて、ものづくり補助金は農業用ドローンの導入実績が最も多い補助金だが、2026年度に新事業進出補助金と統合され「新事業進出・ものづくり補助金」へ一本化される見込みで、公募スケジュールは都度確認が必要。<a class="pb-c" href="#s-fukuoka-hojo">[25]</a></p>
+    </div>
+
+    <div class="pb-note wn">
+      <b class="pb-lab">市町村の単独補助は「前年の秋」に決まる</b>
+      <p>大牟田市の「スマート農業機械等導入支援事業」は、令和6・7年度に補助率1/2・上限100万円（類型により1/3・上限50万円）で実施されていた。この種の市町村単独事業は<strong>翌年度の予算化に向けて前年秋に要望調査が先行する</strong>傾向がある。つまり<strong>9〜12月に市役所の農政担当課に接触しておかないと、翌年度の枠に自社の顧客が乗らない</strong>。久留米市・朝倉市・うきは市・八女市・みやま市・柳川市については単独補助の存在を今回確認できなかったため、電話で直接確認すること。<a class="pb-c" href="#s-omuta">[26]</a></p>
+    </div>
+
+    <div class="pb-note">
+      <b class="pb-lab">営業への落とし込み</b>
+      <p>初回訪問の手土産は<strong>「補助金の一覧表1枚」</strong>にする。売り込みではなく情報提供として渡せるので、断られにくい。そして補助金の申請を手伝った相手は、ほぼ必ず自社の顧客になる。逆に「補助金が出るなら自分で機体を買う」と言われても止めない——<strong>買った後に不足するのは、飛ばす人と繁忙期の応援と年次点検</strong>だからだ。</p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="pb-sec" id="pb-act">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">10 ／ ACTION</span><span class="pb-rule"></span></div>
+    <h2>9月12日からの2週間</h2>
+    <p class="pb-prose">チェックはこの端末にだけ保存される。各自で潰していくこと。</p>
+    <div class="pb-check" id="pb-checklist">
+      <div class="pb-ci"><input type="checkbox" id="k1"><label for="k1"><span class="pb-when">DAY 1</span>九州農政局統計部と福岡県農林水産部に電話し、県内の法人経営体数・認定農業者数・集落営農組織一覧の最新公表資料をもらう</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k2"><label for="k2"><span class="pb-when">DAY 1-2</span>福岡県農業法人協会（092-711-5070）と日本農業法人協会に会員名簿の入手可否を照会</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k3"><label for="k3"><span class="pb-when">DAY 2-3</span>ターゲット100社リストを作り、A（水田法人）／B（施設園芸）／C（JA部会）／D（自治体）に分類</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k4"><label for="k4"><span class="pb-when">DAY 3</span>資料3点セットを完成：①1枚チラシ ②年間の料金表（薬剤内外を明記） ③近隣事前周知の手順書サンプル</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k5"><label for="k5"><span class="pb-when">DAY 3</span>保険証券・技能証明・機体登録・久留米市の輸送実績を1冊のファイルにまとめ、全員が携行</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k6"><label for="k6"><span class="pb-when">WEEK 1</span>B層（いちご施設園芸）を優先訪問。遮光剤は9月が需要期、待てない</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k7"><label for="k7"><span class="pb-when">WEEK 1</span>筑後の管内JA（福岡くるめ・ふくおか八女・みなみ筑後ほか）の営農指導課に挨拶。共同防除の体制と料金をヒアリング</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k8"><label for="k8"><span class="pb-when">WEEK 1-2</span>A層20社にアポ電。稲刈り前後で会えるタイミングを狙い、麦の話から入る</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k9"><label for="k9"><span class="pb-when">WEEK 2</span>9月下旬にデモフライト枠を2日確保し、A層・B層に招待をかける</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k10"><label for="k10"><span class="pb-when">WEEK 2</span>うきは市・添田町の隣接自治体（朝倉市・久留米市・田川市等）の企画部門にアポ。次年度予算に間に合わせる</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k11"><label for="k11"><span class="pb-when">WEEK 2</span>九州農政局・大阪航空局に遮光剤散布の法令上の扱いを照会し、回答を営業資料に反映</label></div>
+      <div class="pb-ci"><input type="checkbox" id="k12"><label for="k12"><span class="pb-when">WEEK 2</span>契約書の雛形を作る：中止基準・延期・面積実測・薬剤選定責任・周知の主体・保険</label></div>
+    </div>
+    <div class="pb-note">
+      <b class="pb-lab">2週間で取るべき成果</b>
+      <p>受注はまだ立たなくていい。<strong>①A層20社との面談、②JA3か所との接点、③デモ2日の実施、④自治体3か所への提案投函</strong>——この4つが2週間の合格ライン。麦の契約が決まるのは11〜12月、水稲は年明け以降になる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="pb-sec" id="pb-read">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">11 ／ LIBRARY</span><span class="pb-rule"></span></div>
+    <h2>読む物・持ち歩く物</h2>
+
+    <div class="pb-note">
+      <b class="pb-lab">まずこの3つ</b>
+      <p><strong>①『ドローンを仕事にする』</strong>——実務家30組の事例集。何が売れて、どこで躓くかが最短でわかる最新刊。<strong>②『農家のための売る技術100』</strong>——売る相手＝農家の思考様式を理解するため。顧客理解なくして提案なし。<strong>③農水省の空中散布Q&amp;A（無料PDF）</strong>——規制と安全基準を顧客より正確に語れない営業は、この業界では信用されない。</p>
+    </div>
+
+    <div class="pb-books">
+      <div class="pb-bgrp">
+        <h3>ドローンビジネス</h3>
+        <ul>
+          <li><a href="https://www.amazon.co.jp/dp/4761529733">『ドローンを仕事にする 未経験から「空のプロ」へ。30組の実践』</a>／名倉真悟／学芸出版社／2026年6月／ISBN 978-4-7615-2973-4</li>
+          <li><a href="https://www.amazon.co.jp/dp/B0CQZDRJHK">『ドローン3.0時代のビジネスハック』</a>／名倉真悟・水野二千翔／MdN／2023年11月</li>
+          <li><a href="https://www.utp.or.jp/book/b614685.html">『ドローン活用入門 レベル4時代の社会実装ハンドブック』</a>／鈴木真二・中村裕子編／東京大学出版会／2022年12月／ISBN 978-4-13-062845-7</li>
+          <li><a href="https://research.impress.co.jp/report/list/drone/502419">『ドローンビジネス調査報告書2026』</a>／インプレス総合研究所／2026年3月（<a href="https://book.impress.co.jp/books/1125501010">書籍ページ</a>）</li>
+          <li><a href="https://www.amazon.co.jp/dp/4274506843">『ドローン産業応用のすべて』</a>／野波健蔵／オーム社（発行年・ISBN未確認）</li>
+        </ul>
+      </div>
+
+      <div class="pb-bgrp">
+        <h3>農業ビジネス・顧客理解</h3>
+        <ul>
+          <li><a href="https://www.amazon.co.jp/dp/4761278277">『農家のための売る技術100 農業特化「ブランディング×マーケティング×デザイン」のコツ』</a>／角田誠／ISBN 978-4-7612-7827-4</li>
+          <li><a href="https://www.amazon.co.jp/dp/4833451174">『アグリビジネス進化論 ―新たな農業経営を拓いた7人のプロフェッショナル』</a>／有限責任監査法人トーマツ 農林水産業ビジネス推進室（出版社・発行年未確認）</li>
+        </ul>
+      </div>
+
+      <div class="pb-bgrp">
+        <h3>BtoB営業</h3>
+        <ul>
+          <li><a href="https://www.amazon.co.jp/dp/4903212521">『チャレンジャー・セールス・モデル』</a>／M.ディクソン、B.アダムソン／海と月社／2015年11月／ISBN 978-4-903212-52-4 — 「御用聞き」ではなく相手の課題を指摘する営業。実績のない新規参入者に効く</li>
+          <li><a href="https://www.amazon.co.jp/dp/479815816X">『THE MODEL』</a>／福田康隆／翔泳社／2019年1月／ISBN 978-4-7981-5816-7 — 訪問から受注までを工程として管理する考え方。チームで数字を追うなら</li>
+        </ul>
+      </div>
+
+      <div class="pb-bgrp">
+        <h3>常に携行する公的資料（無料PDF）</h3>
+        <ul>
+          <li><a href="https://www.maff.go.jp/j/kanbo/smart/attach/pdf/drone-192.pdf">農林水産省「無人航空機による農薬等の空中散布に関するQ&amp;A（使用者向け）」</a>（2023年5月版）</li>
+          <li><a href="https://www.maff.go.jp/j/syouan/syokubo/gaicyu/g_kouku_zigyo/muzinkoukuuki.html">農林水産省「無人航空機による農薬等の空中散布に関する情報」ポータル</a></li>
+          <li><a href="https://www.pref.fukuoka.lg.jp/contents/mujinnheri.html">福岡県「無人航空機による農薬の空中散布における注意事項」</a></li>
+          <li><a href="https://www.mlit.go.jp/koku/koku_fr10_000042.html">国土交通省「無人航空機の飛行許可・承認手続」</a></li>
+          <li><a href="https://www.uafp.dips.mlit.go.jp/contents/req-appl/preview/11.DIPS-Manual_FPA_JP_New-Registration_Lv.3.5.pdf">DIPS「レベル3.5飛行 新規申請マニュアル」</a></li>
+        </ul>
+      </div>
+
+      <div class="pb-bgrp">
+        <h3>毎週見る業界メディア</h3>
+        <ul>
+          <li><a href="https://drone-journal.impress.co.jp/">ドローンジャーナル</a>／<a href="https://drone.jp/">DRONE.jp</a>／<a href="https://smartagri-jp.com/">SMART AGRI</a>／<a href="https://agri.mynavi.jp/">マイナビ農業</a>／<a href="https://www.agrinews.co.jp/">日本農業新聞</a></li>
+        </ul>
+      </div>
+
+      <div class="pb-bgrp">
+        <h3>顔を出すイベント</h3>
+        <ul>
+          <li><a href="https://www.m-messe.co.jp/event/detail/7935">農業WEEK</a>（幕張メッセ・毎年10月／2026年は10月7〜9日）— <strong>営業開始直後に行ける最初の大型商談機会</strong></li>
+          <li><a href="https://www.jagri-global.jp/hub/ja-jp.html">九州農業WEEK</a>（グランメッセ熊本・毎年5月）— 地元九州の見込み客が集まる</li>
+          <li><a href="https://ssl.japan-drone.com/">Japan Drone / 次世代エアモビリティEXPO</a>（幕張メッセ・毎年6月）</li>
+          <li><a href="https://agri-food.jma.or.jp/kyushu/index.php">九州みどりの食料システムEXPO</a>（マリンメッセ福岡）／<a href="https://agribiz.maff.go.jp/overview">アグリビジネス創出フェア</a>（農水省主催）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="pb-sec" id="pb-src">
+  <div class="pb-wrap">
+    <div class="pb-h"><span class="pb-no">SOURCES</span><span class="pb-rule"></span></div>
+    <h2>出典</h2>
+    <p class="pb-prose" style="font-size:14px;color:var(--pb-muted)">数値は各出典の公表値。営業の型・切り返し・アクションリストは、これらの公開情報をもとに本資料が構成したもので、実績値ではない。行政サイトの一部はこの調査環境からアクセスできず、検索結果の要約に依っている箇所がある（本文に明記）。<strong>顧客への提示資料に転記する前に、一次資料で裏取りすること。</strong></p>
+    <ol class="pb-src">
+      <li id="s-census">2025年農林業センサス結果の概要（九州・概数値）／農林水産省・九州農政局 <a href="https://www.maff.go.jp/kyusyu/press/toukei/251128.html">maff.go.jp</a></li>
+      <li id="s-fukuoka">福岡県の農林水産業の概要／農林水産省 <a href="https://www.maff.go.jp/j/kanbo/tiho/attach/pdf/todouhuken_gaiyou-36.pdf">maff.go.jp</a>、福岡の麦（九州農政局） <a href="https://www.maff.go.jp/kyusyu/saga/attach/pdf/250806-6.pdf">maff.go.jp</a></li>
+      <li id="s-tagawa">JAたがわ「麦管理情報」（穂揃い期追肥と赤かび病防除） <a href="https://ja-tagawa.or.jp/wp-content/uploads/2024/08/R6%E7%94%A3%E9%BA%A6%E7%AE%A1%E7%90%86%E6%83%85%E5%A0%B1No.pdf">ja-tagawa.or.jp</a></li>
+      <li id="s-achilles">アキレス「ファインシェードスカイ」 <a href="https://www.achilles.jp/product/agriculture/horticulture/fine-shade-sky/">achilles.jp</a>／AGRI JOURNAL <a href="https://agrijournal.jp/material/66942/">agrijournal.jp</a></li>
+      <li id="s-rival">株式会社5wins <a href="https://drone.5wins.jp/sanpu/">drone.5wins.jp</a>／福岡ドローンステーション <a href="https://fukuoka-ds.jp/">fukuoka-ds.jp</a>／株式会社青空ミツバチ <a href="https://aozora38.co.jp/">aozora38.co.jp</a>／マゼックス九州特約店 <a href="https://mazex.jp/shop/2351">mazex.jp</a></li>
+      <li id="s-nokono">能古島ドローン配送実証（日本経済新聞） <a href="https://www.nikkei.com/article/DGXZQOUC174S00X11C22A0000000/">nikkei.com</a>／流通ニュース <a href="https://www.ryutsuu.biz/strategy/o101718.html">ryutsuu.biz</a></li>
+      <li id="s-cb26">株式会社セントラルベース26「福岡県久留米市で苗木のドローン輸送を実施」 <a href="https://www.centralbase26.com/">centralbase26.com</a></li>
+      <li id="s-fukui">福井県「ドローンを活用した施肥方法」実用化活用技術手引き <a href="https://www.pref.fukui.lg.jp/doc/noushi/kikaku/hukyu2_d/fil/r05_02_drone_tebiki.pdf">pref.fukui.lg.jp</a>／クボタ「大麦の適期追肥作業」 <a href="https://agriculture.kubota.co.jp/agriinfo/tec/post_43991.html">kubota.co.jp</a>／片倉コープアグリ「空散追肥306」 <a href="https://www.katakuraco-op.com/site_fertilizer/products/pdf/kusan306.pdf">katakuraco-op.com</a></li>
+      <li id="s-maff-drone">農林水産省「無人航空機による農薬等の空中散布に関する情報」 <a href="https://www.maff.go.jp/j/syouan/syokubo/gaicyu/g_kouku_zigyo/muzinkoukuuki.html">maff.go.jp</a></li>
+      <li id="s-chikugo">JA全農ふくれん（産地情報） <a href="https://zennoh-fukuren.jp/">zennoh-fukuren.jp</a>／福岡県茶業振興推進協議会 <a href="https://fukuoka-yamecha.jp/gaiyo/">fukuoka-yamecha.jp</a></li>
+      <li id="s-fnk-hojin">福岡県農業法人協会 <a href="http://fukuoka-agri.jp/">fukuoka-agri.jp</a></li>
+      <li id="s-hojin">日本農業法人協会 九州地区会員一覧 <a href="https://hojin.or.jp/common/common_category/member-list/membership_list/kyushu/">hojin.or.jp</a></li>
+      <li id="s-ja">JAグループ福岡（県内18JA） <a href="https://www.ja-gp-fukuoka.jp/group/about.html">ja-gp-fukuoka.jp</a></li>
+      <li id="s-fap">福岡県農業振興推進機構（農地中間管理事業） <a href="https://www.f-ap.org/nouchikanri/about.html">f-ap.org</a></li>
+      <li id="s-nintei">認定農業者の認定状況／農林水産省 <a href="https://www.maff.go.jp/j/kobetu_ninaite/n_seido/nintei_zyokyo/r7b.html">maff.go.jp</a></li>
+      <li id="s-optim">オプティム「ドローン農薬散布の仕事ご紹介サービス」 <a href="https://www.optim.co.jp/agriculture/services/pilots/">optim.co.jp</a>／「ドローン遮光・遮熱剤散布サービス」 <a href="https://www.optim.co.jp/agriculture/services/shading-agent-spray/">optim.co.jp</a></li>
+      <li id="s-sales">農閑期と営業タイミング（農業ジョブ） <a href="https://agrijob.jp/contents/gunma/how-to-make-money-during-agricultural-off-season">agrijob.jp</a>／マイナビ農業 <a href="https://agri.mynavi.jp/2019_06_25_76495/">agri.mynavi.jp</a>／農業法人の意思決定（日本農業法人協会） <a href="https://hojin.or.jp/common/what_is-html/">hojin.or.jp</a></li>
+      <li id="s-demo">マゼックス「ドローンのデモ会・デモフライト説明会とは」 <a href="https://mazex.jp/blog/demo-flight.html">mazex.jp</a>／精密農業.com「農業用ドローン代行とは」 <a href="https://seimitsu-nougyo.com/agricultural-drone-service/">seimitsu-nougyo.com</a></li>
+      <li id="s-trouble">日本国内の無人航空機事故（2015-2021）の要因分析／J-STAGE <a href="https://www.jstage.jst.go.jp/article/tjam/4/4/4_39/_pdf/-char/ja">jstage.jst.go.jp</a>／国土交通省 無人航空機の事故等の報告 <a href="https://www.mlit.go.jp/koku/accident_report.html">mlit.go.jp</a>／マゼックス「ドローンの事故の事例から学ぶ」 <a href="https://mazex.jp/blog/accident.html">mazex.jp</a></li>
+      <li id="s-reject">スマート農業の導入障壁（イノチオアグリ） <a href="https://inochio.co.jp/column/127/">inochio.co.jp</a>／NTT東日本 <a href="https://business.ntt-east.co.jp/column/bizdrive/smart-agriculture-cost-issues.html">ntt-east.co.jp</a></li>
+      <li id="s-hoken">共栄火災「ドローン総合保険 農林水産用」 <a href="https://www.kyoeikasai.co.jp/pdf/ag/agriculture/drone.pdf">kyoeikasai.co.jp</a>／東京海上日動 ドローン保険 <a href="https://drone-hoken.jp/indemnity">drone-hoken.jp</a></li>
+      <li id="s-qa">農林水産省「無人航空機による農薬等の空中散布に関するQ&amp;A（使用者向け）」令和5年5月 <a href="https://www.maff.go.jp/j/kanbo/smart/attach/pdf/drone-192.pdf">maff.go.jp</a>／蜜蜂被害軽減対策の推進について <a href="https://www.maff.go.jp/j/nouyaku/n_mitubati/notice.html">maff.go.jp</a></li>
+      <li id="s-soeda">添田町の林業資材空輸実証（ロジ・トゥデイ） <a href="https://www.logi-today.com/755134">logi-today.com</a>／うきは市の地域づくり連携協定（PR TIMES） <a href="https://prtimes.jp/main/html/rd/p/000000016.000081060.html">prtimes.jp</a>／エアロネクスト NEXT DELIVERY <a href="https://aeronext.co.jp/next_series/next_delivery/">aeronext.co.jp</a></li>
+      <li id="s-hojo">農林水産省 補助事業・支援制度 <a href="https://www.maff.go.jp/j/supply/hozyo/index.html">maff.go.jp</a>／スマート農業技術活用促進法 <a href="https://www.maff.go.jp/j/kanbo/smart/houritsu.html">maff.go.jp</a>／強い農業づくり総合支援交付金（令和8年度）解説 <a href="https://agri-ja.net/articles/strong-agriculture-comprehensive-grant-r8">agri-ja.net</a>／スマート農業の補助金 <a href="https://seimitsu-nougyo.com/smart-agriculture-grants/">seimitsu-nougyo.com</a></li>
+      <li id="s-fukuoka-hojo">福岡県「スマート農業機械利用拡大推進事業」／農業支援サービス関連 <a href="https://www.pref.fukuoka.lg.jp/contents/sien-service.html">pref.fukuoka.lg.jp</a>、<a href="https://www.pref.fukuoka.lg.jp/contents/fukuokasmartnougyou.html">pref.fukuoka.lg.jp</a></li>
+      <li id="s-omuta">大牟田市「スマート農業機械等導入支援事業」 <a href="https://www.city.omuta.lg.jp/kiji00319121/index.html">city.omuta.lg.jp</a></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="pb-wrap">福岡ドローン営業プレイブック ／ 2026年8月作成 ／ 掲載の単価・時期は公開情報に基づく目安であり、契約条件は個別に確認すること。</div>
+</footer>
+
+<script>
+(function(){
+  var KEY='pb-fukuoka-checklist-v1';
+  var box=document.getElementById('pb-checklist');
+  if(!box) return;
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ saved={}; }
+  var inputs=box.querySelectorAll('input[type=checkbox]');
+  Array.prototype.forEach.call(inputs,function(el){
+    if(saved[el.id]) el.checked=true;
+    el.addEventListener('change',function(){
+      var state={};
+      Array.prototype.forEach.call(inputs,function(i){ if(i.checked) state[i.id]=1; });
+      try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){}
+    });
+  });
+})();
+</script>
