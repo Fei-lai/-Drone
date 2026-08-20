@@ -1,0 +1,696 @@
+<title>西日本ドローン事業リサーチ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ground:#eceff0;
+  --surface:#ffffff;
+  --surface-2:#f5f7f7;
+  --ink:#0f1c21;
+  --ink-2:#3a4b51;
+  --muted:#697b81;
+  --line:#d3dbdb;
+  --line-strong:#b6c2c2;
+  --deep:#16333c;
+  --survey:#b4541a;
+  --survey-soft:#f2e3d8;
+  --agri:#3f6f38;
+  --agri-soft:#dfe9db;
+  --warn:#8a6a12;
+  --shadow:0 1px 2px rgba(15,28,33,.06),0 8px 24px -18px rgba(15,28,33,.4);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0b1114;
+    --surface:#121b1f;
+    --surface-2:#172126;
+    --ink:#e7edec;
+    --ink-2:#bcc9c9;
+    --muted:#8b9c9d;
+    --line:#25333a;
+    --line-strong:#35474f;
+    --deep:#a8ccd3;
+    --survey:#e58b4d;
+    --survey-soft:#33231a;
+    --agri:#93c184;
+    --agri-soft:#1d2a1e;
+    --warn:#d9b44a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -20px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0b1114;
+  --surface:#121b1f;
+  --surface-2:#172126;
+  --ink:#e7edec;
+  --ink-2:#bcc9c9;
+  --muted:#8b9c9d;
+  --line:#25333a;
+  --line-strong:#35474f;
+  --deep:#a8ccd3;
+  --survey:#e58b4d;
+  --survey-soft:#33231a;
+  --agri:#93c184;
+  --agri-soft:#1d2a1e;
+  --warn:#d9b44a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -20px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:600;text-wrap:balance;line-height:1.4;margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--survey);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.prose{max-width:70ch}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------- masthead ---------- */
+.masthead{position:relative;overflow:hidden;background:var(--surface);border-bottom:1px solid var(--line)}
+.masthead .contours{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.masthead .contours g{stroke:var(--deep);opacity:.14}
+.masthead .inner{position:relative;padding:56px 0 40px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.masthead h1{font-size:clamp(30px,5.4vw,52px);letter-spacing:.01em;margin:14px 0 0;color:var(--deep)}
+.masthead .lede{margin:20px 0 0;max-width:62ch;font-size:clamp(16px,1.6vw,18px);color:var(--ink-2)}
+.meta{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 28px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.meta b{font-weight:500;color:var(--ink-2)}
+
+/* ---------- nav ---------- */
+nav.jump{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.jump ul{display:flex;gap:0;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:thin}
+nav.jump a{display:block;white-space:nowrap;padding:11px 16px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent}
+nav.jump a:hover{color:var(--ink);border-bottom-color:var(--survey)}
+
+/* ---------- sections ---------- */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.sec-head .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);flex:none}
+.sec-head .rule{flex:1;height:1px;background:var(--line-strong)}
+section h2{font-size:clamp(22px,3vw,30px);color:var(--deep);margin-bottom:20px}
+section h3{font-size:19px;margin:36px 0 12px}
+p{margin:0 0 16px}
+.stack{display:flex;flex-direction:column;gap:16px}
+
+/* ---------- key figures ---------- */
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0}
+.fig{background:var(--surface);padding:20px}
+.fig .n{font-family:"Shippori Mincho B1",serif;font-size:30px;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--deep)}
+.fig .n small{font-size:15px;font-family:"Zen Kaku Gothic New",sans-serif;margin-left:2px;color:var(--ink-2)}
+.fig .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-top:8px}
+.fig .s{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.6}
+
+/* ---------- axis chips ---------- */
+.chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;padding:3px 9px;border-radius:2px;border:1px solid}
+.chip.sv{color:var(--survey);border-color:var(--survey);background:var(--survey-soft)}
+.chip.ag{color:var(--agri);border-color:var(--agri);background:var(--agri-soft)}
+.chip.nt{color:var(--muted);border-color:var(--line-strong);background:var(--surface-2)}
+
+/* ---------- calendar ---------- */
+.cal{margin:24px 0;border:1px solid var(--line);background:var(--surface);overflow-x:auto}
+.cal-grid{min-width:820px}
+.cal-row{display:grid;grid-template-columns:214px repeat(12,1fr);align-items:center;border-bottom:1px solid var(--line)}
+.cal-row:last-child{border-bottom:0}
+.cal-row .lab{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:10px 12px;font-size:13px;font-weight:500;border-right:1px solid var(--line)}
+.cal-row .m{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);text-align:center;padding:8px 0}
+.cal-row.head{background:var(--surface-2)}
+.bar{height:12px;margin:0;border-radius:1px}
+.cell{padding:9px 3px}
+.b-sv{background:var(--survey)}
+.b-sv-l{background:var(--survey);opacity:.32}
+.b-ag{background:var(--agri)}
+.b-ag-l{background:var(--agri);opacity:.32}
+.b-nt{background:var(--line-strong)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.65}
+thead th{background:var(--surface-2);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{background:var(--surface-2);font-weight:700;border-top:2px solid var(--line-strong)}
+caption{caption-side:bottom;text-align:left;padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);background:var(--surface-2)}
+
+/* ---------- region cards ---------- */
+.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:28px}
+.region{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column}
+.region .top{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.region h3{margin:0;font-size:20px;color:var(--deep)}
+.region .sub{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;margin-top:6px}
+.region .body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px;flex:1}
+.region dl{margin:0;display:flex;flex-direction:column;gap:12px}
+.region dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--muted);margin-bottom:3px}
+.region dd{margin:0;font-size:14px;line-height:1.75}
+.region .hook{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-strong);font-size:14px}
+.region .hook b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--muted);display:block;margin-bottom:4px;font-weight:500}
+
+/* ---------- model list ---------- */
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:24px}
+.model{border:1px solid var(--line);background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:10px}
+.model h3{margin:0;font-size:17px}
+.model p{margin:0;font-size:14px;color:var(--ink-2)}
+.model .foot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+
+/* ---------- callouts ---------- */
+.note{border-left:3px solid var(--deep);background:var(--surface);padding:16px 20px;margin:24px 0;font-size:14.5px}
+.note.risk{border-left-color:var(--warn)}
+.note b{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--muted);margin-bottom:6px;font-weight:500}
+.note p:last-child{margin-bottom:0}
+
+/* ---------- phases ---------- */
+.phases{display:flex;flex-direction:column;gap:0;margin-top:24px;border:1px solid var(--line);background:var(--surface)}
+.phase{display:grid;grid-template-columns:104px 1fr;border-bottom:1px solid var(--line)}
+.phase:last-child{border-bottom:0}
+.phase .no{padding:20px;border-right:1px solid var(--line);background:var(--surface-2)}
+.phase .no .p{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--muted)}
+.phase .no .t{font-family:"Shippori Mincho B1",serif;font-size:26px;color:var(--deep);line-height:1.2;margin-top:4px}
+.phase .pbody{padding:20px}
+.phase h3{margin:0 0 8px;font-size:17px}
+.phase ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:6px}
+
+ul.bul{margin:0 0 16px;padding-left:1.15em;display:flex;flex-direction:column;gap:8px}
+ul.bul li{line-height:1.8}
+
+/* ---------- citations ---------- */
+.c{font-family:"IBM Plex Mono",monospace;font-size:10.5px;vertical-align:super;line-height:0;color:var(--survey);text-decoration:none;padding:0 1px}
+.c:hover{text-decoration:underline}
+ol.src{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.9;color:var(--muted);padding-left:2.2em;display:flex;flex-direction:column;gap:4px}
+ol.src a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-strong)}
+ol.src a:hover{color:var(--survey);border-bottom-color:var(--survey)}
+ol.src li{word-break:break-word}
+
+footer{padding:40px 0 64px;font-size:12.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+
+@media (max-width:900px){
+  .figs{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:620px){
+  .figs{grid-template-columns:1fr}
+  body{font-size:15px}
+  section{padding:48px 0}
+  .masthead .inner{padding:40px 0 32px}
+  .phase{grid-template-columns:1fr}
+  .phase .no{border-right:0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:12px;padding:14px 20px}
+  .phase .no .t{margin-top:0;font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="masthead">
+  <svg class="contours" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke-width="1">
+      <path d="M-20 268 C 180 240, 300 300, 470 272 S 800 214, 980 244 1220 226 1220 226"/>
+      <path d="M-20 232 C 170 200, 320 262, 500 232 S 810 168, 1000 200 1220 178 1220 178"/>
+      <path d="M-20 196 C 160 160, 340 224, 530 192 S 820 122, 1020 156 1220 130 1220 130"/>
+      <path d="M-20 160 C 150 120, 360 186, 560 152 S 830 76, 1040 112 1220 82 1220 82"/>
+      <path d="M-20 124 C 140 80, 380 148, 590 112 S 840 30, 1060 68 1220 34 1220 34"/>
+      <path d="M-20 88 C 130 40, 400 110, 620 72 S 850 -16, 1080 24 1220 -14 1220 -14"/>
+    </g>
+  </svg>
+  <div class="wrap inner">
+    <div class="eyebrow">Research Note ／ 2026.08</div>
+    <h1>西日本ドローン事業リサーチ</h1>
+    <p class="lede">測量と農薬散布を二本柱に据えるとき、九州・四国・山陰・山陽・兵庫で何が起きているか。市場規模、制度の追い風、地域ごとの需要のかたち、収益モデル、そして参入時の落とし穴までを一枚にまとめた。</p>
+    <div class="meta">
+      <span>対象エリア <b>九州／四国／山陰／山陽／兵庫</b></span>
+      <span>主軸 <b>測量・農薬散布</b></span>
+      <span>調査時点 <b>2026年8月</b></span>
+      <span>出典 <b>公開情報20件</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <ul>
+      <li><a href="#summary">要点</a></li>
+      <li><a href="#market">市場</a></li>
+      <li><a href="#policy">制度</a></li>
+      <li><a href="#axes">二本柱の構造</a></li>
+      <li><a href="#area">エリア別</a></li>
+      <li><a href="#models">収益モデル</a></li>
+      <li><a href="#pnl">収支試算</a></li>
+      <li><a href="#risk">リスク</a></li>
+      <li><a href="#roadmap">ロードマップ</a></li>
+      <li><a href="#sources">出典</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">SUMMARY</span><span class="rule"></span></div>
+    <h2>結論：測量と散布は、同じ人と機材で「季節が噛み合う」</h2>
+    <div class="prose stack">
+      <p>この二本柱の組み合わせは、思いつきの多角化ではなく<strong>稼働率の設計</strong>である。農薬散布の需要は 6〜9 月に集中し、公共工事に紐づく測量需要は年度末の 10〜3 月に山が来る。片方だけでは機材と人が半年遊ぶ事業が、組み合わせると通年稼働の事業になる。西日本で狙うべきは、この稼働カレンダーを埋める順番だ。</p>
+      <ul class="bul">
+        <li><strong>市場は成長の後半戦ではなく実装の初期戦。</strong>国内ドローンビジネス市場は 2025 年度 4,973 億円（前年度比 +13.8%）、2026 年度は 5,501 億円の見込み。うちサービス市場が 2,711 億円と最大かつ最速（+18.1%）で伸びている<a class="c" href="#s1">[1]</a>。</li>
+        <li><strong>制度が需要を作る側に回った。</strong>i-Construction 2.0 により公共工事で 3 次元データ納品が標準化し、公共測量作業規程の準則に UAV 写真測量・LiDAR が正式手法として位置づけられた<a class="c" href="#s4">[4]</a><a class="c" href="#s5">[5]</a>。対応できない地場業者は受注機会を失う＝外注需要になる。</li>
+        <li><strong>農業側は「機体を売る」から「作業を売る」へ移った。</strong>農業用ドローンは 2019 年約 4,000 台から 2024 年約 4 万台へ 5 年で約 10 倍<a class="c" href="#s3">[3]</a>。機体は行き渡りつつあり、次に不足するのは飛ばせる人と受託してくれる事業者。</li>
+        <li><strong>西日本の地形が参入障壁になる。</strong>中山間・傾斜地・小区画という条件は大型機械が入れないため、ドローンの相対優位が最も大きく出る。中山間地の防除では 1ha あたり作業時間がブームスプレーヤの約 1/3<a class="c" href="#s9">[9]</a>、傾斜柑橘園では 2ha を 3 時間から 10 分に短縮した実例がある<a class="c" href="#s10">[10]</a>。</li>
+        <li><strong>差別化の主戦場は単価ではなくデータ。</strong>散布代行は 10a 1,000〜3,000 円の価格競争に落ちやすい<a class="c" href="#s15">[15]</a>。生育診断・可変施肥・3D 点群といった「納品物」を持つ事業者だけが単価を維持できる。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="market">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">01 ／ MARKET</span><span class="rule"></span></div>
+    <h2>市場の全体像と価格の相場感</h2>
+    <div class="figs">
+      <div class="fig"><div class="n">4,973<small> 億円</small></div><div class="k">2025年度 国内市場</div><div class="s">前年度比 +13.8%。土木・建築と点検用途の普及が牽引<a class="c" href="#s1">[1]</a></div></div>
+      <div class="fig"><div class="n">5,501<small> 億円</small></div><div class="k">2026年度 見込み</div><div class="s">+10.6%。2030年度には9,544億円へ（CAGR 13.9%）<a class="c" href="#s1">[1]</a></div></div>
+      <div class="fig"><div class="n">2,711<small> 億円</small></div><div class="k">うちサービス市場</div><div class="s">+18.1% と最大セグメントかつ最速成長。機体市場は1,227億円<a class="c" href="#s1">[1]</a></div></div>
+      <div class="fig"><div class="n">約4<small> 万台</small></div><div class="k">農業用ドローン（2024年）</div><div class="s">2019年の約4,000台から5年で約10倍<a class="c" href="#s3">[3]</a></div></div>
+      <div class="fig"><div class="n">7<small> 割超</small></div><div class="k">実装フェーズの利用企業</div><div class="s">実証段階を抜け、現場ツール化が進行<a class="c" href="#s1">[1]</a></div></div>
+      <div class="fig"><div class="n">63<small> %</small></div><div class="k">データ活用（団体経営体）</div><div class="s">個人含む全経営体では40.0%（33.1万経営体）<a class="c" href="#s3">[3]</a></div></div>
+    </div>
+
+    <h3>受注単価のレンジ</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>サービス</th><th>単価レンジ</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip ag">散布</span> 農薬散布代行（水稲・液剤）</td><td class="num">10a 1,000〜2,500円</td><td>全体相場は10a 1,000〜3,000円。面積が大きいほど逓減、傾斜地・不整形圃場・障害物は割増<a class="c" href="#s15">[15]</a></td></tr>
+          <tr><td><span class="chip ag">散布</span> 年間受託（3〜5回／15ha規模）</td><td class="num">60万〜150万円</td><td>1回あたり20万〜30万円。薬剤費・出張費の内外を明示した見積が必須<a class="c" href="#s23">[23]</a></td></tr>
+          <tr><td><span class="chip sv">測量</span> UAV写真測量</td><td class="num">20万〜50万円／件</td><td>面積・要求精度・成果品の種類で変動<a class="c" href="#s16">[16]</a></td></tr>
+          <tr><td><span class="chip sv">測量</span> UAVレーザー測量</td><td class="num">30万〜80万円／件</td><td>植生下の地形取得が必要な林地・法面で優位。1haあたり50万円〜という提示例も<a class="c" href="#s17">[17]</a></td></tr>
+          <tr><td><span class="chip sv">測量</span> 点群処理・土量計算のみ</td><td class="num">5万〜15万円</td><td>撮影は他社、解析だけ受ける形。閑散期の穴埋めに使える<a class="c" href="#s16">[16]</a></td></tr>
+          <tr><td><span class="chip nt">機体</span> 農業用ドローン本体</td><td class="num">100万〜400万円</td><td>相場は100万〜300万円。DJI AGRAS T50はセットで250万〜300万円前後、T25は約400万円、国産マゼックス飛助は100万〜250万円<a class="c" href="#s23">[23]</a></td></tr>
+        </tbody>
+        <caption>公開されている料金表・比較記事からのレンジ。実際の見積は移動距離・薬剤の内外・圃場条件で大きく振れる。</caption>
+      </table>
+    </div>
+
+    <h3>季節の噛み合わせ</h3>
+    <p class="prose">下図が本レポートの中心的な主張。散布と測量は繁忙期がほぼ排他的で、点検・林業が谷を埋める。</p>
+    <div class="cal">
+      <div class="cal-grid">
+        <div class="cal-row head">
+          <div class="lab mono" style="font-size:11px;letter-spacing:.1em;color:var(--muted)">MONTH</div>
+          <div class="m">4</div><div class="m">5</div><div class="m">6</div><div class="m">7</div><div class="m">8</div><div class="m">9</div><div class="m">10</div><div class="m">11</div><div class="m">12</div><div class="m">1</div><div class="m">2</div><div class="m">3</div>
+        </div>
+        <div class="cal-row">
+          <div class="lab"><span class="chip ag">散布</span> 水稲防除</div>
+          <div class="cell"></div><div class="cell"><div class="bar b-ag-l"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag-l"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        </div>
+        <div class="cal-row">
+          <div class="lab"><span class="chip ag">散布</span> 果樹・畑作</div>
+          <div class="cell"><div class="bar b-ag-l"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag"></div></div><div class="cell"><div class="bar b-ag-l"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        </div>
+        <div class="cal-row">
+          <div class="lab"><span class="chip sv">測量</span> 公共工事・起工／出来形</div>
+          <div class="cell"><div class="bar b-sv-l"></div></div><div class="cell"><div class="bar b-sv-l"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"><div class="bar b-sv-l"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div>
+        </div>
+        <div class="cal-row">
+          <div class="lab"><span class="chip sv">測量</span> 森林資源・林地</div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"><div class="bar b-sv-l"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv"></div></div><div class="cell"><div class="bar b-sv-l"></div></div>
+        </div>
+        <div class="cal-row">
+          <div class="lab"><span class="chip nt">通年</span> 点検・空撮・災害対応</div>
+          <div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div><div class="cell"><div class="bar b-nt"></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="prose" style="font-size:13.5px;color:var(--muted)">濃い帯＝繁忙、淡い帯＝準繁忙。林地のレーザー計測は落葉期（晩秋〜早春）が精度・効率ともに有利で、公共測量の年度末繁忙とやや競合する点は要注意。</p>
+  </div>
+</section>
+
+<section id="policy">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">02 ／ POLICY</span><span class="rule"></span></div>
+    <h2>制度の追い風は「使ってもいい」から「使わないと不利」へ</h2>
+    <p class="prose">2026 年時点で効いている制度変化は、規制緩和よりも<strong>調達要件の変更</strong>にある。発注側が 3 次元データを前提に据えたため、対応可否が受注可否に直結し始めた。</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>制度・政策</th><th>要点</th><th>事業への効き方</th></tr></thead>
+        <tbody>
+          <tr><td><strong>i-Construction 2.0</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">国土交通省 / 2024〜</span></td><td>建設現場のオートメーション化。ドローン測量・3次元設計・ICT建機を一気通貫で活用。公共測量作業規程の準則にUAV写真測量・LiDARが正式手法として位置づけ<a class="c" href="#s4">[4]</a></td><td><span class="chip sv">測量</span> 3次元データに対応できない地場土木業者が確実に発生する。彼らの<strong>外注先</strong>になるのが最短の入口</td></tr>
+          <tr><td><strong>橋梁定期点検 3巡目</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">2024年度〜</span></td><td>全橋梁を5年に1回近接目視。直轄では点検支援技術の活用が原則化され、地方公共団体・民間にも推奨<a class="c" href="#s26">[26]</a></td><td><span class="chip nt">通年</span> 市町村管理の中小橋梁が大量に残る。足場・交通規制の削減が提案の切り口</td></tr>
+          <tr><td><strong>レベル3.5／レベル4飛行</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">航空法</span></td><td>レベル3.5は機上カメラ＋技能証明＋第三者賠償責任保険で道路・鉄道横断が容易化<a class="c" href="#s6">[6]</a>。レベル4は一等＋第一種機体認証＋許可<a class="c" href="#s5">[5]</a></td><td><span class="chip nt">通年</span> 一等資格の保有は「作業範囲が広い会社」という調達上の実利になる</td></tr>
+          <tr><td><strong>民間資格の優遇措置終了</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">2025年末</span></td><td>飛行許可申請における審査簡略化など、民間資格への優遇が終了し国家資格中心の体制へ完全移行<a class="c" href="#s24">[24]</a></td><td><span class="chip nt">通年</span> 有資格者の希少性が上がる＝<strong>オペレーター派遣</strong>という商材が成立する</td></tr>
+          <tr><td><strong>スマート農業技術活用促進法</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">農林水産省</span></td><td>生産方式革新実施計画の認定で、日本公庫の長期低利融資、税制特例、補助事業でのポイント加算・優先採択。<strong>サービス事業体も支援対象</strong><a class="c" href="#s7">[7]</a></td><td><span class="chip ag">散布</span> 顧客（農業法人）の認定取得を手伝う立場に回れば、機体導入とセットで受託契約が取れる</td></tr>
+          <tr><td><strong>スマート林業 現場実装ビジョン</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">林野庁 / 2026年3月</span></td><td>デジタル技術による森林資源管理の高度化。資材運搬ドローン・地上／航空レーザ計測機器を例示。森林集約・循環成長対策で購入・リースが補助対象<a class="c" href="#s8">[8]</a></td><td><span class="chip sv">測量</span> 森林率の高い山陰・四国・九州南部で、林地レーザー計測が新規需要として立ち上がる</td></tr>
+          <tr><td><strong>ドローン航路登録制度</strong><br><span class="mono" style="font-size:11px;color:var(--muted)">経済産業省 / 検討・整備中</span></td><td>安全性を事前確認した飛行ルートを登録し、毎回の個別申請を不要にする方向<a class="c" href="#s24">[24]</a></td><td><span class="chip nt">通年</span> 反復案件（同一路線の点検・同一圃場の防除）の申請コストが下がる</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <b>使える補助金の型</b>
+      <p>国の事業（スマート農業・農業支援サービス加速化総合対策、産地パワーアップ 等）に加え、<strong>市町村単独の上乗せ補助</strong>が実務では効く。例：神戸市「スマート農業等導入支援事業」（2026年度は4月17日〜5月22日募集、2027年3月31日までに事業完了）<a class="c" href="#s14">[14]</a>、三田市のスマート農業機械導入支援（補助率1/2以内、農薬散布ドローン・リモコン草刈機が対象）。顧客側の補助スケジュールを把握して<strong>逆算で商談を仕掛ける</strong>のが受注の型になる。</p>
+    </div>
+  </div>
+</section>
+
+<section id="axes">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">03 ／ STRUCTURE</span><span class="rule"></span></div>
+    <h2>二本柱の性格はまったく違う</h2>
+    <p class="prose">同じドローンでも、測量と散布は顧客・営業サイクル・利益の出方が別物である。どちらを先に立てるかで組織の作り方が変わる。</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>軸</th><th><span class="chip sv">測量</span> 測量・3Dデータ</th><th><span class="chip ag">散布</span> 農薬散布</th></tr></thead>
+        <tbody>
+          <tr><td>主な顧客</td><td>建設会社、測量・建設コンサル、自治体、砂防・治山、森林組合</td><td>農業法人、集落営農組織、JA、大規模個人農家、果樹産地</td></tr>
+          <tr><td>1件あたり単価</td><td>20万〜80万円（案件型）</td><td>2万〜30万円（面積課金／反復）</td></tr>
+          <tr><td>繁忙期</td><td>10〜3月（年度末に集中）＋災害時スポット</td><td>6〜9月に極端に集中</td></tr>
+          <tr><td>収益の源泉</td><td>飛行より<strong>解析・成果品作成</strong>。点群処理の工数が原価の主役</td><td>飛行の<strong>実働時間と面積</strong>。移動と充電のロスが利益を削る</td></tr>
+          <tr><td>参入障壁</td><td>高い（精度管理・測量の知識・成果品の作法・実績）</td><td>低い（＝価格競争に晒されやすい）</td></tr>
+          <tr><td>必要資格・体制</td><td>一等／二等技能証明、測量士補以上が望ましい、解析ソフト、RTK基準点</td><td>技能証明、農薬取扱いの知識、産業用機体、薬剤・希釈の管理体制</td></tr>
+          <tr><td>初期投資</td><td>写真測量から入れば100万円台〜、レーザー機は数百万〜1,000万円級</td><td>機体100万〜400万円＋バッテリー・発電機・運搬車</td></tr>
+          <tr><td>リピート性</td><td>案件ごと。ただし1社取ると継続発注になりやすい</td><td>非常に高い。年間3〜5回×毎年</td></tr>
+          <tr><td>拡張の方向</td><td>点検（橋梁・法面・太陽光）、森林資源量、災害調査</td><td>播種・施肥・受粉、生育診断、可変施肥、収量予測</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <b>順番についての判断</b>
+      <p>キャッシュを早く回すなら<strong>散布が先</strong>（単価は低いが契約が読め、翌年も続く）。事業としての堀を作るなら<strong>測量が先</strong>（実績と精度管理のノウハウは真似されにくい）。福岡を拠点に持つなら、九州の建設・災害復旧需要と農業需要の両方に手が届くため、<strong>散布で夏の稼働と地域の信用を作り、その資金で測量の解析力に投資する</strong>順が現実的。</p>
+    </div>
+  </div>
+</section>
+
+<section id="area">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">04 ／ AREA</span><span class="rule"></span></div>
+    <h2>エリア別の攻め筋</h2>
+    <p class="prose">同じ「西日本」でも、需要のかたちは県境よりも<strong>地形と作目</strong>で切れる。以下は 5 圏域ごとの特徴と、最初に当たるべき相手。</p>
+
+    <div class="regions">
+
+      <article class="region">
+        <div class="top">
+          <h3>九州</h3>
+          <div class="sub">FUKUOKA / SAGA / NAGASAKI / KUMAMOTO / OITA / MIYAZAKI / KAGOSHIMA</div>
+        </div>
+        <div class="body">
+          <dl>
+            <dt>需要の芯</dt>
+            <dd>水稲＋畑作（茶・さつまいも・飼料作）＋施設園芸という作目の厚み。九州農政局が管内の農業支援サービス事例集を公表しており、防除代行・機械のリース／レンタル・データ分析といった業態が既に事業として成立している<a class="c" href="#s12">[12]</a>。鹿児島では低価格帯の散布サービスが、熊本には農業用ドローンの教育拠点がある。</dd>
+            <dt>もう一つの柱</dt>
+            <dd>豪雨災害の常襲地帯であること。災害調査・復旧測量は単価が高く、緊急性ゆえに価格交渉が起きにくい。九州地方整備局はICT活用工事で無人航空機による起工測量を手引きに明記している<a class="c" href="#s12">[12]</a>。</dd>
+          </dl>
+          <div class="hook"><b>最初に当たる相手</b>市町村の農林／土木担当と<strong>災害時応援協定</strong>の締結交渉。協定は売上ではないが、平時の測量・点検案件を呼び込む信用装置になる。</div>
+        </div>
+      </article>
+
+      <article class="region">
+        <div class="top">
+          <h3>四国</h3>
+          <div class="sub">EHIME / KAGAWA / TOKUSHIMA / KOCHI</div>
+        </div>
+        <div class="body">
+          <dl>
+            <dt>需要の芯</dt>
+            <dd>傾斜地果樹。愛媛・宇和島の柑橘園では、動力噴霧器で2.5〜3時間かかっていた2haの防除がドローンで約10分になった<a class="c" href="#s10">[10]</a>。樹高を3Dで読み高度を自動調整する機体が実用段階に入り、国のプロジェクトでも傾斜地果樹園の防除技術が確立されつつある<a class="c" href="#s11">[11]</a>。</dd>
+            <dt>周辺の柱</dt>
+            <dd>高知の施設園芸・大規模農地整備（南国市など）、香川の平坦水田、徳島の露地野菜。中国四国農政局が水田作・露地野菜・果樹の実装地区を抱えており、実証の受け皿が既にある<a class="c" href="#s13">[13]</a>。</dd>
+          </dl>
+          <div class="hook"><b>最初に当たる相手</b>柑橘産地のJA部会。個別農家ではなく<strong>部会単位で年間防除契約</strong>を取ると、移動効率が跳ね上がり傾斜地の割増単価も通る。</div>
+        </div>
+      </article>
+
+      <article class="region">
+        <div class="top">
+          <h3>山陰</h3>
+          <div class="sub">SHIMANE / TOTTORI</div>
+        </div>
+        <div class="body">
+          <dl>
+            <dt>需要の芯</dt>
+            <dd>担い手不足が全国でも最も先鋭化した地域。中山間の小区画圃場が点在し大型機械が入らないため、ドローンの相対優位が最大化する。中山間地では1haあたりの作業時間がマルチコプタ0.42時間に対しブームスプレーヤ1.30時間と約1/3<a class="c" href="#s9">[9]</a>。</dd>
+            <dt>組み方</dt>
+            <dd>島根・阿井地区では集落営農組織がドローン防除を導入し、負担軽減とコスト削減に加えて<strong>地域の若手をオペレーターとして育成</strong>する取り組みが進む<a class="c" href="#s20">[20]</a>。「代行して終わり」ではなく育成込みで入るのが地域の受け入れ方に合う。</dd>
+            <dt>森林</dt>
+            <dd>森林率が高く、林野庁の実装ビジョンに沿った林地レーザー計測・資材運搬の需要が立ち上がる余地<a class="c" href="#s8">[8]</a>。</dd>
+          </dl>
+          <div class="hook"><b>最初に当たる相手</b>集落営農法人と県の農業普及部門。<strong>「作業受託＋オペレーター育成」のパッケージ</strong>で提案すると補助・地域政策と噛み合う。</div>
+        </div>
+      </article>
+
+      <article class="region">
+        <div class="top">
+          <h3>山陽</h3>
+          <div class="sub">OKAYAMA / HIROSHIMA / YAMAGUCHI</div>
+        </div>
+        <div class="body">
+          <dl>
+            <dt>需要の芯</dt>
+            <dd>ここは農業より<strong>測量・点検が主戦場</strong>。人口と建設投資が集まり、砂防・治山の事業量が大きい。広島県・山口県はいずれも土砂災害警戒区域のポータルを整備するほど斜面災害の管理対象が多く、災害復旧と法面調査の反復需要がある<a class="c" href="#s18">[18]</a>。</dd>
+            <dt>設備点検</dt>
+            <dd>瀬戸内側は日照条件から太陽光発電設備が多く、赤外線カメラによるパネル点検が通年商材になる。橋梁・ため池も自治体管理の対象が膨大。</dd>
+            <dt>農業側</dt>
+            <dd>岡山の果樹（ぶどう・桃）は高単価で、薬害リスクに厳しい分だけ<strong>丁寧な散布に対価が付く</strong>。中国四国農政局の実装地区にも岡山・広島・山口の水田作／露地野菜／果樹が含まれる<a class="c" href="#s13">[13]</a>。</dd>
+          </dl>
+          <div class="hook"><b>最初に当たる相手</b>地場の建設会社と建設コンサル。i-Construction 2.0対応の<strong>起工測量・出来形計測の外注先</strong>として単発から入り、年間の協力会社ポジションを取る。</div>
+        </div>
+      </article>
+
+      <article class="region">
+        <div class="top">
+          <h3>兵庫</h3>
+          <div class="sub">AWAJI / HARIMA / TAJIMA / TAMBA / KOBE</div>
+        </div>
+        <div class="body">
+          <dl>
+            <dt>需要の芯</dt>
+            <dd>一県のなかに気候も作目も揃う「縮図」。淡路はたまねぎ・レタスで全国上位の産地、播磨は水田地帯で酒米「山田錦」の主産地（酒米生産量全国1位）、但馬は中山間の稲作・高原野菜と但馬牛、丹波は黒大豆<a class="c" href="#s25">[25]</a>。</dd>
+            <dt>効きどころ</dt>
+            <dd>山田錦や丹波黒のような<strong>高付加価値作物</strong>は、生育ムラの管理と適期防除が品質と直結する。単なる代行ではなく生育診断・可変施肥まで含めた提案が通りやすい（可変施肥の実証では約1割増収、10aあたり売上総利益+12,800円の例<a class="c" href="#s21">[21]</a>）。</dd>
+            <dt>制度の使いやすさ</dt>
+            <dd>神戸市・三田市など<strong>市町村単独の導入補助</strong>が動いており、顧客の初期投資を下げる材料になる<a class="c" href="#s14">[14]</a>。神戸・阪神圏の建設需要も近い。</dd>
+          </dl>
+          <div class="hook"><b>最初に当たる相手</b>酒造メーカーと契約する山田錦の生産組合。<strong>品質データの納品</strong>を売り物にすれば、10a単価の競争から抜けられる。</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">05 ／ MODELS</span><span class="rule"></span></div>
+    <h2>収益モデルの5類型</h2>
+    <p class="prose">単発の作業受託だけで積み上げると、天候と季節に売上が完全に依存する。下の①から⑤へ重心を移すほど、売上が読めるようになる。</p>
+    <div class="models">
+      <div class="model">
+        <span class="chip nt">① 作業受託（スポット）</span>
+        <h3>飛ばした分だけ請求する</h3>
+        <p>散布は10a単価、測量は案件単価。参入が最も速い一方、価格競争と天候リスクを丸ごと被る。<strong>入口としては正しいが、ここに留まると消耗する。</strong></p>
+        <div class="foot">読みやすさ ★☆☆ ／ 粗利 中</div>
+      </div>
+      <div class="model">
+        <span class="chip ag">② 年間防除契約</span>
+        <h3>シーズンをまとめて売る</h3>
+        <p>年3〜5回の防除を一括契約。15ha規模で年60万〜150万円<a class="c" href="#s23">[23]</a>。前年のうちに翌年分を押さえると、機体投資と人員計画が立つ。集落営農・JA部会単位で取るのが定石。</p>
+        <div class="foot">読みやすさ ★★★ ／ 粗利 中</div>
+      </div>
+      <div class="model">
+        <span class="chip sv">③ データ納品</span>
+        <h3>飛行ではなく成果品を売る</h3>
+        <p>3D点群・オルソ・土量計算、生育マップ・可変施肥処方、森林資源量。相場は点群処理単体でも5万〜15万円<a class="c" href="#s16">[16]</a>。<strong>解析力が原価であり、同時に堀になる。</strong></p>
+        <div class="foot">読みやすさ ★★☆ ／ 粗利 高</div>
+      </div>
+      <div class="model">
+        <span class="chip nt">④ 人と機体を貸す</span>
+        <h3>オペレーター派遣・機体レンタル・教育</h3>
+        <p>国家資格一本化で有資格者が希少化<a class="c" href="#s24">[24]</a>し、業界ではインストラクター不足も顕在化している<a class="c" href="#s19">[19]</a>。機体を持つ農業法人に<strong>飛ばす人だけ</strong>を売る形は、繁忙期の重複を吸収できる。</p>
+        <div class="foot">読みやすさ ★★☆ ／ 粗利 中〜高</div>
+      </div>
+      <div class="model">
+        <span class="chip nt">⑤ 自治体・インフラの継続契約</span>
+        <h3>災害協定と点検の年間枠</h3>
+        <p>災害時応援協定、橋梁・ため池・法面の点検、太陽光設備の定期点検。橋梁は5年に1回の点検義務があり<a class="c" href="#s26">[26]</a>、<strong>更新サイクルが読める</strong>のが最大の価値。</p>
+        <div class="foot">読みやすさ ★★★ ／ 粗利 高</div>
+      </div>
+      <div class="model">
+        <span class="chip nt">＋ 補完</span>
+        <h3>顧客の補助金申請を伴走する</h3>
+        <p>スマート農業技術活用促進法の生産方式革新実施計画は、認定で低利融資・税制特例・補助の優先採択が付く<a class="c" href="#s7">[7]</a>。<strong>申請を手伝った相手はほぼ必ず自社の顧客になる。</strong></p>
+        <div class="foot">直接売上は小 ／ 受注率への効果 大</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pnl">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">06 ／ NUMBERS</span><span class="rule"></span></div>
+    <h2>収支のあたりを付ける</h2>
+    <p class="prose">以下は<strong>公開単価から組んだ仮定モデル</strong>であり、実績値ではない。前提を差し替えて自社の条件で読み直すための骨格として使ってほしい。</p>
+
+    <h3><span class="chip ag">散布</span> 農薬散布事業（1チーム体制・初年度〜2年目）</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>項目</th><th class="num">金額</th><th>前提</th></tr></thead>
+        <tbody>
+          <tr><td>受託売上</td><td class="num">4,000,000円</td><td>延べ散布面積200ha（＝2,000反）× 10a 2,000円</td></tr>
+          <tr><td>変動費（移動・電力・バッテリー消耗・保険）</td><td class="num">-1,000,000円</td><td>売上の約25%。薬剤は顧客支給前提</td></tr>
+          <tr><td>繁忙期の補助人員（外注）</td><td class="num">-600,000円</td><td>2名体制のうち1名分を実働60日で外注</td></tr>
+          <tr><td>機体・周辺機器の減価償却</td><td class="num">-250,000円</td><td>取得250万円、補助1/2活用で自己負担125万円を5年償却</td></tr>
+          <tr><td>申請・保守・年次点検・教育</td><td class="num">-300,000円</td><td>機体整備、資格更新、飛行申請の事務</td></tr>
+        </tbody>
+        <tfoot><tr><td>営業利益（概算）</td><td class="num">約 1,850,000円</td><td>粗利率 約46%</td></tr></tfoot>
+        <caption>200haは1チームの能力上限ではない。実働60日×15ha/日なら理論値は900ha級で、上限は機体性能ではなく<strong>受注面積の確保</strong>にある。損益分岐は概ね延べ55〜60ha前後。</caption>
+      </table>
+    </div>
+
+    <h3><span class="chip sv">測量</span> 測量・3Dデータ事業（写真測量から入る場合）</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>項目</th><th class="num">金額</th><th>前提</th></tr></thead>
+        <tbody>
+          <tr><td>案件売上</td><td class="num">6,000,000円</td><td>平均25万円 × 24件（うち解析のみの小口を数件含む）</td></tr>
+          <tr><td>外注・変動費</td><td class="num">-1,200,000円</td><td>基準点測量の一部外注、移動、クラウド処理</td></tr>
+          <tr><td>機体・ソフト償却／年間ライセンス</td><td class="num">-700,000円</td><td>RTK機＋解析ソフト。レーザー機は案件確度が立つまで導入を待つ</td></tr>
+          <tr><td>解析工数（内製人件費）</td><td class="num">-2,400,000円</td><td>1件あたり平均3〜5人日。<strong>ここが原価の主役</strong></td></tr>
+        </tbody>
+        <tfoot><tr><td>営業利益（概算）</td><td class="num">約 1,700,000円</td><td>粗利率 約28%</td></tr></tfoot>
+        <caption>測量は「飛ばす時間」より「机の上の時間」で利益が決まる。解析を効率化できるかが拡大の律速で、レーザー機（数百万〜1,000万円級）は年間案件数が20件を安定して超えてから検討するのが安全。</caption>
+      </table>
+    </div>
+
+    <div class="note">
+      <b>合算で見たときの意味</b>
+      <p>2事業を同一人員・同一車両で回すと、上の2表の固定費の一部（車両・保険・事務・営業）が重複しなくなる。単独では成り立ちにくい規模でも、<strong>通年で1人分の人件費を賄える売上</strong>に届くのが二本柱の実利である。逆に言えば、夏と冬の両方に人を張れない体制でこの構成を取ると、繁忙期に取りこぼす。</p>
+    </div>
+  </div>
+</section>
+
+<section id="risk">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">07 ／ RISK</span><span class="rule"></span></div>
+    <h2>先に潰しておくべきリスク</h2>
+    <div class="prose stack">
+      <div class="note risk">
+        <b>01 ／ 機体調達リスク</b>
+        <p>米国では FCC の措置により DJI 製機体の新規販売が制限される方向にあり、DJI は 2026 年に米国で約 15 億ドルの売上を失う可能性を示している<a class="c" href="#s18b">[18b]</a>。日本を直接規制するものではないが、<strong>供給・価格・部品保守の不確実性</strong>は無視できない。国産機（マゼックス、ACSL 等）を含めた複数系統で機種選定し、単一メーカーに全稼働を賭けない。</p>
+      </div>
+      <div class="note risk">
+        <b>02 ／ 価格競争と「安売り事業者」</b>
+        <p>散布代行は 10a 1,000 円台の提示が現に存在し<a class="c" href="#s15">[15]</a>、機体さえ買えば参入できるため単価は下がりやすい。<strong>面積単価だけで勝負しない</strong>こと。飛行記録・散布ログ・生育マップの納品、事故時の保険と補償、翌年の作付計画への提案までを含めて「同じ土俵に乗らない」設計にする。</p>
+      </div>
+      <div class="note risk">
+        <b>03 ／ 人材の需給</b>
+        <p>2025年末で民間資格の優遇措置が終了し国家資格中心に移行した一方、スクールの乱立とインストラクター不足が同時に起きている<a class="c" href="#s19">[19]</a><a class="c" href="#s24">[24]</a>。有資格者の採用は年々難しくなる前提で、<strong>自社で育てる仕組み</strong>（地域の若手をオペレーターに育成する山陰型の取り組み<a class="c" href="#s20">[20]</a>）を早めに持つ。</p>
+      </div>
+      <div class="note risk">
+        <b>04 ／ 天候と季節集中</b>
+        <p>散布適期は数日単位で、その期間に雨が続くと売上がそのまま消える。受託面積に対して<strong>予備日を確保した契約条項</strong>と、複数エリアに顧客を分散させて気象リスクを相殺する設計が要る。</p>
+      </div>
+      <div class="note risk">
+        <b>05 ／ 農薬と事故の法的責任</b>
+        <p>無人航空機による空中散布は、農薬取締法・航空法の双方に加え、飛行計画の通報やドリフト（飛散）防止の実務が伴う。周辺作物・住宅・養蜂への影響は<strong>賠償規模が読めないタイプのリスク</strong>。第三者賠償責任保険は当然として、散布記録の保存と近隣周知の手順を文書化しておく。</p>
+      </div>
+      <div class="note risk">
+        <b>06 ／ 測量の品質責任</b>
+        <p>公共測量は成果品の精度が検査対象になる。標定点の配置、精度管理表、点検測量の作法を外すと、次の指名から外れる。<strong>初回は経験のある測量会社の下請けに入り、作法を学んでから元請けを狙う</strong>のが遠回りに見えて速い。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">08 ／ ROADMAP</span><span class="rule"></span></div>
+    <h2>着手の順番</h2>
+    <p class="prose">以下は実際に順序が意味を持つ工程。フェーズを飛ばすと、設備を買ってから顧客を探すという最悪の順番になる。</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="no"><div class="p">PHASE</div><div class="t">1</div></div>
+        <div class="pbody">
+          <h3>〜90日：需要の実在を確かめる</h3>
+          <ul>
+            <li>拠点から片道90分圏で、集落営農法人・JA部会・農業法人を20件訪問し、<strong>現在いくらで誰に頼んでいるか</strong>を聞き取る（価格帯・不満・断られている条件）。</li>
+            <li>同じ圏域の地場建設会社・建設コンサル10社に、i-Construction 2.0対応で困っている工程を確認。起工測量／出来形／土量の外注意向を数値で押さえる。</li>
+            <li>市町村の農林・土木・防災担当を訪ね、災害時応援協定と補助事業の年間スケジュールを取得する。</li>
+            <li>この段階では機体を買わない。必要ならレンタルとオペレーター委託でテスト受注する。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="no"><div class="p">PHASE</div><div class="t">2</div></div>
+        <div class="pbody">
+          <h3>90日〜1年：夏を埋め、冬の足場を作る</h3>
+          <ul>
+            <li>翌シーズンの<strong>年間防除契約を先に取る</strong>（延べ60ha確保で損益分岐を超える）。契約が積み上がってから機体を発注する。</li>
+            <li>顧客側の補助金申請を伴走し、機体導入とセットで受託契約を締結する<a class="c" href="#s7">[7]</a><a class="c" href="#s14">[14]</a>。</li>
+            <li>10〜3月は測量。まず<strong>経験のある測量会社の協力会社</strong>として写真測量と点群処理を回し、精度管理の作法を身につける。</li>
+            <li>飛行記録・散布ログ・オルソ画像を全案件で標準納品にし、「記録が残る事業者」として認知を作る。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="no"><div class="p">PHASE</div><div class="t">3</div></div>
+        <div class="pbody">
+          <h3>1〜3年：単価の出る側へ移る</h3>
+          <ul>
+            <li>生育診断・可変施肥処方の販売を開始（実証では約1割増収、10a あたり売上総利益+12,800円<a class="c" href="#s21">[21]</a>）。散布と抱き合わせて<strong>面積単価から脱出</strong>する。</li>
+            <li>案件数が安定してからUAVレーザーを導入し、林地・法面・森林資源量へ展開<a class="c" href="#s8">[8]</a>。山陰・四国・九州南部の森林需要を取りに行く。</li>
+            <li>自治体との災害協定と、橋梁・ため池・太陽光の点検年間枠を取得して<strong>読める売上</strong>の比率を上げる<a class="c" href="#s26">[26]</a>。</li>
+            <li>育成したオペレーターの派遣・機体レンタルを商品化し、繁忙期の需要超過を売上に変える。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">SOURCES</span><span class="rule"></span></div>
+    <h2>出典</h2>
+    <p class="prose" style="font-size:14px;color:var(--muted)">数値は各出典の公表値。収支試算および「攻め筋」の提案部分は、これらの公開情報をもとにした本レポートの構成であり、実績値ではない。</p>
+    <ol class="src">
+      <li id="s1">インプレスホールディングス「ドローン利用企業の7割以上が実装フェーズに／2025年度国内市場規模4973億円『ドローンビジネス調査報告書2026』」 <a href="https://prtimes.jp/main/html/rd/p/000007271.000005875.html">prtimes.jp</a></li>
+      <li id="s2">インプレス総合研究所『ドローンビジネス調査報告書2026』 <a href="https://research.impress.co.jp/report/list/drone/502419">research.impress.co.jp</a></li>
+      <li id="s3">先端農業マガジン「日本のスマート農業の普及状況｜農業用ドローン約4万台の広がり」 <a href="https://smartagri.jp/p/2379/">smartagri.jp</a></li>
+      <li id="s4">国土交通省「i-Construction 2.0 〜建設現場のオートメーション化〜」 <a href="https://www.mlit.go.jp/tec/constplan/content/001738240.pdf">mlit.go.jp</a></li>
+      <li id="s5">国土交通省「無人航空機レベル4飛行ポータルサイト」 <a href="https://www.mlit.go.jp/koku/level4/">mlit.go.jp</a></li>
+      <li id="s6">国土交通省「レベル3.5飛行の許可・承認申請について」 <a href="https://www.mlit.go.jp/koku/content/001725836.pdf">mlit.go.jp</a></li>
+      <li id="s7">農林水産省「スマート農業技術活用促進法について」 <a href="https://www.maff.go.jp/j/kanbo/smart/houritsu.html">maff.go.jp</a></li>
+      <li id="s8">林野庁「スマート林業技術の現場実装ビジョン」（令和8年3月） <a href="https://www.rinya.maff.go.jp/j/press/kaihatu/attach/pdf/260330-1.pdf">rinya.maff.go.jp</a></li>
+      <li id="s9">農林水産省「中山間地域におけるドローンによる防除の省力効果」 <a href="https://www.maff.go.jp/j/kanbo/smart/forum/R2smaforum/rice/seika82.html">maff.go.jp</a></li>
+      <li id="s10">日本農業新聞「傾斜かんきつ園をドローン防除 作業3時間から10分に 愛媛・宇和島市」 <a href="https://www.agrinews.co.jp/farming/index/165589">agrinews.co.jp</a></li>
+      <li id="s11">農林水産技術会議「傾斜地果樹園におけるドローン病害虫防除の実現」 <a href="https://www.affrc.maff.go.jp/docs/project/seika/2023/r5_seikashu_03.html">affrc.maff.go.jp</a></li>
+      <li id="s12">九州農政局「管内の農業支援サービス取組事例」（令和7年12月）／「i-Construction（九州地方整備局）」 <a href="https://www.maff.go.jp/kyusyu/seisan/gizyutu/attach/pdf/smart-18.pdf">maff.go.jp</a> ／ <a href="https://www.qsr.mlit.go.jp/ict/">qsr.mlit.go.jp</a></li>
+      <li id="s13">中国四国農政局「スマート農業」 <a href="https://www.maff.go.jp/chushi/seisan/hukyu/smart.html">maff.go.jp</a></li>
+      <li id="s14">神戸市「2026年度スマート農業等導入支援事業の募集」 <a href="https://www.city.kobe.lg.jp/a99375/business/recruit/smartnougyoushienjigyouboshuu.html">city.kobe.lg.jp</a></li>
+      <li id="s15">ドローンキング「ドローン農薬散布の料金相場｜10aいくらが適正価格？【2026年最新版】」 <a href="https://www.droneking.jp/news/p992/">droneking.jp</a></li>
+      <li id="s16">東海エアサービス「ドローン測量の費用相場【2026年版】」 <a href="https://tokaiair.com/articles/uav-survey-posts/drone-survey-cost-2026/">tokaiair.com</a></li>
+      <li id="s17">旭テクノロジー「ドローンレーザー測量の価格・費用を徹底解説【2026年最新版】」 <a href="https://atcl-dsj.com/useful/drone-laser-survey-price/">atcl-dsj.com</a></li>
+      <li id="s18">広島県 土砂災害ポータルひろしま ／ 山口県土砂災害ポータル <a href="https://www.sabo.pref.hiroshima.lg.jp/">sabo.pref.hiroshima.lg.jp</a></li>
+      <li id="s18b">AgFunderNews「DJI: FCC action could wipe out $1.5bn in US drone sales in 2026」 <a href="https://agfundernews.com/dji-fcc-action-could-wipe-out-1-5bn-in-us-drone-sales-in-2026-with-staggering-real-world-consequences">agfundernews.com</a></li>
+      <li id="s19">ドローンジャーナル「Japan Drone 2026で見えた市場の変化と人材不足の現状」 <a href="https://drone-journal.impress.co.jp/docs/event/1188712.html">drone-journal.impress.co.jp</a></li>
+      <li id="s20">デジタル田園都市国家構想「阿井地区集落営農組織等連携の取組み（島根県）」 <a href="https://www.cas.go.jp/jp/seisaku/digitaldenen/menubook/2022_summer/0107.html">cas.go.jp</a></li>
+      <li id="s21">クボタ「生育診断に基づくドローンでの施肥管理の実証」／アグリポートWeb「リモートセンシング技術を利用した可変施肥体系の比較」 <a href="https://agriculture.kubota.co.jp/agriinfo/tec/post_44741.html">kubota.co.jp</a> ／ <a href="https://agriport.jp/field/ap-13415/">agriport.jp</a></li>
+      <li id="s23">先端農業マガジン「農薬散布ドローンの料金【2026年版】代行費用・機体価格・ランニングコスト」 <a href="https://smartagri.jp/p/1571/">smartagri.jp</a></li>
+      <li id="s24">牛島総合法律事務所「無人航空機（ドローン）法制の最新動向」 <a href="https://www.ushijima-law.gr.jp/client-alert_seminar/client-alert/20251120drone/">ushijima-law.gr.jp</a></li>
+      <li id="s25">JAグループ兵庫「兵庫県の農業」 <a href="https://ja-grp-hyogo.or.jp/agriculture/">ja-grp-hyogo.or.jp</a></li>
+      <li id="s26">インプレス総合研究所『ドローンビジネス調査報告書2026【インフラ・設備点検編】』／国土交通省 道路橋定期点検要領 <a href="https://research.impress.co.jp/report/list/drone/502293">research.impress.co.jp</a></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">西日本ドローン事業リサーチ ／ 調査時点 2026年8月 ／ 掲載の収支は公開単価に基づく試算であり実績値ではありません。</div>
+</footer>
