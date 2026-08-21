@@ -1,0 +1,624 @@
+<title>散布営業の七段</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --pb-ground:#edeef1; --pb-surface:#ffffff; --pb-surface2:#f4f5f8;
+  --pb-ink:#14161f; --pb-ink2:#3c4152; --pb-muted:#6b7185;
+  --pb-line:#d6d8e0; --pb-line2:#b4b8c6; --pb-navy:#1d2440;
+  --pb-seal:#c0392b; --pb-seal-bg:#f7e6e3;
+  --pb-spray:#2f6b46; --pb-spray-bg:#e0ece5;
+  --pb-move:#2b5878; --pb-move-bg:#e0e9f0;
+  --pb-warn:#8a6410; --pb-warn-bg:#f6ecd6;
+  --pb-shadow:0 1px 2px rgba(20,22,31,.05),0 10px 26px -20px rgba(20,22,31,.5);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pb-ground:#0d0f14; --pb-surface:#161923; --pb-surface2:#1d212d;
+    --pb-ink:#e9ebf1; --pb-ink2:#bfc4d2; --pb-muted:#8b91a4;
+    --pb-line:#2a2f3d; --pb-line2:#3d4356; --pb-navy:#aab6dc;
+    --pb-seal:#e8705f; --pb-seal-bg:#33201d;
+    --pb-spray:#82c39a; --pb-spray-bg:#18291f;
+    --pb-move:#7fb2d6; --pb-move-bg:#16242e;
+    --pb-warn:#d9b455; --pb-warn-bg:#2b2417;
+    --pb-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+  }
+}
+:root[data-theme="dark"]{
+  --pb-ground:#0d0f14; --pb-surface:#161923; --pb-surface2:#1d212d;
+  --pb-ink:#e9ebf1; --pb-ink2:#bfc4d2; --pb-muted:#8b91a4;
+  --pb-line:#2a2f3d; --pb-line2:#3d4356; --pb-navy:#aab6dc;
+  --pb-seal:#e8705f; --pb-seal-bg:#33201d;
+  --pb-spray:#82c39a; --pb-spray-bg:#18291f;
+  --pb-move:#7fb2d6; --pb-move-bg:#16242e;
+  --pb-warn:#d9b455; --pb-warn-bg:#2b2417;
+  --pb-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--pb-ground);color:var(--pb-ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Zen Old Mincho","Hiragino Mincho ProN",serif;font-weight:600;line-height:1.45;text-wrap:balance;margin:0}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--pb-seal);outline-offset:3px}
+.lw{max-width:1020px;margin:0 auto;padding:0 22px}
+.lprose{max-width:68ch}
+.lmono{font-family:"Roboto Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+.lmast{background:var(--pb-navy);color:#f2f3f7;padding:50px 0 36px}
+:root[data-theme="dark"] .lmast,:root:not([data-theme="light"]) .lmast{background:#11131c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .lmast{background:var(--pb-navy)}}
+.lmast .leyebrow{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.24em;color:#9aa3c4;text-transform:uppercase}
+.lmast h1{font-size:clamp(28px,5.2vw,50px);color:#fff;margin:14px 0 0;letter-spacing:.03em}
+.lmast .llede{margin:18px 0 0;max-width:60ch;color:#ccd1e2;font-size:clamp(15px,1.5vw,17px)}
+.lmast .lback{display:inline-block;margin-top:22px;font-family:"Roboto Mono",monospace;font-size:12px;color:#9aa3c4;border-bottom:1px solid #4a5478;text-decoration:none;padding-bottom:2px}
+.lmast .lback:hover{color:#fff;border-bottom-color:#fff}
+
+.lnav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--pb-ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--pb-line)}
+.lnav ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto}
+.lnav a{display:block;white-space:nowrap;padding:11px 15px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--pb-muted);text-decoration:none;border-bottom:2px solid transparent}
+.lnav a:hover{color:var(--pb-ink);border-bottom-color:var(--pb-seal)}
+
+.lsec{padding:56px 0;border-bottom:1px solid var(--pb-line)}
+.lsec:last-of-type{border-bottom:0}
+.lhd{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+.lhd .lno{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--pb-seal);flex:none}
+.lhd .lrule{flex:1;height:1px;background:var(--pb-line2)}
+.lsec h2{font-size:clamp(21px,2.9vw,29px);margin-bottom:18px}
+.lsec h3{font-size:18px;margin:32px 0 12px}
+p{margin:0 0 15px}
+ul.ll{margin:0 0 15px;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+
+.lchip{display:inline-block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap}
+.lchip.sp{color:var(--pb-spray);border-color:var(--pb-spray);background:var(--pb-spray-bg)}
+.lchip.sl{color:var(--pb-seal);border-color:var(--pb-seal);background:var(--pb-seal-bg)}
+.lchip.nu{color:var(--pb-muted);border-color:var(--pb-line2);background:var(--pb-surface2)}
+
+/* staircase */
+.lstair{margin:26px 0;border:1px solid var(--pb-line);background:var(--pb-surface);overflow-x:auto}
+.lstairin{min-width:840px;display:grid;grid-template-columns:repeat(8,1fr);align-items:end;gap:6px;padding:24px 20px 0}
+.lst{display:flex;flex-direction:column;justify-content:flex-end;height:230px}
+.lst .lbar{min-height:86px}
+.lst .lbar{background:var(--pb-spray-bg);border:1px solid var(--pb-spray);border-bottom:0;border-radius:3px 3px 0 0;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:9px 6px 0;gap:4px}
+.lst.z .lbar{background:var(--pb-surface2);border-color:var(--pb-line2)}
+.lst .lnum{font-family:"Zen Old Mincho",serif;font-size:22px;color:var(--pb-spray);line-height:1}
+.lst.z .lnum{color:var(--pb-muted)}
+.lst .lttl{font-size:11.5px;font-weight:700;text-align:center;line-height:1.45;color:var(--pb-ink)}
+.lstairlab{min-width:840px;display:grid;grid-template-columns:repeat(8,1fr);gap:6px;padding:0 20px 20px;border-top:1px solid var(--pb-line2)}
+.lstairlab div{font-family:"Roboto Mono",monospace;font-size:10px;color:var(--pb-muted);text-align:center;padding-top:8px;line-height:1.5}
+
+/* step blocks */
+.lsteps{display:flex;flex-direction:column;gap:18px;margin-top:26px}
+.lstep{border:1px solid var(--pb-line);background:var(--pb-surface);box-shadow:var(--pb-shadow)}
+.lstep>.lhead{display:grid;grid-template-columns:78px 1fr;border-bottom:1px solid var(--pb-line)}
+.lstep .lbadge{background:var(--pb-surface2);border-right:1px solid var(--pb-line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 8px}
+.lstep .lbadge em{font-family:"Roboto Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:var(--pb-muted);font-style:normal}
+.lstep .lbadge b{font-family:"Zen Old Mincho",serif;font-size:30px;color:var(--pb-spray);font-weight:600;line-height:1.1}
+.lstep.z .lbadge b{color:var(--pb-muted)}
+.lstep .lhtxt{padding:15px 20px}
+.lstep h3{margin:0;font-size:19px}
+.lstep .lmeta{margin-top:5px;font-family:"Roboto Mono",monospace;font-size:11px;color:var(--pb-muted);letter-spacing:.05em}
+.lbody{padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lblk h4{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pb-muted);font-weight:500;margin:0 0 7px}
+.lblk ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:6px;line-height:1.75}
+.lblk p{margin:0;font-size:14px;line-height:1.8}
+.lsay{grid-column:1/-1;background:var(--pb-surface2);border-left:3px solid var(--pb-navy);padding:13px 17px}
+:root[data-theme="dark"] .lsay,:root:not([data-theme="light"]) .lsay{border-left-color:var(--pb-spray)}
+.lsay h4{color:var(--pb-muted)}
+.lsay q{font-style:normal;font-size:15.5px;font-weight:700;line-height:1.8;display:block}
+.lgate{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--pb-line);border-radius:2px;overflow:hidden}
+.lgate>div{padding:13px 16px;font-size:13.5px;line-height:1.75}
+.lgate .lup{background:var(--pb-spray-bg);border-right:1px solid var(--pb-line)}
+.lgate .ldown{background:var(--pb-seal-bg)}
+.lgate b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;margin-bottom:5px;font-weight:500}
+.lgate .lup b{color:var(--pb-spray)}
+.lgate .ldown b{color:var(--pb-seal)}
+.lnever{grid-column:1/-1;font-size:13.5px;color:var(--pb-ink2);border-top:1px dashed var(--pb-line2);padding-top:12px}
+.lnever b{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pb-seal);font-weight:500;margin-right:8px}
+
+/* funnel */
+.lfun{margin:24px 0;border:1px solid var(--pb-line);background:var(--pb-surface);padding:22px 20px;display:flex;flex-direction:column;gap:8px}
+.lfr{display:grid;grid-template-columns:132px 1fr 74px;align-items:center;gap:12px}
+.lfr .lfl{font-size:13.5px;font-weight:700}
+.lfr .lft{height:26px;background:var(--pb-spray);border-radius:2px;opacity:.85}
+.lfr .lfv{font-family:"Roboto Mono",monospace;font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.lfr.acc .lft{background:var(--pb-seal)}
+
+/* tables */
+.ltw{overflow-x:auto;margin:22px 0;border:1px solid var(--pb-line);background:var(--pb-surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--pb-line);vertical-align:top;line-height:1.7}
+thead th{background:var(--pb-surface2);font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.06em;color:var(--pb-muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.lnum2{text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+caption{caption-side:bottom;text-align:left;padding:10px 13px;font-size:12.5px;color:var(--pb-muted);border-top:1px solid var(--pb-line);background:var(--pb-surface2)}
+
+.lnote{border-left:3px solid var(--pb-navy);background:var(--pb-surface);padding:16px 19px;margin:22px 0;font-size:14.5px}
+.lnote.wn{border-left-color:var(--pb-warn);background:var(--pb-warn-bg)}
+.lnote.ng{border-left-color:var(--pb-seal);background:var(--pb-seal-bg)}
+.lnote b.llab{display:block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--pb-muted);margin-bottom:6px;font-weight:500}
+.lnote p:last-child{margin-bottom:0}
+
+.lday{border:1px solid var(--pb-line);background:var(--pb-surface);margin-top:22px}
+.ldr{display:grid;grid-template-columns:104px 1fr;border-bottom:1px solid var(--pb-line)}
+.ldr:last-child{border-bottom:0}
+.ldr .ldt{font-family:"Roboto Mono",monospace;font-size:12.5px;color:var(--pb-seal);padding:13px 14px;border-right:1px solid var(--pb-line);background:var(--pb-surface2);white-space:nowrap}
+.ldr .ldc{padding:13px 17px;font-size:14px}
+.ldr.off .ldt{color:var(--pb-muted)}
+
+footer{padding:36px 0 60px;font-size:12.5px;color:var(--pb-muted);font-family:"Roboto Mono",monospace}
+
+@media (max-width:700px){
+  body{font-size:15px}
+  .lsec{padding:44px 0}
+  .lbody{grid-template-columns:1fr;gap:16px}
+  .lgate{grid-template-columns:1fr}
+  .lgate .lup{border-right:0;border-bottom:1px solid var(--pb-line)}
+  .lfr{grid-template-columns:98px 1fr 60px;gap:9px}
+  .lfr .lfl{font-size:12.5px}
+  .ldr{grid-template-columns:1fr}
+  .ldr .ldt{border-right:0;border-bottom:1px solid var(--pb-line)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="lmast">
+  <div class="lw">
+    <div class="leyebrow">Spray Sales ／ Step Ladder ／ Fukuoka</div>
+    <h1>散布営業の七段</h1>
+    <p class="llede">散布代行だけに絞った、面識ゼロから年間契約までの登り方。1段ごとに「次へ進んでいい条件」を決めてあるので、勘で押し込まずに済む。落ちても、ゼロには戻らない。</p>
+    <a class="lback" href="https://claude.ai/code/artifact/d0a62f86-dd5d-4b5d-898f-0544ddc6dbe1">← 福岡ドローン営業プレイブック（本編）</a>
+  </div>
+</header>
+
+<nav class="lnav">
+  <div class="lw">
+    <ul>
+      <li><a href="#l-rule">3つの原則</a></li>
+      <li><a href="#l-map">階段の全体</a></li>
+      <li><a href="#l-steps">各段の中身</a></li>
+      <li><a href="#l-entry">商材別の入り口</a></li>
+      <li><a href="#l-fun">数字の逆算</a></li>
+      <li><a href="#l-day">1日の回り方</a></li>
+      <li><a href="#l-kpi">週次で見る数字</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section class="lsec" id="l-rule">
+  <div class="lw">
+    <div class="lhd"><span class="lno">RULES</span><span class="lrule"></span></div>
+    <h2>登り方の原則は3つだけ</h2>
+    <div class="lprose">
+      <ul class="ll">
+        <li><strong>1段飛ばさない。</strong>会ったその日に見積を出すと、価格だけの比較に落ちる。散布は「安いから頼む」ではなく「任せられるから頼む」商売なので、順番を守ったほうが速い。</li>
+        <li><strong>各段にゲートがある。</strong>「なんとなく手応えがあった」で次に進まない。各段に<strong>次へ進んでいい客観条件</strong>を1つだけ決めてある。それが満たされていなければ、同じ段をもう一度やる。</li>
+        <li><strong>落ちても1段だけ。</strong>断られてもゼロには戻らない。3段で失敗したら2段に戻る。関係が切れるのは、飛ばせない圃場を飛ばせると言った時と、事故を隠した時だけ。</li>
+      </ul>
+    </div>
+    <div class="lnote">
+      <b class="llab">なぜ階段なのか</b>
+      <p>調査で挙がった断りの理由は、上から<strong>実績不足・費用対効果への疑問・前例主義・JAとの関係・失敗への恐れ</strong>。このうち4つは「信用の不足」であって、価格の問題ではない。価格表を先に出すと、唯一価格の問題だった相手にしか刺さらない。<strong>信用は段階でしか積めないので、営業も段階にする。</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="lsec" id="l-map">
+  <div class="lw">
+    <div class="lhd"><span class="lno">MAP</span><span class="lrule"></span></div>
+    <h2>階段の全体</h2>
+    <div class="lstair">
+      <div class="lstairin">
+        <div class="lst z"><div class="lbar" style="height:86px"><span class="lnum">0</span><span class="lttl">装備を<br>揃える</span></div></div>
+        <div class="lst"><div class="lbar" style="height:106px"><span class="lnum">1</span><span class="lttl">会う<br>15分で帰る</span></div></div>
+        <div class="lst"><div class="lbar" style="height:126px"><span class="lnum">2</span><span class="lttl">圃場に<br>立つ</span></div></div>
+        <div class="lst"><div class="lbar" style="height:146px"><span class="lnum">3</span><span class="lttl">1枚だけ<br>飛ばす</span></div></div>
+        <div class="lst"><div class="lbar" style="height:166px"><span class="lnum">4</span><span class="lttl">ピークの<br>数日を取る</span></div></div>
+        <div class="lst"><div class="lbar" style="height:186px"><span class="lnum">5</span><span class="lttl">シーズンを<br>丸ごと</span></div></div>
+        <div class="lst"><div class="lbar" style="height:208px"><span class="lnum">6</span><span class="lttl">面で取る</span></div></div>
+        <div class="lst"><div class="lbar" style="height:230px"><span class="lnum">7</span><span class="lttl">抜けなく<br>なる</span></div></div>
+      </div>
+      <div class="lstairlab">
+        <div>〜9/11<br>2日</div>
+        <div>15分<br>／1社</div>
+        <div>同日〜<br>2週間</div>
+        <div>直近の<br>適期</div>
+        <div>1シーズン<br>目</div>
+        <div>麦9-12月<br>稲11-2月</div>
+        <div>2年目<br>以降</div>
+        <div>3年目<br>以降</div>
+      </div>
+    </div>
+    <p class="lprose" style="font-size:13.5px;color:var(--pb-muted)">段が上がるほど、価格の話が減り、日程と面積の話が増える。7段まで来ると相手のほうから「来年どうする?」と聞いてくるようになる。そこが目標地点。</p>
+  </div>
+</section>
+
+<section class="lsec" id="l-steps">
+  <div class="lw">
+    <div class="lhd"><span class="lno">STEPS</span><span class="lrule"></span></div>
+    <h2>各段の中身</h2>
+
+    <div class="lsteps">
+
+      <!-- 0 -->
+      <article class="lstep z">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>0</b></div>
+          <div class="lhtxt"><h3>装備を揃える — 訪問する前にやること</h3><div class="lmeta">〜9/11 ／ 2日 ／ 全員共通</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>クリアファイル1冊に7点を入れる：①名刺・会社概要1枚 ②<strong>保険証券のコピー</strong>（農薬飛散が補償対象か確認済みのもの） ③技能証明 ④機体登録と年次点検記録 ⑤久留米市の苗木輸送の実績1枚 ⑥料金表 ⑦近隣事前周知の手順書サンプル</li>
+              <li>料金表には<strong>薬剤の内外・出張費・最低面積</strong>を必ず明記する</li>
+              <li>散布報告書のサンプルを1枚作る。「何を納品するか」を見せられる会社は少ない</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>なぜ必要か</h4>
+            <p>断りの理由の上位が「実績不足」と「失敗への恐れ」である以上、初回訪問で出せる<strong>物証</strong>の数がそのまま通過率になる。特に保険証券のコピーは、口で「保険入ってます」と言うのとは別物として受け取られる。<br><br>逆に、この7点が揃う前に訪問すると、二度目の機会がなくなる。1軒の見込み客は使い捨てにできない。</p>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>7点が1冊のファイルに入っていて、全員が同じものを持っている</div>
+            <div class="ldown"><b>▼ 満たないとき</b>訪問しない。装備なしの1軒より、装備ありの1軒。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>保険の補償範囲を確認せずに「保険は入っています」と言う。農薬散布作業そのものが対象外の商品が実在する。</div>
+        </div>
+      </article>
+
+      <!-- 1 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>1</b></div>
+          <div class="lhtxt"><h3>会う — 売らずに、15分で帰る</h3><div class="lmeta">9月中旬〜通年 ／ 滞在15分 ／ 1日5件が上限</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>手土産は値引きではなく<strong>補助金の一覧表1枚</strong>。売り込みでなく情報提供として渡せるので断られにくい</li>
+              <li>質問は3つだけ。①いま防除は<strong>誰が</strong>やっているか（自社／JA／外注／無人ヘリ） ②一番きつい作業は<strong>何月の何</strong>か ③来年、人は足りるか</li>
+              <li>15分で切り上げて帰る。<strong>帰ることが技術。</strong>「あの人は長居しない」が次のアポにつながる</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>言い方</h4>
+            <p>相手は「また売り込みか」という構えで玄関に出てくる。その構えを最初の10秒で外す。<br><br>訪問時間は<strong>日中の休憩帯</strong>。早朝と夕方の作業時間には行かない。農繁期（4〜6月・9〜10月）は特に、時間を間違えるとそれだけで印象が決まる。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>今日は売り込みではありません。この地域で散布のお手伝いを始めるので、まず何が要るのかを教えていただきに来ました。15分で帰ります。</q>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>①作目 ②おおよその面積 ③一番きつい月 — この3つがメモに書けた</div>
+            <div class="ldown"><b>▼ 満たないとき</b>同じ段に留まる。別の商材（遮光剤・追肥）の話を口実に再訪する。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>カタログを開かない。価格を言わない。この段で価格を出すと、以降ずっと価格の話になる。</div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>2</b></div>
+          <div class="lhtxt"><h3>圃場に立つ — 見積の前提と、信用を同時に作る</h3><div class="lmeta">1段と同日、または2週間以内</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>圃場を一緒に歩いて記録：電線・住宅・学校・水路・<strong>隣接圃場（有機／特別栽培か）</strong>・養蜂箱・進入路・駐車位置</li>
+              <li>写真を撮り、1週間以内に<strong>圃場マップをPDFで無料送付</strong>。障害物と散布可能エリアを色分けする</li>
+              <li>飛ばせない圃場は、その場で「ここは飛ばせません」と言う</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>この段の本当の効果</h4>
+            <p>圃場マップは無料の販促物に見えて、実は<strong>相手の資産情報を預かる関係</strong>への入口。渡した瞬間に、こちらは「次に来る理由」を手に入れる。<br><br>そして隣接の有機・特別栽培圃場の確認は、後で最大の火種になる箇所を先に潰す作業でもある。<strong>事故を先に考える人だ</strong>という評価は、価格以上に効く。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>見積の前に、飛ばせる場所かどうかだけ見せてください。危ないところがあれば正直に言います。</q>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>圃場マップを渡して、受け取ってもらえた</div>
+            <div class="ldown"><b>▼ 満たないとき</b>1段に戻る。マップを受け取らない相手は、まだこちらを業者として見ていない。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>飛ばせない圃場を「飛ばせます」と言う。1回の受注と引き換えに、地域全体の信用を失う。断る勇気がそのまま信用になる。</div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>3</b></div>
+          <div class="lhtxt"><h3>1枚だけ飛ばす — 最大の断り理由をここで消す</h3><div class="lmeta">直近の適期に合わせる ／ 10〜30a</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>最小単位（1枚・10〜30a）で実施。<strong>水を撒くデモではなく、本番の薬剤で本番の防除</strong>をやる</li>
+              <li>デモは必ず<strong>相手の圃場</strong>で。業界の慣行としてもデモ会は申込者の圃場・近隣の空き地で無料開催されている。他所の映像では決まらない</li>
+              <li>散布記録＋前後の写真＋飛行記録をセットで納品する</li>
+              <li>無料は1回まで。2回目からは実費でも必ず請求する</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>なぜ効くか</h4>
+            <p>「おたく、うちの地域で実績あると?」——これが最大の壁で、言葉では返せない。<strong>実績は語るものではなく、その場で作るもの。</strong><br><br>自分の田んぼの上を実際に飛ぶのを見た時にだけ、相手の頭の中の計算が「頼めるかどうか」から「いつ頼むか」に切り替わる。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>まず1枚だけやらせてください。効きと仕上がりを見ていただいて、駄目なら次はありません。</q>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>散布報告書を渡した場で「次もお願いする」と口頭で言われた</div>
+            <div class="ldown"><b>▼ 満たないとき</b>2段に戻る。原因を必ず特定する（散布ムラ／時期がずれた／連絡不足）。原因不明のまま次の適期を待たない。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>相手の主力圃場でいきなりやる。失敗した時に取り返しがつかない。最初は端の1枚から。</div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>4</b></div>
+          <div class="lhtxt"><h3>ピークの数日を取る — 全部を取ろうとしない</h3><div class="lmeta">1シーズン目 ／ 有償の初受注</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>1段で聞いた「一番きつい月」に狙いを定め、<strong>その回だけ</strong>受ける</li>
+              <li>見積は反単価だけで出さない。<strong>その1回の総額・作業日数・薬剤の内外</strong>をセットで</li>
+              <li>実施後、必ず報告書を持って対面で届ける。郵送やメールで済ませない</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>「自分でやるから要らん」への答え</h4>
+            <p>全面代行を売ろうとすると断られるが、<strong>ピークの数日に限定すると通る。</strong>相手のやり方を否定しないからだ。<br><br>そして一度でも一番きつい週を肩代わりすると、翌年その週は最初からこちらの予定に入る。4段は、5段への布石として設計する。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>全部は要りません。8月の一番暑い週と、麦の穂揃い期だけ、うちが入ります。</q>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>有償の受注が1回成立し、事故もクレームもなく完了した</div>
+            <div class="ldown"><b>▼ 満たないとき</b>3段に戻り、別の作目・別の時期でもう一度試験散布を提案する。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>初受注を取りたいがために1,800円を下回る提示をする。<strong>下限を作った会社は、翌年その価格から上げられない。</strong></div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>5</b></div>
+          <div class="lhtxt"><h3>シーズンを丸ごと — 売上が読めるようになる段</h3><div class="lmeta">麦は9〜12月、水稲は11〜2月に締結</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>年3〜5回を一括で見積。<strong>反単価ではなく「年間総額と想定作業日数」</strong>で提示する</li>
+              <li>契約書に必ず入れる6項目：①風速・降雨の中止基準 ②延期の回数と期限、キャンセル料 ③面積の実測方法と差異精算 ④薬剤選定の責任（相手指定か当方提案か） ⑤近隣周知を誰がやるか ⑥保険の補償範囲</li>
+              <li>締結は<strong>相手の農閑期</strong>に。稲作なら11〜2月、特に12〜2月は月の半分が休みという経営体も多く、じっくり話せる唯一の時期</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>希少性は、嘘ではなく事実</h4>
+            <p>散布の適期は数日しかなく、同じ地域の依頼は必ず同じ週に集中する。<strong>先に日程を押さえた顧客が優先になるのは事実</strong>なので、そのまま言っていい。営業テクニックとしての煽りではなく、運用上の説明として伝わる。<br><br>実際、業界でも散布日程・ルートは3〜4週間前から検討し、地域単位でまとめて組むのが効率的とされている。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>来年の分を、いまのうちに押さえさせてください。日程を先に決めておかないと、適期が重なった時にどうしても先約が優先になります。
+          </q></div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>翌シーズンの<strong>面積と日程</strong>が書面で確定した（口約束は5段ではない）</div>
+            <div class="ldown"><b>▼ 満たないとき</b>4段でスポットを積む。2シーズン続けてスポットが成立すれば、3年目に年間契約は自然に通る。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>中止基準を決めずに契約する。天候で揉めた1件は、地域全体に伝わる。</div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>6</b></div>
+          <div class="lhtxt"><h3>面で取る — 1軒から地域へ</h3><div class="lmeta">2年目以降 ／ 単価を守るための段</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li>既存顧客に「隣も一緒にやりませんか」と持ちかける。<strong>紹介がこの業界の主要な新規経路</strong>で、特に高齢層の多い地域ほど横のつながりが効く</li>
+              <li>JAの営農指導課・生産部会へ。調査上もっとも効果が高いルートで、<strong>JAに認められた業者として紹介されると信頼が一気に立つ</strong></li>
+              <li>集落・部会単位で連続日程を組み、移動時間を潰す</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>なぜ単価が守れるのか</h4>
+            <p>1軒ずつ回ると、移動と充電で1日の実働が削られる。<strong>散布事業の利益を食うのは飛行時間ではなく移動時間。</strong>まとめて組めれば、その分を価格で還元しても粗利は落ちない。<br><br>だから「まとめてくれたら安くする」は値引きではなく、原価構造の共有として説明できる。</p>
+          </div>
+          <div class="lsay">
+            <h4>そのまま使える一言</h4>
+            <q>1軒ずつだと移動で時間が消えます。まとめていただければ、その分は価格でお返しします。
+          </q></div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 次へ進む条件</b>1つの部会または集落で<strong>3軒以上・連続した日程</strong>が組めた</div>
+            <div class="ldown"><b>▼ 満たないとき</b>5段の個別契約を積み増す。面は、点が5つ以上ないと張れない。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>JAと正面から競合しにいく。「JAさんが手を回しきれない時期と場所だけ埋めます」——傾斜地・小区画・飛び地・日程が後回しになる圃場が、こちらの領域。</div>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="lstep">
+        <div class="lhead">
+          <div class="lbadge"><em>STEP</em><b>7</b></div>
+          <div class="lhtxt"><h3>抜けなくなる — 価格比較の土俵から降りる</h3><div class="lmeta">3年目以降 ／ ここが目標地点</div></div>
+        </div>
+        <div class="lbody">
+          <div class="lblk">
+            <h4>やること</h4>
+            <ul>
+              <li><strong>防除履歴と生育マップを蓄積し、翌年の作付計画に口を出せる立場になる</strong>。可変施肥の実証では約1割増収、10aあたり売上総利益+12,800円という数字もある</li>
+              <li>地域の若手をオペレーターとして育てる。山陰では集落営農組織が育成込みで導入した事例がある</li>
+              <li>機体を買った法人の<strong>運用受託</strong>（繁忙期の応援・オペレーター派遣・年次点検）。買った法人ほど翌年に人手で困る</li>
+            </ul>
+          </div>
+          <div class="lblk">
+            <h4>この段の意味</h4>
+            <p>6段までは、まだ他社に置き換えられる。7段は<strong>置き換えると相手が損をする状態</strong>を作る段。過去3年の防除履歴と圃場マップを持っている業者を切るのは、相手にとってコストになる。<br><br>単価の話が出なくなったら、7段に着いている。</p>
+          </div>
+          <div class="lgate">
+            <div class="lup"><b>▲ 到達の合図</b>相手のほうから「来年どうする?」と先に聞いてくる</div>
+            <div class="ldown"><b>▼ 崩れるとき</b>事故を隠した時と、預かった圃場情報を他所で喋った時。この2つだけは7段から一気に落ちる。</div>
+          </div>
+          <div class="lnever"><b>NEVER</b>蓄積したデータを、他の顧客との会話で使う。「◯◯さんとこは…」の一言で、地域の信用が終わる。</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="lsec" id="l-entry">
+  <div class="lw">
+    <div class="lhd"><span class="lno">ENTRY</span><span class="lrule"></span></div>
+    <h2>商材によって、入る段と使える時間が違う</h2>
+    <p class="lprose">同じ階段でも、9月12日時点でどこから登り始められるかは商材ごとに違う。ここを間違えると、時間切れの商材に労力を使うことになる。</p>
+    <div class="ltw">
+      <table>
+        <thead><tr><th>商材</th><th>実施時期</th><th>9/12時点で登れる段</th><th>持ち時間</th><th>方針</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="lchip sp">遮光剤</span><br>いちご育苗・定植</td>
+            <td>8〜9月（定植は9月中下旬）</td>
+            <td class="lnum2">1 → 3 を一気に</td>
+            <td class="lnum2">数週間</td>
+            <td><strong>いま需要が立っている唯一の商材。</strong>ハウスは面積が小さく試験しやすい。段を圧縮してでも9月中に3段まで行く</td>
+          </tr>
+          <tr>
+            <td><span class="lchip sp">麦</span><br>赤かび病防除＋穂揃い期追肥</td>
+            <td>3月下旬〜4月中旬</td>
+            <td class="lnum2">1 → 5 を丁寧に</td>
+            <td class="lnum2">約6か月</td>
+            <td><strong>本命。</strong>時間が最も潤沢で、階段を1段も飛ばさずに登れる。11月の播種前に関係を作り、年内に契約まで持っていく</td>
+          </tr>
+          <tr>
+            <td><span class="lchip sp">水稲</span><br>穂いもち・カメムシ防除</td>
+            <td>6〜9月（ピーク8〜9月）</td>
+            <td class="lnum2">1 → 5</td>
+            <td class="lnum2">約9か月</td>
+            <td>締結は農閑期の11〜2月。9〜10月は稲刈り前後で会いやすいので、<strong>1段と2段をこの時期に済ませる</strong></td>
+          </tr>
+          <tr>
+            <td><span class="lchip sp">追肥</span><br>水稲・麦</td>
+            <td>作物の生育に従う</td>
+            <td class="lnum2">4 → 5 に追加</td>
+            <td class="lnum2">—</td>
+            <td>単独で売らない。<strong>防除契約に足す</strong>のが最短。10a 3〜5分、動噴比で作業時間5〜9割減という実証値を根拠に使う</td>
+          </tr>
+          <tr>
+            <td><span class="lchip nu">大豆・果樹・茶</span></td>
+            <td>大豆7〜9月／果樹・茶4〜9月</td>
+            <td class="lnum2">1 → 2</td>
+            <td class="lnum2">約7か月</td>
+            <td>今季は間に合わない。<strong>2段まで作って年明けに5段を狙う。</strong>八女・うきはの傾斜地は代行の訴求力が高い</td>
+          </tr>
+        </tbody>
+        <caption>「9/12時点で登れる段」は、その商材で年内に到達しておくべき段。遮光剤だけは例外的に段の圧縮を許容する。</caption>
+      </table>
+    </div>
+    <div class="lnote wn">
+      <b class="llab">遮光剤だけは先に確認が要る</b>
+      <p>ドローン用遮光剤は農薬登録品ではないとみられるが、「農薬取締法の対象外」と明記した一次資料は確認できていない。また内容物にかかわらず<strong>航空法上の物件投下・散布に該当し得る</strong>。9月中に九州農政局と大阪航空局に照会し、回答を得てから提案すること。<strong>この回答書自体が、他社にない営業資料になる。</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="lsec" id="l-fun">
+  <div class="lw">
+    <div class="lhd"><span class="lno">NUMBERS</span><span class="lrule"></span></div>
+    <h2>何軒回れば、何本の契約になるか</h2>
+    <p class="lprose">下は<strong>計画の仮置き</strong>であって実測値ではない。3か月動いたら実際の数字に置き換えること。ただし置き換えるまでは、この数字で行動量を決める。</p>
+
+    <div class="lfun">
+      <div class="lfr"><span class="lfl">リスト</span><span class="lft" style="width:100%"></span><span class="lfv">100社</span></div>
+      <div class="lfr"><span class="lfl">接触（電話・訪問）</span><span class="lft" style="width:60%"></span><span class="lfv">60社</span></div>
+      <div class="lfr"><span class="lfl">1段 面談</span><span class="lft" style="width:30%"></span><span class="lfv">30社</span></div>
+      <div class="lfr"><span class="lfl">2段 圃場同行</span><span class="lft" style="width:15%"></span><span class="lfv">15社</span></div>
+      <div class="lfr"><span class="lfl">3段 試験散布</span><span class="lft" style="width:8%"></span><span class="lfv">8社</span></div>
+      <div class="lfr acc"><span class="lfl">4段 有償スポット</span><span class="lft" style="width:6%"></span><span class="lfv">6社</span></div>
+      <div class="lfr acc"><span class="lfl">5段 年間契約</span><span class="lft" style="width:4%"></span><span class="lfv">4社</span></div>
+    </div>
+
+    <div class="lnote">
+      <b class="llab">この数字が意味すること</b>
+      <p>年間契約4社を取るには、<strong>リストが100社必要</strong>ということ。つまり初週の仕事は訪問ではなく<strong>リスト作り</strong>になる。そして100社のリストが50社しかなければ、どれだけ営業がうまくても契約は2社にしかならない。<br><br>売上の目安：年間契約1社が15ha規模・年3回・10a 2,000円なら、150反×2,000円×3回＝<strong>約90万円／年・社</strong>。4社で約360万円。ここに4段のスポット6社分が乗る。初年度としては、これが現実的な線。</p>
+    </div>
+
+    <div class="lnote ng">
+      <b class="llab">100社リストの作り方（初週にやる）</b>
+      <p>①<strong>福岡県農業法人協会</strong>（092-711-5070）に会員名簿の入手可否を照会 ②<strong>日本農業法人協会</strong>の九州地区会員一覧 ③<strong>JAグループ福岡の18JA</strong>から筑後管内（福岡くるめ・ふくおか八女・みなみ筑後・柳川・みづま・福岡大城・筑前あさくら）の営農指導課 ④<strong>国税庁法人番号公表サイト</strong>で「農事組合法人」「ファーム」等を県内名称検索 ⑤<strong>福岡県農業振興推進機構</strong>に農地の受け手＝規模拡大中の経営体の情報提供を照会。<br><br>あわせて九州農政局統計部と福岡県農林水産部に電話し、県内の法人経営体数・認定農業者数・集落営農組織一覧の<strong>最新公表資料</strong>をもらうこと。</p>
+    </div>
+  </div>
+</section>
+
+<section class="lsec" id="l-day">
+  <div class="lw">
+    <div class="lhd"><span class="lno">DAY</span><span class="lrule"></span></div>
+    <h2>1日の回り方</h2>
+    <div class="lday">
+      <div class="ldr off"><div class="ldt">〜07:30</div><div class="ldc">前日の圃場マップ・報告書を仕上げてから出る。移動中に作らない</div></div>
+      <div class="ldr"><div class="ldt">09:00-11:30</div><div class="ldc"><strong>アポあり訪問2件</strong>（1段・2段）。圃場同行はこの時間帯が最も歩きやすい</div></div>
+      <div class="ldr"><div class="ldt">11:30-13:00</div><div class="ldc"><strong>飛び込みが最も通る時間帯。</strong>作業の手が止まっていて、話を聞く余裕がある。ここを空けない</div></div>
+      <div class="ldr"><div class="ldt">13:00-16:00</div><div class="ldc">訪問3件。うち1件は<strong>既存顧客のフォロー</strong>に必ず充てる（6段の紹介はここから生まれる）</div></div>
+      <div class="ldr"><div class="ldt">16:00-17:30</div><div class="ldc">その日のうちに圃場マップ・見積・お礼の連絡を出す。<strong>翌日に持ち越さない</strong></div></div>
+      <div class="ldr off"><div class="ldt">17:30〜</div><div class="ldc">訪問しない。相手は片付けと翌日の準備をしている時間</div></div>
+    </div>
+    <div class="lnote wn">
+      <b class="llab">行ってはいけない時間</b>
+      <p>農繁期（<strong>4〜6月の田植え期、9〜10月の稲刈り期</strong>）の早朝と夕方には行かない。この時期の飛び込みはほぼ逆効果になる。逆に<strong>農閑期の11〜2月</strong>、特に12〜2月は月の半分が休みという経営体も多く、じっくり話を聞いてもらえる唯一の時期。5段（年間契約）の締結はここに寄せる。<br><br>服装は作業着。スーツで圃場に立つと、それだけで「現場を知らない人」として扱われる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="lsec" id="l-kpi">
+  <div class="lw">
+    <div class="lhd"><span class="lno">KPI</span><span class="lrule"></span></div>
+    <h2>週次で見る数字は6つだけ</h2>
+    <div class="ltw">
+      <table>
+        <thead><tr><th>指標</th><th>週の目安（1人）</th><th>見る理由</th></tr></thead>
+        <tbody>
+          <tr><td>新規接触数</td><td class="lnum2">10件</td><td>リストが尽きていないかの確認。これが落ちると2か月後に受注が落ちる</td></tr>
+          <tr><td>1段 面談数</td><td class="lnum2">5件</td><td>アポの取り方が正しいか</td></tr>
+          <tr><td>2段 圃場同行数</td><td class="lnum2">2〜3件</td><td>面談が「話を聞いただけ」で終わっていないか</td></tr>
+          <tr><td>3段 試験散布の予定数</td><td class="lnum2">1件</td><td>適期に合わせて先に押さえられているか</td></tr>
+          <tr><td>見積提出数</td><td class="lnum2">2件</td><td>提案に落とせているか</td></tr>
+          <tr><td><strong>次回訪問日が決まっている件数</strong></td><td class="lnum2">15件</td><td><strong>最重要。</strong>これがパイプラインの実体。受注数より先に動く指標なので、ここだけは毎週必ず数える</td></tr>
+        </tbody>
+        <caption>受注数は結果であって、週次で追っても打ち手が変わらない。追うのは「次回訪問日が決まっている件数」。これが減った週は、2か月後に必ず数字が落ちる。</caption>
+      </table>
+    </div>
+    <div class="lnote">
+      <b class="llab">段ごとの滞留を見る</b>
+      <p>週次ミーティングでは、各見込み客が<strong>いま何段にいるか</strong>を一覧にする。同じ段に3週間留まっている案件は、ゲート条件が満たせていないということ。<strong>押し込むのではなく、1段下げてやり直す。</strong>3段で止まっている案件が多ければ試験散布のやり方に、2段で止まっていれば圃場マップの質に原因がある。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="lw">散布営業の七段 ／ 2026年8月作成 ／ ファネルの数値は計画上の仮置きであり実測値ではない。3か月後に実データへ置き換えること。</div>
+</footer>
