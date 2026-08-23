@@ -1,0 +1,469 @@
+<title>遮光剤散布の攻め方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --sg-ground:#edeef1; --sg-surface:#ffffff; --sg-surface2:#f4f5f8;
+  --sg-ink:#14161f; --sg-ink2:#3c4152; --sg-muted:#6b7185;
+  --sg-line:#d6d8e0; --sg-line2:#b4b8c6; --sg-navy:#1d2440;
+  --sg-seal:#c0392b; --sg-seal-bg:#f7e6e3;
+  --sg-spray:#2f6b46; --sg-spray-bg:#e0ece5;
+  --sg-sun:#b1720c; --sg-sun-bg:#f8ecd7;
+  --sg-shadow:0 1px 2px rgba(20,22,31,.05),0 10px 26px -20px rgba(20,22,31,.5);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --sg-ground:#0d0f14; --sg-surface:#161923; --sg-surface2:#1d212d;
+    --sg-ink:#e9ebf1; --sg-ink2:#bfc4d2; --sg-muted:#8b91a4;
+    --sg-line:#2a2f3d; --sg-line2:#3d4356; --sg-navy:#aab6dc;
+    --sg-seal:#e8705f; --sg-seal-bg:#33201d;
+    --sg-spray:#82c39a; --sg-spray-bg:#18291f;
+    --sg-sun:#e0ac4d; --sg-sun-bg:#2e2413;
+    --sg-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+  }
+}
+:root[data-theme="dark"]{
+  --sg-ground:#0d0f14; --sg-surface:#161923; --sg-surface2:#1d212d;
+  --sg-ink:#e9ebf1; --sg-ink2:#bfc4d2; --sg-muted:#8b91a4;
+  --sg-line:#2a2f3d; --sg-line2:#3d4356; --sg-navy:#aab6dc;
+  --sg-seal:#e8705f; --sg-seal-bg:#33201d;
+  --sg-spray:#82c39a; --sg-spray-bg:#18291f;
+  --sg-sun:#e0ac4d; --sg-sun-bg:#2e2413;
+  --sg-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--sg-ground);color:var(--sg-ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Zen Old Mincho","Hiragino Mincho ProN",serif;font-weight:600;line-height:1.45;text-wrap:balance;margin:0}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--sg-seal);outline-offset:3px}
+.sw{max-width:1020px;margin:0 auto;padding:0 22px}
+.sprose{max-width:68ch}
+
+.smast{background:var(--sg-navy);color:#f2f3f7;padding:50px 0 36px;position:relative;overflow:hidden}
+:root[data-theme="dark"] .smast,:root:not([data-theme="light"]) .smast{background:#11131c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .smast{background:var(--sg-navy)}}
+.smast .sey{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.24em;color:#9aa3c4;text-transform:uppercase}
+.smast h1{font-size:clamp(28px,5.2vw,50px);color:#fff;margin:14px 0 0;letter-spacing:.03em}
+.smast .sld{margin:18px 0 0;max-width:60ch;color:#ccd1e2;font-size:clamp(15px,1.5vw,17px)}
+.smast .sbk{display:inline-block;margin-top:22px;font-family:"Roboto Mono",monospace;font-size:12px;color:#9aa3c4;border-bottom:1px solid #4a5478;text-decoration:none;padding-bottom:2px}
+.smast .sbk:hover{color:#fff;border-bottom-color:#fff}
+
+.snav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--sg-ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--sg-line)}
+.snav ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto}
+.snav a{display:block;white-space:nowrap;padding:11px 15px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--sg-muted);text-decoration:none;border-bottom:2px solid transparent}
+.snav a:hover{color:var(--sg-ink);border-bottom-color:var(--sg-seal)}
+
+.ssec{padding:56px 0;border-bottom:1px solid var(--sg-line)}
+.ssec:last-of-type{border-bottom:0}
+.shd{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+.shd .sn{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--sg-seal);flex:none}
+.shd .sr{flex:1;height:1px;background:var(--sg-line2)}
+.ssec h2{font-size:clamp(21px,2.9vw,29px);margin-bottom:18px}
+.ssec h3{font-size:18px;margin:32px 0 12px}
+p{margin:0 0 15px}
+ul.sl{margin:0 0 15px;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+
+.chip{display:inline-block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap}
+.chip.sn2{color:var(--sg-sun);border-color:var(--sg-sun);background:var(--sg-sun-bg)}
+.chip.sp{color:var(--sg-spray);border-color:var(--sg-spray);background:var(--sg-spray-bg)}
+.chip.nu{color:var(--sg-muted);border-color:var(--sg-line2);background:var(--sg-surface2)}
+
+.skeys{display:grid;gap:1px;background:var(--sg-line);border:1px solid var(--sg-line);margin:26px 0}
+.skey{background:var(--sg-surface);padding:18px 20px;display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start}
+.skey .kn{font-family:"Zen Old Mincho",serif;font-size:23px;color:var(--sg-sun);line-height:1.1}
+.skey h3{margin:0 0 5px;font-size:17px}
+.skey p{margin:0;font-size:14.5px;color:var(--sg-ink2)}
+
+.stw{overflow-x:auto;margin:22px 0;border:1px solid var(--sg-line);background:var(--sg-surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--sg-line);vertical-align:top;line-height:1.7}
+thead th{background:var(--sg-surface2);font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.06em;color:var(--sg-muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.nm{text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{background:var(--sg-surface2);font-weight:700;border-top:2px solid var(--sg-line2)}
+caption{caption-side:bottom;text-align:left;padding:10px 13px;font-size:12.5px;color:var(--sg-muted);border-top:1px solid var(--sg-line);background:var(--sg-surface2)}
+
+/* season band */
+.sband{margin:24px 0;border:1px solid var(--sg-line);background:var(--sg-surface);overflow-x:auto}
+.sbin{min-width:850px}
+.sbrow{display:grid;grid-template-columns:196px repeat(12,1fr);align-items:center;border-bottom:1px solid var(--sg-line)}
+.sbrow:last-child{border-bottom:0}
+.sbrow.hd{background:var(--sg-surface2)}
+.sblab{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 12px;font-size:13px;font-weight:700;border-right:1px solid var(--sg-line)}
+.sbm{font-family:"Roboto Mono",monospace;font-size:11px;color:var(--sg-muted);text-align:center;padding:7px 0}
+.sbm.now{color:var(--sg-seal);font-weight:500}
+.sbc{padding:8px 3px}
+.bar{height:13px;border-radius:1px}
+.b-apply{background:var(--sg-sun)}
+.b-hold{background:var(--sg-sun);opacity:.3}
+.b-rm{background:var(--sg-seal)}
+.b-sell{background:repeating-linear-gradient(135deg,var(--sg-navy) 0 3px,transparent 3px 6px);border:1px solid var(--sg-navy)}
+:root[data-theme="dark"] .b-sell,:root:not([data-theme="light"]) .b-sell{background:repeating-linear-gradient(135deg,var(--sg-navy) 0 3px,transparent 3px 6px);border-color:var(--sg-navy)}
+.sleg{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;font-size:13px;color:var(--sg-ink2);align-items:center}
+.sleg span{display:inline-flex;align-items:center;gap:7px}
+.sleg i{width:24px;height:11px;display:inline-block;border-radius:1px}
+
+.scards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin-top:22px}
+.scard{background:var(--sg-surface);border:1px solid var(--sg-line);box-shadow:var(--sg-shadow);padding:20px;display:flex;flex-direction:column;gap:10px}
+.scard h3{margin:0;font-size:17px}
+.scard p{margin:0;font-size:14px;color:var(--sg-ink2)}
+.scard .ft{margin-top:auto;padding-top:11px;border-top:1px solid var(--sg-line);font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--sg-muted)}
+
+.snote{border-left:3px solid var(--sg-navy);background:var(--sg-surface);padding:16px 19px;margin:22px 0;font-size:14.5px}
+.snote.sun{border-left-color:var(--sg-sun);background:var(--sg-sun-bg)}
+.snote.ng{border-left-color:var(--sg-seal);background:var(--sg-seal-bg)}
+.snote b.lb{display:block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--sg-muted);margin-bottom:6px;font-weight:500}
+.snote p:last-child{margin-bottom:0}
+
+.splan{border:1px solid var(--sg-line);background:var(--sg-surface);margin-top:22px}
+.spr{display:grid;grid-template-columns:120px 1fr;border-bottom:1px solid var(--sg-line)}
+.spr:last-child{border-bottom:0}
+.spr .spt{font-family:"Roboto Mono",monospace;font-size:12px;color:var(--sg-seal);padding:14px;border-right:1px solid var(--sg-line);background:var(--sg-surface2);white-space:nowrap}
+.spr .spc{padding:14px 18px;font-size:14px}
+.spr .spc b{display:block;font-size:15px;margin-bottom:4px}
+
+ol.ssrc{font-family:"Roboto Mono",monospace;font-size:12.5px;line-height:1.9;color:var(--sg-muted);padding-left:2.2em;display:flex;flex-direction:column;gap:4px}
+ol.ssrc a{color:var(--sg-ink2);text-decoration:none;border-bottom:1px solid var(--sg-line2);word-break:break-word}
+ol.ssrc a:hover{color:var(--sg-seal);border-bottom-color:var(--sg-seal)}
+.cit{font-family:"Roboto Mono",monospace;font-size:10.5px;vertical-align:super;line-height:0;color:var(--sg-seal);text-decoration:none;padding:0 1px}
+
+footer{padding:36px 0 60px;font-size:12.5px;color:var(--sg-muted);font-family:"Roboto Mono",monospace}
+
+@media (max-width:700px){
+  body{font-size:15px}
+  .ssec{padding:44px 0}
+  .spr{grid-template-columns:1fr}
+  .spr .spt{border-right:0;border-bottom:1px solid var(--sg-line)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="smast">
+  <div class="sw">
+    <div class="sey">Shading Agent ／ Focused Strategy ／ Fukuoka</div>
+    <h1>遮光剤散布の攻め方</h1>
+    <p class="sld">遮光剤だけで営業を組むなら、農薬散布とは別の商売として設計する。顧客も、単価の桁も、季節も、法規制も違う。そして9月に始めるなら、入口は「塗る」ではなく「落とす」になる。</p>
+    <a class="sbk" href="https://claude.ai/code/artifact/d0a62f86-dd5d-4b5d-898f-0544ddc6dbe1">← 福岡ドローン営業プレイブック（本編）</a>
+  </div>
+</header>
+
+<nav class="snav">
+  <div class="sw">
+    <ul>
+      <li><a href="#s-why">なぜ特化が効くか</a></li>
+      <li><a href="#s-what">売り物の正体</a></li>
+      <li><a href="#s-num">単価と1日の売上</a></li>
+      <li><a href="#s-season">季節の設計</a></li>
+      <li><a href="#s-who">誰に売るか</a></li>
+      <li><a href="#s-move">最大の一手</a></li>
+      <li><a href="#s-plan">9月からの計画</a></li>
+      <li><a href="#s-risk">確認とリスク</a></li>
+      <li><a href="#s-src">出典</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section class="ssec" id="s-why">
+  <div class="sw">
+    <div class="shd"><span class="sn">WHY</span><span class="sr"></span></div>
+    <h2>遮光剤は、農薬散布より「商売として素直」</h2>
+    <p class="sprose">農薬散布は参入が容易なぶん価格競争になり、法規制も重い。遮光剤はその逆で、<strong>面積あたりの単価が桁で大きく、競合がほとんどおらず、農薬取締法の重い制約がかからない可能性が高い</strong>。特化する合理性は十分にある。ただし9月開始という条件が、入り方を決める。</p>
+
+    <div class="skeys">
+      <div class="skey">
+        <div class="kn">1</div>
+        <div>
+          <h3>面積あたりの単価が約30倍</h3>
+          <p>農薬散布は10aで1,800〜2,500円。遮光剤はドローン専用品が<strong>1缶19,800円で約500m²</strong>なので、材料費だけで10a約4万円。総額では10aあたり6〜7万円級の商材になる。<a class="cit" href="#c-achilles">[1]</a></p>
+        </div>
+      </div>
+      <div class="skey">
+        <div class="kn">2</div>
+        <div>
+          <h3>県内に競合が見当たらない</h3>
+          <p>福岡県内で遮光剤散布を打ち出している事業者は、今回の調査では確認できなかった。全国でもOPTiMが2026年2月に全国提供を開始した段階で、地方の代行業者が数社。<strong>いま入れば県内で最初になれる。</strong><a class="cit" href="#c-optim">[2]</a></p>
+        </div>
+      </div>
+      <div class="skey">
+        <div class="kn">3</div>
+        <div>
+          <h3>農薬の重い制約がかからない見込み</h3>
+          <p>遮光剤は水・界面活性剤・炭酸カルシウム・アクリル樹脂系の被覆資材で、農薬登録品ではないとみられる。適用登録・希釈倍数・事前周知・養蜂配慮・散布記録といった<strong>農薬散布の重い運用が丸ごと外れる可能性がある</strong>。ただし断定できる一次資料は未確認で、航空法上の扱いは別途要確認。<a class="cit" href="#c-maff">[3]</a></p>
+        </div>
+      </div>
+      <div class="skey">
+        <div class="kn">4</div>
+        <div>
+          <h3>顧客が地理的に固まっている</h3>
+          <p>施設園芸は産地に集積する。福岡は筑後にいちご・なす・トマトが密集し、<strong>ハウスは道路から見える</strong>。1軒取れば隣が視認できるという、農薬散布にはない営業のしやすさがある。<a class="cit" href="#c-fukuren">[4]</a></p>
+        </div>
+      </div>
+      <div class="skey">
+        <div class="kn">5</div>
+        <div>
+          <h3>ただし、9月に「塗る」仕事はもう薄い</h3>
+          <p>遮光剤の塗布は高温期の4〜6月が中心で、効果は1〜3か月。9月中旬に新規で塗る需要は残暑対策の駆け込みくらいしかない。<strong>今季の主戦場は塗布ではない。</strong><a class="cit" href="#c-season">[5]</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-what">
+  <div class="sw">
+    <div class="shd"><span class="sn">01 ／ PRODUCT</span><span class="sr"></span></div>
+    <h2>売っているのは遮光ではなく「屋根に上がらないこと」</h2>
+    <p class="sprose">従来の塗布は、作業者が梯子で登り、ホースを引きながら手作業で行う。<strong>ハウスの高さは6〜10mあることもあり、足元は不安定で、水に濡れると滑る。</strong>ここが商品の本体になる。遮光率や温度の話は、その後でいい。</p>
+
+    <div class="stw">
+      <table>
+        <thead><tr><th>比較軸</th><th>従来（人が屋根に上がる）</th><th>ドローン散布</th></tr></thead>
+        <tbody>
+          <tr><td>作業の姿</td><td>梯子で6〜10mの屋根に登り、ホースを引いて手吹き</td><td>地上から操作。屋根に人が乗らない</td></tr>
+          <tr><td>危険</td><td><strong>落下。濡れた屋根は滑る</strong></td><td>高所作業そのものが消える</td></tr>
+          <tr><td>時間</td><td>2,000m²規模で3〜4時間という比較例</td><td>500m²を約10分（ドローン専用品・希釈不要）</td></tr>
+          <tr><td>仕上がり</td><td>作業者の技量に依存</td><td>一定高度・自動航行で均一という業者主張（実データは限定的）</td></tr>
+          <tr><td>人手</td><td>複数人がかり、真夏の炎天下</td><td>オペレーター1〜2名</td></tr>
+        </tbody>
+        <caption>効率については、動力噴霧器比で約210%という提示もある。仕上がりの均一性は業者側の主張が中心で、第三者の検証データは限定的。<a class="cit" href="#c-optim">[2]</a><a class="cit" href="#c-tfm">[6]</a></caption>
+      </table>
+    </div>
+
+    <div class="snote sun">
+      <b class="lb">最初の一言はこれでいい</b>
+      <p>「遮光剤をドローンで撒きます」ではなく、<strong>「今年、屋根に上がるのを止めませんか」</strong>。相手の頭に浮かぶのは温度ではなく、去年ヒヤリとした場面のほうです。労災が一度起きた時の損失を考えれば、価格の話は後回しになります。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-num">
+  <div class="sw">
+    <div class="shd"><span class="sn">02 ／ NUMBERS</span><span class="sr"></span></div>
+    <h2>単価をどう組むか</h2>
+    <p class="sprose">代行各社は料金を公表しておらず、「要問合せ」が基本。つまり<strong>相場が固まっていない</strong>ということで、こちらが設計できる余地がある。以下は材料費から積み上げた試算。</p>
+
+    <div class="stw">
+      <table>
+        <thead><tr><th>項目</th><th class="nm">数値</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr><td>ドローン専用遮光剤（希釈不要）</td><td class="nm">19,800円／缶</td><td>アキレス「ファインシェードスカイ」約9kg・8.0L、遮光率20〜30%</td></tr>
+          <tr><td>1缶の施工面積</td><td class="nm">約500m²</td><td>同上。施工時間は約10分</td></tr>
+          <tr><td>材料費の単価</td><td class="nm">約40円／m²</td><td>19,800 ÷ 500</td></tr>
+          <tr><td>施工料（提案）</td><td class="nm">20〜30円／m²</td><td>本試算での置き値</td></tr>
+          <tr><td><strong>提示単価（材料込み）</strong></td><td class="nm"><strong>60〜70円／m²</strong></td><td>10aあたり6〜7万円</td></tr>
+          <tr><td>1日の施工能力</td><td class="nm">1.0〜1.5ha</td><td>500m²／10分の実効値。OPTiMの「1日最大1〜2ha」とも整合</td></tr>
+        </tbody>
+        <tfoot><tr><td>1日の売上（材料込み・実働5時間想定）</td><td class="nm">60〜105万円</td><td>うち施工料は20〜45万円</td></tr></tfoot>
+        <caption><strong>公表単価ではなく、材料費から組んだ試算。</strong>実際の見積は棟数・屋根形状・進入条件・移動距離で変わる。まずアキレスと代理店に施工料の相場感をヒアリングして、この置き値を差し替えること。</caption>
+      </table>
+    </div>
+
+    <div class="snote">
+      <b class="lb">農薬散布と正しく比べる</b>
+      <p>面積単価は約30倍だが、1日にこなせる面積は約1/10（農薬散布15ha に対し遮光剤1.5ha）。<strong>1日の売上は同等かやや上、という程度</strong>で、桁違いに儲かるわけではない。特化する価値は売上の絶対額ではなく、<strong>①材料マージンが乗る ②県内に競合がいない ③農薬の法規制がかからない見込み ④季節が農薬散布とずれるので年間稼働を足せる</strong>——この4点にある。</p>
+    </div>
+
+    <div class="snote sun">
+      <b class="lb">30aのいちご農家なら</b>
+      <p>栽培面積30a＝3,000m² → 材料6缶（約119,000円）＋施工料6〜9万円 = <strong>1戸あたり18〜21万円</strong>。農薬散布の年間契約（15ha規模で年90万円）に比べれば小さいが、<strong>1日で複数戸を回れる</strong>ので日商は立つ。そして翌年も必ず必要になる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-season">
+  <div class="sw">
+    <div class="shd"><span class="sn">03 ／ SEASON</span><span class="sr"></span></div>
+    <h2>今季は「落とす」から入る</h2>
+    <p class="sprose">遮光剤の年間サイクルは、<strong>塗る（春〜初夏）→効いている（夏）→落とす（秋）</strong>。9月12日開始は塗布期を逃しているが、<strong>ちょうど「落とす」時期に入る</strong>。秋に光量を確保するには遮光剤を除去する必要があり、自然剥離を待てない場合は専用の除去剤や洗浄が要る。</p>
+
+    <div class="sband">
+      <div class="sbin">
+        <div class="sbrow hd">
+          <div class="sblab" style="font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--sg-muted);font-weight:400">MONTH</div>
+          <div class="sbm now">9</div><div class="sbm">10</div><div class="sbm">11</div><div class="sbm">12</div><div class="sbm">1</div><div class="sbm">2</div><div class="sbm">3</div><div class="sbm">4</div><div class="sbm">5</div><div class="sbm">6</div><div class="sbm">7</div><div class="sbm">8</div>
+        </div>
+        <div class="sbrow">
+          <div class="sblab"><span class="chip sn2">塗布</span>作業</div>
+          <div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-apply"></div></div><div class="sbc"><div class="bar b-apply"></div></div><div class="sbc"><div class="bar b-apply"></div></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-hold"></div></div>
+        </div>
+        <div class="sbrow">
+          <div class="sblab"><span class="chip nu">効果</span>持続1〜3か月</div>
+          <div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-hold"></div></div><div class="sbc"><div class="bar b-hold"></div></div>
+        </div>
+        <div class="sbrow">
+          <div class="sblab"><span class="chip sn2">除去</span>秋の光量確保</div>
+          <div class="sbc"><div class="bar b-rm"></div></div><div class="sbc"><div class="bar b-rm"></div></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div>
+        </div>
+        <div class="sbrow">
+          <div class="sblab"><span class="chip sp">営業</span>翌春の予約</div>
+          <div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"><div class="bar b-sell"></div></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div><div class="sbc"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sleg">
+      <span><i class="bar b-apply"></i>塗布の作業</span>
+      <span><i class="bar b-hold"></i>効果が乗っている</span>
+      <span><i class="bar b-rm"></i>除去の作業</span>
+      <span><i class="bar b-sell"></i>営業（翌春の予約）</span>
+    </div>
+
+    <div class="snote sun">
+      <b class="lb">除去は、塗布への最短の入口</b>
+      <p>除去作業をやると3つ手に入る。<strong>①今季の売上 ②屋根に上がった実績（＝相手の資材と構造を知る） ③翌春の塗布を予約する会話のきっかけ。</strong>落としに来た業者が「来年は塗るのもうちで」と言うのは自然な流れで、営業として無理がない。<br><br>ただし——<strong>除去剤の散布がドローンで可能かは未確認</strong>。高圧洗浄が必要な場合はドローンでは不可能で、別の機材と人手が要る。<strong>初週にアキレスと代理店へ確認すること。</strong>ドローンで不可でも、除去を人手で請ける価値はある（訪問理由が手に入る）。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-who">
+  <div class="sw">
+    <div class="shd"><span class="sn">04 ／ TARGET</span><span class="sr"></span></div>
+    <h2>誰に売るか</h2>
+    <div class="scards">
+      <div class="scard">
+        <span class="chip sn2">最優先</span>
+        <h3>JA・県の育苗センター</h3>
+        <p>大型ハウスが1か所に集中しており、<strong>1件で面積が大きい</strong>。公的性格があるため労働安全に敏感で、高所作業の削減が響く。ここを1つ取ると、管内の生産者への紹介経路も同時に手に入る。</p>
+        <div class="ft">効く言葉：高所作業の削減／均一な仕上がり</div>
+      </div>
+      <div class="scard">
+        <span class="chip sn2">本命</span>
+        <h3>いちご（あまおう）の施設園芸法人</h3>
+        <p>筑後（八女・久留米・うきは・大川・広川）が主産地。<strong>育苗期の高温対策と定植期の遮光</strong>が要る。県の試験場も定植前後の遮光効果を報告している。</p>
+        <div class="ft">面積目安：1戸20〜50a／単価18〜21万円級</div>
+      </div>
+      <div class="scard">
+        <span class="chip sn2">数で取る</span>
+        <h3>なす・トマトの施設園芸</h3>
+        <p>筑後南部が主産地。夏秋作型は高温対策の必要度が高い。いちごと産地が重なるので<strong>同じ日程で回れる</strong>。</p>
+        <div class="ft">狙い：移動効率。1日で複数戸を連続施工</div>
+      </div>
+      <div class="scard">
+        <span class="chip nu">高単価</span>
+        <h3>花き・種苗会社</h3>
+        <p>筑豊のトルコギキョウなど。花きは品質が光条件に直結するため、遮光管理への投資意欲が比較的高い。種苗会社の育苗施設も同様。</p>
+        <div class="ft">狙い：単価を守れる少数顧客</div>
+      </div>
+    </div>
+
+    <div class="snote">
+      <b class="lb">ハウスは道路から見える</b>
+      <p>これが遮光剤営業の最大の実務的利点。水田と違い、<strong>訪問先を車で走りながら目視で見つけられる</strong>。しかも屋根の白さで「今年塗ったか／塗っていないか」まで分かる。<strong>塗ってある屋根＝除去の見込み客、塗っていない大型ハウス＝翌春の塗布の見込み客</strong>として、走りながらリストが作れる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-move">
+  <div class="sw">
+    <div class="shd"><span class="sn">05 ／ KEY MOVE</span><span class="sr"></span></div>
+    <h2>最大の一手：メーカーと資材店の「施工部隊」になる</h2>
+    <p class="sprose">遮光剤は農薬と違い、<strong>売る側が施工難易度で困っている</strong>商材だ。メーカーと農業資材店は製品を売りたいが、屋根に上がる作業がネックで話が止まる。そこにドローンの施工能力を差し込む。</p>
+
+    <div class="scards">
+      <div class="scard">
+        <h3>アキレス（メーカー）</h3>
+        <p>ドローン散布専用品を出している以上、<strong>施工できる事業者を必要としている</strong>。九州で施工パートナーがいるか、紹介の枠組みがあるかを直接聞く。製品を売ってもらえる立場になれば、営業せずに案件が来る。</p>
+        <div class="ft">初週に電話する先の筆頭</div>
+      </div>
+      <div class="scard">
+        <h3>県内の農業資材店・JA購買</h3>
+        <p>資材は彼らが売る。<strong>「資材はそちらで、施工はうちで」</strong>という分担なら競合しない。資材店にとっては売れなかった商品が売れるようになるので、断る理由がない。</p>
+        <div class="ft">組めれば、リスト作りが不要になる</div>
+      </div>
+      <div class="scard">
+        <h3>ハウス施工業者・農業設備業者</h3>
+        <p>ハウスを建てた業者は顧客と構造を両方知っている。<strong>遮光は彼らのサービスメニューに足せる。</strong>下請けでも構わないので入り、実績を積む。</p>
+        <div class="ft">狙い：初年度の実績づくり</div>
+      </div>
+    </div>
+
+    <div class="snote sun">
+      <b class="lb">なぜこれが最大の一手なのか</b>
+      <p>農薬散布では、この構造は作れない。農薬は既にJAと資材店の強固な流通に乗っていて、施工（防除）もJAが担ってきたからだ。<strong>遮光剤は流通も施工も固まっていない新しい商材なので、いま組んだ相手がそのまま数年間の商流になる。</strong>個別の農家を100軒回るより、この3方向に電話するほうが早い。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-plan">
+  <div class="sw">
+    <div class="shd"><span class="sn">06 ／ PLAN</span><span class="sr"></span></div>
+    <h2>9月から翌6月までの組み立て</h2>
+    <div class="splan">
+      <div class="spr">
+        <div class="spt">9月</div>
+        <div class="spc"><b>確認と、除去の飛び込み</b>①アキレス・代理店へ電話（施工パートナーの枠組み／除去剤のドローン可否／施工料の相場） ②九州農政局・大阪航空局へ法令の扱いを照会 ③筑後を車で走り、<strong>屋根が白いハウスを地図に落とす</strong> ④除去の営業を開始</div>
+      </div>
+      <div class="spr">
+        <div class="spt">10月</div>
+        <div class="spc"><b>除去で実績を作る</b>1件でも実施し、作業前後の写真と所要時間を記録する。<strong>その場で翌春の塗布を仮予約</strong>。JA・県の育苗センターへのアプローチもこの月に開始</div>
+      </div>
+      <div class="spr">
+        <div class="spt">11-12月</div>
+        <div class="spc"><b>商流を作る</b>資材店・JA購買・ハウス施工業者と施工分担の話をまとめる。同時に、翌春に向けた料金表と施工実績1枚を完成させる</div>
+      </div>
+      <div class="spr">
+        <div class="spt">1-2月</div>
+        <div class="spc"><b>予約を積む</b>施設園芸の農閑期にあたるので話が通りやすい。<strong>4〜6月の施工日程を先に埋める。</strong>同時期は麦の防除営業と重なるので、担当を分けるか訪問日を分ける</div>
+      </div>
+      <div class="spr">
+        <div class="spt">3月</div>
+        <div class="spc"><b>段取りを固める</b>材料の発注、日程の確定、進入路と駐車位置の下見。連続施工できる順に並べ替える</div>
+      </div>
+      <div class="spr">
+        <div class="spt">4-6月</div>
+        <div class="spc"><b>本番</b>塗布のピーク。ここで1日1〜1.5haを連続でこなせるかが、この事業の成否になる</div>
+      </div>
+    </div>
+
+    <div class="snote">
+      <b class="lb">農薬散布との衝突に注意</b>
+      <p>遮光剤の塗布ピーク（4〜6月）は、<strong>麦の防除・追肥（3月下旬〜4月中旬）と水稲の初期作業に重なる</strong>。両方を同じ人員でやると、必ずどちらかを落とす。特化するなら、<strong>遮光剤は専任を立てる</strong>か、麦を捨てるかを先に決めておくこと。「両方やる」が一番危ない。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-risk">
+  <div class="sw">
+    <div class="shd"><span class="sn">07 ／ CHECK</span><span class="sr"></span></div>
+    <h2>始める前に潰す4点</h2>
+    <ul class="sl">
+      <li><strong>法令上の扱い（最優先）</strong>——遮光剤が農薬取締法の対象外と明記した一次資料は確認できていない。また内容物にかかわらず<strong>航空法上の物件投下・散布に該当し得る</strong>。九州農政局と大阪航空局に照会し、<strong>回答を書面で残す</strong>。この回答書自体が他社にない営業資料になる。<a class="cit" href="#c-maff">[3]</a></li>
+      <li><strong>除去剤のドローン散布可否</strong>——高圧洗浄が必要なら、除去はドローン案件にならない。メーカーに確認する。不可でも人手で請ける価値はある（訪問理由になる）。</li>
+      <li><strong>ハウス資材への長期影響</strong>——除去後は被覆材が元に戻るとされているが、長期的な劣化データは今回確認できなかった。<strong>「フィルムを傷めません」と断言しない。</strong>メーカーの見解を取ってから話す。</li>
+      <li><strong>仕上がりの実データ</strong>——「人力より均一」は業者側の主張が中心で、第三者検証は限定的。<strong>自社で1件目を施工したときに、遮光率の実測と写真を必ず残す。</strong>それが2件目以降の唯一の武器になる。</li>
+    </ul>
+
+    <div class="snote ng">
+      <b class="lb">言ってはいけないこと</b>
+      <p>「必ず◯℃下がります」「フィルムは絶対に傷みません」「農薬ではないので許可は要りません」——<strong>この3つは、いずれも根拠が確認できていない。</strong>効果は塗布状況・フィルムの状態・ハウスの傾斜角度で変わり、遮光率や持続期間に誤差が出るとされている。曖昧なことは曖昧なまま伝えるほうが、結果的に受注につながる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="ssec" id="s-src">
+  <div class="sw">
+    <div class="shd"><span class="sn">SOURCES</span><span class="sr"></span></div>
+    <h2>出典</h2>
+    <p class="sprose" style="font-size:14px;color:var(--sg-muted)">単価設計・営業計画は本資料の構成であり実績値ではない。代行各社は料金を公表しておらず、施工料の相場は未確認。<strong>メーカー・代理店へのヒアリングで置き値を差し替えること。</strong></p>
+    <ol class="ssrc">
+      <li id="c-achilles">アキレス株式会社「ファインシェードスカイ」 <a href="https://www.achilles.jp/product/agriculture/horticulture/fine-shade-sky/">achilles.jp</a>／AGRI JOURNAL <a href="https://agrijournal.jp/material/66942/">agrijournal.jp</a>／施設園芸.com <a href="https://shisetsuengei.com/farm-equipment/agricultural-materials/agricultural-materials-021/">shisetsuengei.com</a></li>
+      <li id="c-optim">OPTiM「ドローン遮光・遮熱剤散布サービス」 <a href="https://www.optim.co.jp/agriculture/services/shading-agent-spray/">optim.co.jp</a>／株式会社北善塔 <a href="https://www.kita-zento.co.jp/works/vinyl-house-drone/">kita-zento.co.jp</a>／ドローンワークゼロナイン <a href="https://drone-work09.com/house-syakou/">drone-work09.com</a></li>
+      <li id="c-maff">農林水産省「無人航空機による農薬等の空中散布に関する情報」 <a href="https://www.maff.go.jp/j/syouan/syokubo/gaicyu/g_kouku_zigyo/muzinkoukuuki.html">maff.go.jp</a>／国土交通省「無人航空機の飛行許可・承認手続」 <a href="https://www.mlit.go.jp/koku/koku_fr10_000042.html">mlit.go.jp</a></li>
+      <li id="c-fukuren">JA全農ふくれん（産地情報） <a href="https://zennoh-fukuren.jp/">zennoh-fukuren.jp</a>／福岡県農林業総合試験場「イチゴ『あまおう』の作型に関する研究」 <a href="https://www.farc.pref.fukuoka.jp/farc/kenpo/nourinkenpo-3/03-04.pdf">farc.pref.fukuoka.jp</a></li>
+      <li id="c-season">セイコーエコロジア「ビニールハウスの遮光効果と遮光・遮熱商品」 <a href="https://ecologia.100nen-kankyo.jp/column/single137.html">ecologia.100nen-kankyo.jp</a>／兼弥産業「遮光剤と拡散コーティング剤」 <a href="https://www.kaneya-ltd.co.jp/kaneya_news/vol48-21/">kaneya-ltd.co.jp</a>／農材ドットコム「遮光塗料」 <a href="https://www.nouzai.com/agri-shizai/control-item/shakou-toryou">nouzai.com</a></li>
+      <li id="c-tfm">TOKYO FM あぐりずむ「ドローンで農業用ハウスに遮光剤を散布する技術」 <a href="https://www.tfm.co.jp/agripower/report/onair/131177">tfm.co.jp</a>／イノチオプラントケア「ドローン活用事例：遮光剤散布試験」 <a href="https://www.inochio-plantcare.co.jp/articles/4216">inochio-plantcare.co.jp</a></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="sw">遮光剤散布の攻め方 ／ 2026年8月作成 ／ 単価は材料費から組んだ試算であり公表値ではない。法令上の扱いは要照会。</div>
+</footer>
