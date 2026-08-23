@@ -141,6 +141,49 @@ footer{padding:36px 0 60px;font-size:12.5px;color:var(--sg-muted);font-family:"R
   .spr .spt{border-right:0;border-bottom:1px solid var(--sg-line)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- print / PDF ---------- */
+@page{size:A4 portrait;margin:14mm 12mm 16mm}
+@media print{
+  :root{
+    --sg-ground:#ffffff; --sg-surface:#ffffff; --sg-surface2:#f4f5f8;
+    --sg-ink:#14161f; --sg-ink2:#3c4152; --sg-muted:#5c6376;
+    --sg-line:#c8ccd6; --sg-line2:#a6abbb; --sg-navy:#1d2440;
+    --sg-seal:#a8301f; --sg-seal-bg:#f7e6e3;
+    --sg-spray:#2f6b46; --sg-spray-bg:#e0ece5;
+    --sg-sun:#8f5c07; --sg-sun-bg:#f8ecd7;
+    --sg-shadow:none;
+  }
+  body{background:#fff;font-size:9.6pt;line-height:1.75}
+  .snav{display:none}
+  .sw{max-width:none;padding:0}
+  .smast{padding:16mm 10mm 10mm;break-after:avoid}
+  .smast h1{font-size:26pt}
+  .smast .sld{font-size:10pt;max-width:none}
+  .smast .sbk{display:none}
+  .ssec{padding:9mm 0 7mm;break-inside:auto}
+  .ssec h2{font-size:15pt;break-after:avoid}
+  .ssec h3{font-size:11pt;break-after:avoid;margin-top:6mm}
+  .shd{break-after:avoid}
+  .skey,.scard,.snote,.spr,.stw,.sband{break-inside:avoid}
+  .skeys{break-inside:auto}
+  .scards{grid-template-columns:1fr 1fr;gap:4mm}
+  .sband,.stw{overflow:visible}
+  .sbin{min-width:0}
+  .sbrow{grid-template-columns:34mm repeat(12,1fr)}
+  .sblab{font-size:8.4pt;padding:1.6mm 2mm}
+  .sbm{font-size:8pt}
+  .bar{height:3mm}
+  table{min-width:0;font-size:8.6pt}
+  th,td{padding:1.8mm 2.4mm}
+  thead{display:table-header-group}
+  tr{break-inside:avoid}
+  .chip{font-size:8pt;padding:1px 4px}
+  ol.ssrc{font-size:8pt;line-height:1.7}
+  ol.ssrc a{border-bottom:0;text-decoration:underline}
+  footer{padding:6mm 0 0;font-size:8pt;break-inside:avoid}
+  a{color:inherit}
+}
 </style>
 
 <header class="smast">
