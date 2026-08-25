@@ -1,582 +1,592 @@
-<title>遮光剤散布のリスク検証</title>
+<title>ハウス散布 運航要領</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap">
 
 <style>
 :root{
-  --rk-ground:#eeeff2; --rk-surface:#ffffff; --rk-surface2:#f5f6f9;
-  --rk-ink:#14161f; --rk-ink2:#3c4152; --rk-muted:#6b7185;
-  --rk-line:#d6d8e0; --rk-line2:#b4b8c6; --rk-navy:#1d2440;
-  --rk-red:#b32d1e; --rk-red-bg:#f9e7e4;
-  --rk-amb:#8a6410; --rk-amb-bg:#f7edd8;
-  --rk-grn:#2f6b46; --rk-grn-bg:#e2ece6;
-  --rk-shadow:0 1px 2px rgba(20,22,31,.05),0 10px 26px -20px rgba(20,22,31,.5);
+  --op-ground:#eeeff2; --op-surface:#ffffff; --op-surface2:#f5f6f9;
+  --op-ink:#14161f; --op-ink2:#3c4152; --op-muted:#6b7185;
+  --op-line:#d6d8e0; --op-line2:#b4b8c6; --op-navy:#1d2440;
+  --op-grn:#2f6b46; --op-grn-bg:#e2ece6;
+  --op-seal:#b32d1e; --op-seal-bg:#f9e7e4;
+  --op-amb:#8a6410; --op-amb-bg:#f7edd8;
+  --op-shadow:0 1px 2px rgba(20,22,31,.05),0 10px 26px -20px rgba(20,22,31,.5);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --rk-ground:#0d0f14; --rk-surface:#161923; --rk-surface2:#1d212d;
-    --rk-ink:#e9ebf1; --rk-ink2:#bfc4d2; --rk-muted:#8b91a4;
-    --rk-line:#2a2f3d; --rk-line2:#3d4356; --rk-navy:#aab6dc;
-    --rk-red:#ef7a68; --rk-red-bg:#34201c;
-    --rk-amb:#dcb355; --rk-amb-bg:#2c2416;
-    --rk-grn:#82c39a; --rk-grn-bg:#18291f;
-    --rk-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+    --op-ground:#0d0f14; --op-surface:#161923; --op-surface2:#1d212d;
+    --op-ink:#e9ebf1; --op-ink2:#bfc4d2; --op-muted:#8b91a4;
+    --op-line:#2a2f3d; --op-line2:#3d4356; --op-navy:#aab6dc;
+    --op-grn:#82c39a; --op-grn-bg:#18291f;
+    --op-seal:#ef7a68; --op-seal-bg:#34201c;
+    --op-amb:#dcb355; --op-amb-bg:#2c2416;
+    --op-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
   }
 }
 :root[data-theme="dark"]{
-  --rk-ground:#0d0f14; --rk-surface:#161923; --rk-surface2:#1d212d;
-  --rk-ink:#e9ebf1; --rk-ink2:#bfc4d2; --rk-muted:#8b91a4;
-  --rk-line:#2a2f3d; --rk-line2:#3d4356; --rk-navy:#aab6dc;
-  --rk-red:#ef7a68; --rk-red-bg:#34201c;
-  --rk-amb:#dcb355; --rk-amb-bg:#2c2416;
-  --rk-grn:#82c39a; --rk-grn-bg:#18291f;
-  --rk-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
+  --op-ground:#0d0f14; --op-surface:#161923; --op-surface2:#1d212d;
+  --op-ink:#e9ebf1; --op-ink2:#bfc4d2; --op-muted:#8b91a4;
+  --op-line:#2a2f3d; --op-line2:#3d4356; --op-navy:#aab6dc;
+  --op-grn:#82c39a; --op-grn-bg:#18291f;
+  --op-seal:#ef7a68; --op-seal-bg:#34201c;
+  --op-amb:#dcb355; --op-amb-bg:#2c2416;
+  --op-shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px #000;
 }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--rk-ground);color:var(--rk-ink);
+body{margin:0;background:var(--op-ground);color:var(--op-ink);
   font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
   font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:"Zen Old Mincho","Hiragino Mincho ProN",serif;font-weight:600;line-height:1.45;text-wrap:balance;margin:0}
 a{color:inherit}
-a:focus-visible{outline:2px solid var(--rk-red);outline-offset:3px}
-.rw{max-width:1020px;margin:0 auto;padding:0 22px}
-.rprose{max-width:68ch}
+a:focus-visible,input:focus-visible{outline:2px solid var(--op-grn);outline-offset:3px}
+.ow{max-width:1020px;margin:0 auto;padding:0 22px}
+.oprose{max-width:68ch}
 
-.rmast{background:#2a1512;color:#f6efed;padding:50px 0 36px;border-bottom:5px solid var(--rk-red)}
-.rmast .rey{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.24em;color:#d9a89f;text-transform:uppercase}
-.rmast h1{font-size:clamp(27px,5vw,48px);color:#fff;margin:14px 0 0;letter-spacing:.03em}
-.rmast .rld{margin:18px 0 0;max-width:62ch;color:#e2cfcb;font-size:clamp(15px,1.5vw,17px)}
-.rmast .rbk{display:inline-block;margin-top:22px;font-family:"Roboto Mono",monospace;font-size:12px;color:#d9a89f;border-bottom:1px solid #6b3d36;text-decoration:none;padding-bottom:2px}
-.rmast .rbk:hover{color:#fff;border-bottom-color:#fff}
+.omast{background:var(--op-navy);color:#f2f3f7;padding:50px 0 36px;border-bottom:5px solid var(--op-grn)}
+:root[data-theme="dark"] .omast,:root:not([data-theme="light"]) .omast{background:#11131c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .omast{background:var(--op-navy)}}
+.omast .oey{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.24em;color:#9aa3c4;text-transform:uppercase}
+.omast h1{font-size:clamp(28px,5.2vw,50px);color:#fff;margin:14px 0 0;letter-spacing:.03em}
+.omast .old{margin:18px 0 0;max-width:62ch;color:#ccd1e2;font-size:clamp(15px,1.5vw,17px)}
+.omast .obk{display:inline-block;margin-top:22px;font-family:"Roboto Mono",monospace;font-size:12px;color:#9aa3c4;border-bottom:1px solid #4a5478;text-decoration:none;padding-bottom:2px}
+.omast .obk:hover{color:#fff;border-bottom-color:#fff}
 
-.rnav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--rk-ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rk-line)}
-.rnav ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto}
-.rnav a{display:block;white-space:nowrap;padding:11px 15px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--rk-muted);text-decoration:none;border-bottom:2px solid transparent}
-.rnav a:hover{color:var(--rk-ink);border-bottom-color:var(--rk-red)}
+.onav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--op-ground) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--op-line)}
+.onav ul{display:flex;list-style:none;margin:0;padding:0;overflow-x:auto}
+.onav a{display:block;white-space:nowrap;padding:11px 15px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--op-muted);text-decoration:none;border-bottom:2px solid transparent}
+.onav a:hover{color:var(--op-ink);border-bottom-color:var(--op-grn)}
 
-.rsec{padding:54px 0;border-bottom:1px solid var(--rk-line)}
-.rsec:last-of-type{border-bottom:0}
-.rhd{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
-.rhd .rn{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--rk-red);flex:none}
-.rhd .rr{flex:1;height:1px;background:var(--rk-line2)}
-.rsec h2{font-size:clamp(21px,2.9vw,29px);margin-bottom:18px}
-.rsec h3{font-size:18px;margin:30px 0 12px}
+.osec{padding:54px 0;border-bottom:1px solid var(--op-line)}
+.osec:last-of-type{border-bottom:0}
+.ohd{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+.ohd .on{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--op-grn);flex:none}
+.ohd .orr{flex:1;height:1px;background:var(--op-line2)}
+.osec h2{font-size:clamp(21px,2.9vw,29px);margin-bottom:18px}
+.osec h3{font-size:18px;margin:30px 0 12px}
 p{margin:0 0 15px}
-ul.rl{margin:0 0 15px;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+ul.ol2{margin:0 0 15px;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
 
 .chip{display:inline-block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap}
-.chip.hi{color:var(--rk-red);border-color:var(--rk-red);background:var(--rk-red-bg)}
-.chip.md{color:var(--rk-amb);border-color:var(--rk-amb);background:var(--rk-amb-bg)}
-.chip.ok{color:var(--rk-grn);border-color:var(--rk-grn);background:var(--rk-grn-bg)}
-.chip.nu{color:var(--rk-muted);border-color:var(--rk-line2);background:var(--rk-surface2)}
+.chip.g{color:var(--op-grn);border-color:var(--op-grn);background:var(--op-grn-bg)}
+.chip.a{color:var(--op-amb);border-color:var(--op-amb);background:var(--op-amb-bg)}
+.chip.n{color:var(--op-muted);border-color:var(--op-line2);background:var(--op-surface2)}
 
-/* verdict box */
-.rverd{border:2px solid var(--rk-red);background:var(--rk-red-bg);padding:20px 22px;margin:26px 0}
-.rverd h3{margin:0 0 8px;font-size:20px;color:var(--rk-red)}
-.rverd p{margin:0 0 10px;font-size:15px}
-.rverd p:last-child{margin-bottom:0}
+/* flow */
+.oflow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--op-line);border:1px solid var(--op-line);margin:24px 0}
+.ofc{background:var(--op-surface);padding:16px 14px;display:flex;flex-direction:column;gap:5px}
+.ofc em{font-family:"Roboto Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:var(--op-muted);font-style:normal}
+.ofc b{font-family:"Zen Old Mincho",serif;font-size:16.5px;font-weight:600}
+.ofc span{font-size:12.5px;color:var(--op-ink2);line-height:1.65}
 
-/* risk cards */
-.rrisks{display:flex;flex-direction:column;gap:18px;margin-top:24px}
-.rrisk{border:1px solid var(--rk-line);background:var(--rk-surface);box-shadow:var(--rk-shadow)}
-.rrisk>.rh{display:grid;grid-template-columns:62px 1fr;border-bottom:1px solid var(--rk-line)}
-.rrisk .rbadge{background:var(--rk-surface2);border-right:1px solid var(--rk-line);display:flex;align-items:center;justify-content:center}
-.rrisk .rbadge b{font-family:"Zen Old Mincho",serif;font-size:26px;color:var(--rk-red);font-weight:600}
-.rrisk .rht{padding:14px 18px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
-.rrisk h3{margin:0;font-size:18.5px;flex:1 1 auto;min-width:60%}
-.rbody{padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.rblk h4{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;font-weight:500;margin:0 0 7px}
-.rblk.kn h4{color:var(--rk-grn)}
-.rblk.unk h4{color:var(--rk-amb)}
-.rblk ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:6px;line-height:1.75}
-.rblk p{margin:0;font-size:14px;line-height:1.8}
-.rmech{grid-column:1/-1;background:var(--rk-surface2);border-left:3px solid var(--rk-navy);padding:13px 16px;font-size:14px}
-.rmech b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--rk-muted);margin-bottom:5px;font-weight:500}
-.ract{grid-column:1/-1;background:var(--rk-red-bg);border-left:3px solid var(--rk-red);padding:13px 16px;font-size:14px}
-.ract b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--rk-red);margin-bottom:5px;font-weight:500}
+/* checklist */
+.ock{border:1px solid var(--op-line);background:var(--op-surface);margin:20px 0}
+.ockh{background:var(--op-surface2);border-bottom:1px solid var(--op-line);padding:11px 16px;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--op-muted)}
+.oci{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px solid var(--op-line)}
+.oci:last-child{border-bottom:0}
+.oci input{margin-top:5px;width:16px;height:16px;flex:none;accent-color:var(--op-grn)}
+.oci label{font-size:14px;cursor:pointer;line-height:1.75}
+.oci input:checked+label{color:var(--op-muted)}
 
-.rtw{overflow-x:auto;margin:22px 0;border:1px solid var(--rk-line);background:var(--rk-surface)}
+/* proc cards */
+.oprocs{display:flex;flex-direction:column;gap:16px;margin-top:22px}
+.oproc{border:1px solid var(--op-line);background:var(--op-surface);box-shadow:var(--op-shadow)}
+.oproc>.oh{display:grid;grid-template-columns:58px 1fr;border-bottom:1px solid var(--op-line)}
+.oproc .obd{background:var(--op-surface2);border-right:1px solid var(--op-line);display:flex;align-items:center;justify-content:center}
+.oproc .obd b{font-family:"Zen Old Mincho",serif;font-size:24px;color:var(--op-grn);font-weight:600}
+.oproc .oht{padding:13px 18px}
+.oproc h3{margin:0;font-size:18px}
+.obody{padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.oblk h4{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;font-weight:500;margin:0 0 7px;color:var(--op-muted)}
+.oblk ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:6px;line-height:1.75}
+.oblk p{margin:0;font-size:14px;line-height:1.8}
+.orule{grid-column:1/-1;background:var(--op-grn-bg);border-left:3px solid var(--op-grn);padding:13px 16px;font-size:14px}
+.orule b{display:block;font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--op-grn);margin-bottom:5px;font-weight:500}
+
+.otw{overflow-x:auto;margin:22px 0;border:1px solid var(--op-line);background:var(--op-surface)}
 table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}
-th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--rk-line);vertical-align:top;line-height:1.7}
-thead th{background:var(--rk-surface2);font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.06em;color:var(--rk-muted);white-space:nowrap}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--op-line);vertical-align:top;line-height:1.7}
+thead th{background:var(--op-surface2);font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.06em;color:var(--op-muted);white-space:nowrap}
 tbody tr:last-child td{border-bottom:0}
 td.nm{text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
-caption{caption-side:bottom;text-align:left;padding:10px 13px;font-size:12.5px;color:var(--rk-muted);border-top:1px solid var(--rk-line);background:var(--rk-surface2)}
+caption{caption-side:bottom;text-align:left;padding:10px 13px;font-size:12.5px;color:var(--op-muted);border-top:1px solid var(--op-line);background:var(--op-surface2)}
 
-.rnote{border-left:3px solid var(--rk-navy);background:var(--rk-surface);padding:16px 19px;margin:22px 0;font-size:14.5px}
-.rnote.ng{border-left-color:var(--rk-red);background:var(--rk-red-bg)}
-.rnote.wn{border-left-color:var(--rk-amb);background:var(--rk-amb-bg)}
-.rnote.ok{border-left-color:var(--rk-grn);background:var(--rk-grn-bg)}
-.rnote b.lb{display:block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--rk-muted);margin-bottom:6px;font-weight:500}
-.rnote p:last-child{margin-bottom:0}
+.onote{border-left:3px solid var(--op-navy);background:var(--op-surface);padding:16px 19px;margin:22px 0;font-size:14.5px}
+.onote.g{border-left-color:var(--op-grn);background:var(--op-grn-bg)}
+.onote.a{border-left-color:var(--op-amb);background:var(--op-amb-bg)}
+.onote b.lb{display:block;font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--op-muted);margin-bottom:6px;font-weight:500}
+.onote p:last-child{margin-bottom:0}
 
-/* tests */
-.rtests{border:1px solid var(--rk-line);background:var(--rk-surface);margin-top:22px}
-.rtest{display:grid;grid-template-columns:74px 1fr;border-bottom:1px solid var(--rk-line)}
-.rtest:last-child{border-bottom:0}
-.rtn{background:var(--rk-surface2);border-right:1px solid var(--rk-line);padding:16px 10px;text-align:center}
-.rtn em{font-family:"Roboto Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:var(--rk-muted);font-style:normal;display:block}
-.rtn b{font-family:"Zen Old Mincho",serif;font-size:24px;color:var(--rk-navy);font-weight:600;display:block}
-.rtc{padding:15px 18px}
-.rtc h3{margin:0 0 6px;font-size:16.5px}
-.rtc ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:5px}
-.rtc .pass{margin-top:9px;padding-top:9px;border-top:1px dashed var(--rk-line2);font-size:13.5px}
-.rtc .pass b{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--rk-grn);font-weight:500;margin-right:8px}
+.otests{border:1px solid var(--op-line);background:var(--op-surface);margin-top:22px}
+.otest{display:grid;grid-template-columns:70px 1fr;border-bottom:1px solid var(--op-line)}
+.otest:last-child{border-bottom:0}
+.otn{background:var(--op-surface2);border-right:1px solid var(--op-line);padding:15px 8px;text-align:center}
+.otn em{font-family:"Roboto Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:var(--op-muted);font-style:normal;display:block}
+.otn b{font-family:"Zen Old Mincho",serif;font-size:23px;color:var(--op-navy);font-weight:600;display:block}
+.otc{padding:14px 18px}
+.otc h3{margin:0 0 6px;font-size:16.5px}
+.otc ul{margin:0;padding-left:1.15em;font-size:14px;display:flex;flex-direction:column;gap:5px}
+.otc .use{margin-top:9px;padding-top:9px;border-top:1px dashed var(--op-line2);font-size:13.5px}
+.otc .use b{font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--op-grn);font-weight:500;margin-right:8px}
 
-/* conditions */
-.rcond{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;background:var(--rk-line);border:1px solid var(--rk-line);margin-top:22px}
-.rci{background:var(--rk-surface);padding:15px 18px;display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;font-size:14px;line-height:1.75}
-.rci .mk{font-family:"Roboto Mono",monospace;font-size:14px;line-height:1.7}
-.rci.y .mk{color:var(--rk-grn)}
-.rci.n .mk{color:var(--rk-red)}
+ol.osrc{font-family:"Roboto Mono",monospace;font-size:12.5px;line-height:1.9;color:var(--op-muted);padding-left:2.2em;display:flex;flex-direction:column;gap:4px}
+ol.osrc a{color:var(--op-ink2);text-decoration:none;border-bottom:1px solid var(--op-line2);word-break:break-word}
+ol.osrc a:hover{color:var(--op-grn);border-bottom-color:var(--op-grn)}
+.cit{font-family:"Roboto Mono",monospace;font-size:10.5px;vertical-align:super;line-height:0;color:var(--op-grn);text-decoration:none;padding:0 1px}
 
-ol.rsrc{font-family:"Roboto Mono",monospace;font-size:12.5px;line-height:1.9;color:var(--rk-muted);padding-left:2.2em;display:flex;flex-direction:column;gap:4px}
-ol.rsrc a{color:var(--rk-ink2);text-decoration:none;border-bottom:1px solid var(--rk-line2);word-break:break-word}
-ol.rsrc a:hover{color:var(--rk-red);border-bottom-color:var(--rk-red)}
-.cit{font-family:"Roboto Mono",monospace;font-size:10.5px;vertical-align:super;line-height:0;color:var(--rk-red);text-decoration:none;padding:0 1px}
-
-footer{padding:36px 0 60px;font-size:12.5px;color:var(--rk-muted);font-family:"Roboto Mono",monospace}
+footer{padding:36px 0 60px;font-size:12.5px;color:var(--op-muted);font-family:"Roboto Mono",monospace}
 
 @media (max-width:700px){
   body{font-size:15px}
-  .rsec{padding:42px 0}
-  .rbody{grid-template-columns:1fr;gap:14px}
-  .rtest{grid-template-columns:1fr}
-  .rtn{border-right:0;border-bottom:1px solid var(--rk-line);display:flex;align-items:baseline;justify-content:flex-start;gap:10px;padding:11px 18px}
+  .osec{padding:42px 0}
+  .obody{grid-template-columns:1fr;gap:14px}
+  .otest{grid-template-columns:1fr}
+  .otn{border-right:0;border-bottom:1px solid var(--op-line);display:flex;align-items:baseline;justify-content:flex-start;gap:10px;padding:11px 18px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 @page{size:A4 portrait;margin:14mm 12mm 16mm}
 @media print{
   :root{
-    --rk-ground:#fff; --rk-surface:#fff; --rk-surface2:#f5f6f9;
-    --rk-ink:#14161f; --rk-ink2:#3c4152; --rk-muted:#5c6376;
-    --rk-line:#c8ccd6; --rk-line2:#a6abbb; --rk-navy:#1d2440;
-    --rk-red:#a02718; --rk-red-bg:#f9e7e4;
-    --rk-amb:#7d5a0d; --rk-amb-bg:#f7edd8;
-    --rk-grn:#2f6b46; --rk-grn-bg:#e2ece6; --rk-shadow:none;
+    --op-ground:#fff; --op-surface:#fff; --op-surface2:#f5f6f9;
+    --op-ink:#14161f; --op-ink2:#3c4152; --op-muted:#5c6376;
+    --op-line:#c8ccd6; --op-line2:#a6abbb; --op-navy:#1d2440;
+    --op-grn:#27603d; --op-grn-bg:#e2ece6;
+    --op-seal:#a02718; --op-seal-bg:#f9e7e4;
+    --op-amb:#7d5a0d; --op-amb-bg:#f7edd8; --op-shadow:none;
   }
   body{background:#fff;font-size:9.6pt;line-height:1.75}
-  .rnav{display:none}
-  .rw{max-width:none;padding:0}
-  .rmast{padding:16mm 10mm 10mm;break-after:avoid}
-  .rmast h1{font-size:25pt}
-  .rmast .rld{font-size:10pt;max-width:none}
-  .rmast .rbk{display:none}
-  .rsec{padding:9mm 0 7mm}
-  .rsec h2{font-size:15pt;break-after:avoid}
-  .rsec h3{font-size:11pt;break-after:avoid}
-  .rhd{break-after:avoid}
-  .rrisk,.rnote,.rtest,.rverd,.rci,.rtw{break-inside:avoid}
+  .onav{display:none}
+  .ow{max-width:none;padding:0}
+  .omast{padding:16mm 10mm 10mm;break-after:avoid}
+  .omast h1{font-size:25pt}
+  .omast .old{font-size:10pt;max-width:none}
+  .omast .obk{display:none}
+  .osec{padding:9mm 0 7mm}
+  .osec h2{font-size:15pt;break-after:avoid}
+  .osec h3{font-size:11pt;break-after:avoid}
+  .ohd{break-after:avoid}
+  .oproc,.onote,.otest,.ock,.otw,.ofc{break-inside:avoid}
+  .oci input{-webkit-appearance:none;appearance:none;border:1px solid #666;width:3.4mm;height:3.4mm;border-radius:1px}
   table{min-width:0;font-size:8.6pt}
   th,td{padding:1.8mm 2.4mm}
   thead{display:table-header-group}
   tr{break-inside:avoid}
   .chip{font-size:8pt;padding:1px 4px}
-  ol.rsrc{font-size:8pt;line-height:1.7}
-  ol.rsrc a{border-bottom:0;text-decoration:underline}
+  ol.osrc{font-size:8pt;line-height:1.7}
+  ol.osrc a{border-bottom:0;text-decoration:underline}
   footer{padding:6mm 0 0;font-size:8pt}
   a{color:inherit}
 }
 </style>
 
-<header class="rmast">
-  <div class="rw">
-    <div class="rey">Risk Review ／ Greenhouse Shading ／ Go-NoGo</div>
-    <h1>遮光剤散布のリスク検証</h1>
-    <p class="rld">現場から挙がった3つの懸念——塗料によるモーター固着、ハウスのビニールをセンサーが認識しない疑い、そして損害賠償——を裏取りした。結論から言うと、懸念はいずれも根拠がある。前回の「遮光剤に特化する」という提案は、このまま進めてはいけない。</p>
-    <a class="rbk" href="https://claude.ai/code/artifact/fd68075a-42c1-4360-bc7a-0175c26ab0c5">← 遮光剤散布の攻め方（この資料で修正されます）</a>
+<header class="omast">
+  <div class="ow">
+    <div class="oey">Flight Ops ／ Greenhouse Shading ／ Central Base 26</div>
+    <h1>ハウス散布 運航要領</h1>
+    <p class="old">現地を確認し、リスクを洗い出し、チームで共有して、飛ばす。ハウス上空の遮光剤散布を安全に成立させるための手順書。確認項目、高度の作り方、立ち位置、機体管理、事前実測、契約と保険、事故時の動きまでを一本にまとめた。</p>
+    <a class="obk" href="https://claude.ai/code/artifact/fd68075a-42c1-4360-bc7a-0175c26ab0c5">← 遮光剤散布の攻め方（営業編）</a>
   </div>
 </header>
 
-<nav class="rnav">
-  <div class="rw">
+<nav class="onav">
+  <div class="ow">
     <ul>
-      <li><a href="#r-verdict">結論</a></li>
-      <li><a href="#r-risks">5つのリスク</a></li>
-      <li><a href="#r-money">賠償の規模</a></li>
-      <li><a href="#r-test">受注前の検証</a></li>
-      <li><a href="#r-cond">受ける条件</a></li>
-      <li><a href="#r-contract">契約で潰す</a></li>
-      <li><a href="#r-alt">代替案</a></li>
-      <li><a href="#r-src">出典</a></li>
+      <li><a href="#o-base">基本の流れ</a></li>
+      <li><a href="#o-survey">現地確認</a></li>
+      <li><a href="#o-alt">高度の作り方</a></li>
+      <li><a href="#o-pos">立ち位置と目視</a></li>
+      <li><a href="#o-mc">機体管理</a></li>
+      <li><a href="#o-drift">ドリフト</a></li>
+      <li><a href="#o-test">事前実測</a></li>
+      <li><a href="#o-ins">保険と契約</a></li>
+      <li><a href="#o-emg">事故時</a></li>
+      <li><a href="#o-brief">共有</a></li>
+      <li><a href="#o-src">出典</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
 
-<section class="rsec" id="r-verdict">
-  <div class="rw">
-    <div class="rhd"><span class="rn">VERDICT</span><span class="rr"></span></div>
-    <h2>前回の提案を修正します</h2>
+<section class="osec" id="o-base">
+  <div class="ow">
+    <div class="ohd"><span class="on">BASE</span><span class="orr"></span></div>
+    <h2>散布は、飛ばす前に9割決まる</h2>
+    <p class="oprose">ハウス散布が水田より難しいのは事実で、だからこそ<strong>手順を持っている業者にしか回ってこない仕事</strong>になる。リスクは避けるものではなく、洗い出して管理するもの。管理できることを示せるから対価がもらえる。この要領書は、そのための道具。</p>
 
-    <div class="rverd">
-      <h3>遮光剤は「特化」の対象から外し、検証プロジェクトに落とす</h3>
-      <p>先に出した「遮光剤散布の攻め方」は、単価・競合・季節の面からは成立しています。ただし<strong>飛行の安全と賠償のリスクを過小に見ていました</strong>。今回の調査で、業界側にこういう記述が見つかりました。</p>
-      <p style="background:var(--rk-surface);padding:12px 15px;border-left:3px solid var(--rk-red);font-size:14.5px">「ハウスの下からオペレーターが目視でドローンを操作することが難しく、オペレーターが高い位置からの操作が必要だったり、補助がいてもハウスをオーバーランしてしまうことや、電線が近くを通っている、遮光剤のドリフトなど多くの課題があり、<strong>実際にはほとんど行われていないのが実状です</strong>」<a class="cit" href="#c-toyota">[1]</a></p>
-      <p><strong>「受けない業者がいる」のは慎重すぎるのではなく、合理的な判断だった</strong>ということです。メーカー自身がまだ無料モニターを募集している段階でもあります<a class="cit" href="#c-mazex">[2]</a>。売上を作りにいく商材としてではなく、<strong>検証を終えた者だけが取れる市場</strong>として扱うのが正しい。検証を先に済ませれば、そのこと自体が参入障壁になります。</p>
+    <div class="oflow">
+      <div class="ofc"><em>STEP 01</em><b>現地確認</b><span>屋根・周囲・立ち位置・気象を見て記録する</span></div>
+      <div class="ofc"><em>STEP 02</em><b>洗い出し</b><span>この現場固有の危険を書き出す</span></div>
+      <div class="ofc"><em>STEP 03</em><b>運航計画</b><span>高度・経路・立ち位置・中止基準を決める</span></div>
+      <div class="ofc"><em>STEP 04</em><b>共有</b><span>出発前ブリーフと現場KYで全員に通す</span></div>
+      <div class="ofc"><em>STEP 05</em><b>実施</b><span>計画どおりに飛ばす。逸脱したら止める</span></div>
+      <div class="ofc"><em>STEP 06</em><b>記録</b><span>飛行日誌・散布記録・写真を残す</span></div>
     </div>
 
-    <div class="rnote wn">
-      <b class="lb">この資料の読み方</b>
-      <p>各リスクを<strong>「分かっていること（出典あり）」と「分かっていないこと（未確認）」に分けて</strong>書いています。未確認の項目は、推測で埋めずに<strong>自社で実測する手順</strong>に変換してあります。安全に関わる話で、それらしい説明を信じるのが一番危ないためです。</p>
-    </div>
-  </div>
-</section>
-
-<section class="rsec" id="r-risks">
-  <div class="rw">
-    <div class="rhd"><span class="rn">RISKS</span><span class="rr"></span></div>
-    <h2>5つのリスク</h2>
-
-    <div class="rrisks">
-
-      <article class="rrisk">
-        <div class="rh">
-          <div class="rbadge"><b>1</b></div>
-          <div class="rht"><h3>遮光剤がモーターに固着して出力が落ちる</h3><span class="chip hi">機体・墜落</span></div>
-        </div>
-        <div class="rbody">
-          <div class="rblk kn">
-            <h4>✓ 分かっていること</h4>
-            <ul>
-              <li>散布中にモーター・プロペラに付着した薬液はこまめに拭き取る必要があり、<strong>薬液の固着で放熱性が損なわれモーター出力低下が起こる</strong>とメーカー系の解説に明記されている<a class="cit" href="#c-sekido">[3]</a></li>
-              <li>粉塵がモーター・ベアリングに侵入すると摩擦増加・発熱の原因になり、作業後の清水すすぎが必要<a class="cit" href="#c-sekido">[3]</a></li>
-              <li>遮光剤は水・界面活性剤・<strong>炭酸カルシウム・アクリル系樹脂</strong>の被覆材。乾けば固まることが製品の目的そのもの<a class="cit" href="#c-achilles">[4]</a></li>
-              <li>IP等級の試験は真水基準で、高圧の打ち付けは別問題<a class="cit" href="#c-ip">[5]</a></li>
-            </ul>
-          </div>
-          <div class="rblk unk">
-            <h4>？ 分かっていないこと</h4>
-            <ul>
-              <li>遮光剤散布が原因の墜落事例は、公表資料では<strong>確認できなかった</strong>。「あるらしい」という話は現場で聞こえていても、記録として追えない</li>
-              <li>何回散布するとモーター温度・出力にどれだけ影響が出るか</li>
-              <li>固着した樹脂を安全に落とす手順（メーカー公認のもの）</li>
-            </ul>
-          </div>
-          <div class="rmech">
-            <b>MECHANISM</b>農薬の希釈液は水がほとんどで、乾いても薄い残渣にしかならない。遮光剤は<strong>固形分を屋根に定着させるための資材</strong>で、しかも希釈不要のタイプがある。同じ「液体を撒く」でも、モーター周りに入ったときの挙動はまったく別物になる。放熱が落ちれば出力が落ち、出力が落ちれば高度が保てない。<strong>懸念のメカニズムとしては十分に成立している。</strong>
-          </div>
-          <div class="ract">
-            <b>ACTION</b>固着を落とすために高圧洗浄をかけるのは<strong>逆効果になり得る</strong>（防水を破る）。メーカーに「遮光剤散布後の正規の洗浄手順」を書面で問い合わせること。回答が得られない＝メーカーも想定していない、という重要な情報になる。
-          </div>
-        </div>
-      </article>
-
-      <article class="rrisk">
-        <div class="rh">
-          <div class="rbadge"><b>2</b></div>
-          <div class="rht"><h3>レーダーがビニールを透過して、地面を測ってしまう</h3><span class="chip hi">最重要・未検証</span></div>
-        </div>
-        <div class="rbody">
-          <div class="rblk kn">
-            <h4>✓ 分かっていること</h4>
-            <ul>
-              <li>農業ドローンは<strong>機体下部のレーダーで地面からの距離を測り、地形追従モードで対地高度を一定に保つ</strong><a class="cit" href="#c-agl">[6]</a></li>
-              <li>ミリ波レーダーのレドーム（カバー）は<strong>樹脂で作られる。電波を透過することが選定条件</strong>だから<a class="cit" href="#c-radome">[7]</a></li>
-              <li>ビジョンセンサーは明るさ・天候・汚れで作動しない/遅れることがあり、<strong>センサーだけに頼った運用は絶対にしないこと</strong>とメーカー系解説が明記<a class="cit" href="#c-vision">[8]</a></li>
-              <li>電線など細い物体は検知できずすり抜けて衝突する可能性が高い<a class="cit" href="#c-vision">[8]</a></li>
-            </ul>
-          </div>
-          <div class="rblk unk">
-            <h4>？ 分かっていないこと</h4>
-            <ul>
-              <li><strong>実機のレーダーがハウスのフィルムを透過するかどうかの実測データは、公開資料では見つからなかった。</strong>機種ごとに周波数も信号処理も違う</li>
-              <li>透明フィルムに対してビジョンセンサーが反応するか</li>
-              <li>遮光剤を塗って白くなった後の面なら見えるのか</li>
-            </ul>
-          </div>
-          <div class="rmech">
-            <b>MECHANISM</b>ご指摘のとおりの理屈が成り立ちます。<strong>ミリ波レーダーのカバーが樹脂で作られている</strong>ということは、薄い樹脂は電波をほとんど通すということ。ハウスの農ビ・農POフィルムは0.1mm前後の樹脂膜です。<strong>レーダーがフィルムを素通りして地面を測れば、機体は「まだ地面まで5mある」と認識したまま屋根に接近します。</strong>そして地形追従を信じて降下すれば、フィルムに接触する。<br><br>さらに悪いのは順番です。<strong>塗る前のフィルムは透明</strong>で、ビジョンセンサーにとって最も苦手な対象。つまり<strong>1回目の進入がいちばん危ない</strong>。
-          </div>
-          <div class="ract">
-            <b>ACTION</b>これは推測のまま運用してはいけない項目です。<strong>実測するまで受注しない。</strong>検証手順は後述のTEST 1・2。物理的な蓋然性は高いものの、断定はできません——だからこそ、自社の機体で確かめた事実だけを根拠にすること。
-          </div>
-        </div>
-      </article>
-
-      <article class="rrisk">
-        <div class="rh">
-          <div class="rbadge"><b>3</b></div>
-          <div class="rht"><h3>ハウスを目視で追えない。オーバーランする</h3><span class="chip hi">運用</span></div>
-        </div>
-        <div class="rbody">
-          <div class="rblk kn">
-            <h4>✓ 分かっていること</h4>
-            <ul>
-              <li>ハウスの下からの目視操作は難しく、<strong>オペレーターが高い位置に立つ必要がある</strong><a class="cit" href="#c-toyota">[1]</a></li>
-              <li><strong>補助者がいてもハウスをオーバーランする</strong>事例が課題として挙げられている<a class="cit" href="#c-toyota">[1]</a></li>
-              <li>ハウス周りに<strong>電線が通っている</strong>ことが多い。細い線はセンサーで検知できない<a class="cit" href="#c-toyota">[1]</a><a class="cit" href="#c-vision">[8]</a></li>
-              <li>遮光剤のドリフト（飛散）も課題として挙がっている<a class="cit" href="#c-toyota">[1]</a></li>
-            </ul>
-          </div>
-          <div class="rblk unk">
-            <h4>？ 分かっていないこと</h4>
-            <ul>
-              <li>連棟ハウスの谷（樋）部分での挙動</li>
-              <li>換気窓が開いている状態での吸い込み・引き込みの有無</li>
-              <li>風速別のドリフト到達距離</li>
-            </ul>
-          </div>
-          <div class="rmech">
-            <b>MECHANISM</b>水田なら機体は常に自分の目の高さより下か同じ高さにある。ハウスは違って、<strong>機体が屋根の向こう側に回った瞬間に見えなくなる</strong>。しかも屋根は傾斜していて、端がどこで終わっているかが地上からは読みにくい。この「見えない数秒」の間に降下指示が入ると、接触は避けられません。
-          </div>
-          <div class="ract">
-            <b>ACTION</b>屋根の四隅と稜線が見える立ち位置を確保できない現場は、それだけで受けない理由になります。脚立・法面・農道の高い場所——<strong>下見の時点で「立てる場所」を探すこと。</strong>なければ断る。
-          </div>
-        </div>
-      </article>
-
-      <article class="rrisk">
-        <div class="rh">
-          <div class="rbadge"><b>4</b></div>
-          <div class="rht"><h3>保険が効かない可能性がある——「仕事の目的物」の穴</h3><span class="chip hi">賠償</span></div>
-        </div>
-        <div class="rbody">
-          <div class="rblk kn">
-            <h4>✓ 分かっていること</h4>
-            <ul>
-              <li>賠償責任保険では、<strong>所有・使用・管理財物、および「仕事の目的物」は普通保険約款で免責</strong>とされている<a class="cit" href="#c-ukeoi">[9]</a></li>
-              <li>作業範囲や工事の進展によって免責の範囲が不明確になることがあり、<strong>あらかじめ特定しておくことが重要</strong>とされる<a class="cit" href="#c-ukeoi">[9]</a></li>
-              <li>一方で農林水産用のドローン保険には、散布の結果に起因する第三者財物の損壊や、<strong>被保険者の管理下にある財物の滅失・損傷・汚損を補償する商品もある</strong><a class="cit" href="#c-kyoei">[10]</a></li>
-            </ul>
-          </div>
-          <div class="rblk unk">
-            <h4>？ 分かっていないこと</h4>
-            <ul>
-              <li><strong>自社の現契約で、塗布中のハウス屋根が「仕事の目的物」として免責になるかどうか</strong></li>
-              <li>ハウス内の作物・育苗中の苗の損害が対象になるか</li>
-              <li>農薬以外の資材（遮光剤）の散布が用途として認められているか</li>
-              <li>免責金額（自己負担額）と支払限度額</li>
-            </ul>
-          </div>
-          <div class="rmech">
-            <b>MECHANISM</b>ここが今回いちばん見落としやすい穴です。<strong>遮光剤散布では、賠償の対象になりそうな物（ハウスの屋根）が、そのまま作業の対象物でもある。</strong>他人の家の屋根の上を飛んで壊せば第三者財物ですが、<strong>その屋根に塗る仕事を請けている最中に壊した場合、「仕事の目的物」として免責になり得ます。</strong>水田の農薬散布ではこの構図は生まれません。
-          </div>
-          <div class="ract">
-            <b>ACTION</b>保険代理店に<strong>この具体的な想定を文章で示して</strong>回答をもらうこと。「遮光剤の塗布作業中に、その対象であるハウスの屋根フィルムを機体が破損させた場合、支払対象になりますか」——口頭の「たぶん大丈夫」では意味がありません。<strong>書面の回答が取れるまで受注しない。</strong>
-          </div>
-        </div>
-      </article>
-
-      <article class="rrisk">
-        <div class="rh">
-          <div class="rbadge"><b>5</b></div>
-          <div class="rht"><h3>接触したら、金額に関係なく国交省への報告義務が生じる</h3><span class="chip md">法令</span></div>
-        </div>
-        <div class="rbody">
-          <div class="rblk kn">
-            <h4>✓ 分かっていること</h4>
-            <ul>
-              <li>第三者の所有物の損壊は、<strong>損傷規模・損害額を問わずすべてが事故報告の対象</strong>。瓦のひび割れや壁の傷といった軽微なものも含む<a class="cit" href="#c-report">[11]</a></li>
-              <li><strong>制御不能</strong>になった事態、飛行中の<strong>発火</strong>は重大インシデントとして報告対象<a class="cit" href="#c-report">[11]</a></li>
-              <li>報告をしない・虚偽報告は<strong>30万円以下の罰金</strong>。救護等の必要な措置を怠れば<strong>2年以下の懲役または100万円以下の罰金</strong><a class="cit" href="#c-report">[11]</a></li>
-            </ul>
-          </div>
-          <div class="rblk unk">
-            <h4>？ 分かっていないこと</h4>
-            <ul>
-              <li>顧客自身のハウスを壊した場合が「第三者の所有物」に当たるかの解釈（作業を請けている相手は第三者か）</li>
-              <li>報告実績が、以後の飛行許可・承認の審査にどう影響するか</li>
-            </ul>
-          </div>
-          <div class="rmech">
-            <b>MECHANISM</b>「小さく破ってしまったので、こっそり自費で直す」が通用しません。<strong>フィルムに穴を開けた時点で報告対象になり得ます。</strong>そして報告は記録に残ります。件数が積み上がれば、レベル3.5や包括申請の審査、顧客への説明、いずれにも影響します。
-          </div>
-          <div class="ract">
-            <b>ACTION</b>「壊した時にどうするか」を、事故が起きる前に手順書にしておく。飛行中止・救護・立入制限・写真記録・警察／国交省への連絡・保険会社への連絡——この順番を全員が言えるようにする。
-          </div>
-        </div>
-      </article>
-
+    <div class="onote g">
+      <b class="lb">この手順自体が商品になる</b>
+      <p>ハウス散布を打ち出している業者は福岡県内では見当たらず、全国でも始まったばかり。<strong>「確認して、計画して、記録を残して飛ばす」を書面で出せること自体が、他社にない提案材料</strong>になる。顧客が本当に気にしているのは価格より「うちのハウスを壊されないか」なので、この要領書を見せることが受注の決め手になる。</p>
     </div>
   </div>
 </section>
 
-<section class="rsec" id="r-money">
-  <div class="rw">
-    <div class="rhd"><span class="rn">EXPOSURE</span><span class="rr"></span></div>
-    <h2>壊したときに、いくらになるか</h2>
-    <p class="rprose">賠償の規模を掴んでおかないと、受注判断ができません。ハウスの物理的な修理費は意外と小さい。<strong>本当に怖いのは中身のほうです。</strong></p>
+<section class="osec" id="o-survey">
+  <div class="ow">
+    <div class="ohd"><span class="on">01 ／ SURVEY</span><span class="orr"></span></div>
+    <h2>現地確認チェックシート</h2>
+    <p class="oprose">下見でこれを埋める。埋まらない項目があるなら、その場で施主に聞く。<strong>全部埋まってから見積を出す。</strong></p>
 
-    <div class="rtw">
+    <div class="ock">
+      <div class="ockh">A ／ 屋根</div>
+      <div class="oci"><input type="checkbox" id="a1"><label for="a1">形状：単棟／連棟（棟数）、屋根の傾斜、谷（樋）の位置と幅</label></div>
+      <div class="oci"><input type="checkbox" id="a2"><label for="a2">フィルムの種類と厚さ（農ビ／農PO／硬質）、張ってからの経過年数</label></div>
+      <div class="oci"><input type="checkbox" id="a3"><label for="a3"><strong>既存の劣化・穴・破れ・たるみ</strong>を写真に撮り、施主と一緒に確認する</label></div>
+      <div class="oci"><input type="checkbox" id="a4"><label for="a4">換気窓・天窓の位置と開閉状態。散布時は閉めてもらう約束を取る</label></div>
+      <div class="oci"><input type="checkbox" id="a5"><label for="a5">屋根の最高点の高さ（対地）と、四隅の位置</label></div>
+      <div class="oci"><input type="checkbox" id="a6"><label for="a6">屋根上の付帯物：遮光ネット、支線、アンテナ、換気扇、配管</label></div>
+    </div>
+
+    <div class="ock">
+      <div class="ockh">B ／ 周囲</div>
+      <div class="oci"><input type="checkbox" id="b1"><label for="b1"><strong>電線・引込線・支線</strong>の位置と高さ。飛行経路と交差しないルートが取れるか</label></div>
+      <div class="oci"><input type="checkbox" id="b2"><label for="b2">隣接ハウス、住宅、道路、駐車車両までの距離</label></div>
+      <div class="oci"><input type="checkbox" id="b3"><label for="b3">隣接圃場の栽培方法（有機・特別栽培の有無）</label></div>
+      <div class="oci"><input type="checkbox" id="b4"><label for="b4">養蜂箱の有無。ハウス内でミツバチを使っていないかも確認</label></div>
+      <div class="oci"><input type="checkbox" id="b5"><label for="b5">第三者の立入可能性（通学路、農道の通行）</label></div>
+    </div>
+
+    <div class="ock">
+      <div class="ockh">C ／ 立ち位置・進入</div>
+      <div class="oci"><input type="checkbox" id="c1"><label for="c1"><strong>屋根の四隅と稜線が見える立ち位置</strong>を実際に立って確認する（脚立・法面・農道の高所）</label></div>
+      <div class="oci"><input type="checkbox" id="c2"><label for="c2">補助者の立ち位置。機体が見えなくなる範囲を互いに補える配置か</label></div>
+      <div class="oci"><input type="checkbox" id="c3"><label for="c3">離着陸地点、資材置き場、給水・調合場所、車両の駐車位置</label></div>
+      <div class="oci"><input type="checkbox" id="c4"><label for="c4">緊急時の退避経路と、機体を降ろせる安全なエリア</label></div>
+    </div>
+
+    <div class="ock">
+      <div class="ockh">D ／ 気象・時間帯</div>
+      <div class="oci"><input type="checkbox" id="d1"><label for="d1">その現場の風の通り道。午前と午後で風向きが変わるか施主に聞く</label></div>
+      <div class="oci"><input type="checkbox" id="d2"><label for="d2">中止基準（風速の上限、降雨、屋根が濡れている状態）を数値で決めて施主と合意</label></div>
+      <div class="oci"><input type="checkbox" id="d3"><label for="d3">日射と逆光の方向。ビジョンセンサーは光条件で作動が変わる<a class="cit" href="#c-vision">[1]</a></label></div>
+    </div>
+
+    <div class="ock">
+      <div class="ockh">E ／ 施主確認</div>
+      <div class="oci"><input type="checkbox" id="e1"><label for="e1">ハウス内の作物の在圃状況（何が、どの段階で入っているか）</label></div>
+      <div class="oci"><input type="checkbox" id="e2"><label for="e2">屋根の現況について施主の申告を受け、書面に残す</label></div>
+      <div class="oci"><input type="checkbox" id="e3"><label for="e3">近隣への事前周知を誰がやるか決める</label></div>
+      <div class="oci"><input type="checkbox" id="e4"><label for="e4">当日の立会いの有無と連絡先</label></div>
+    </div>
+
+    <div class="onote">
+      <b class="lb">慣れるまでの順番</b>
+      <p>最初の数件は<strong>作物が入っていない空のハウス、または単棟で周囲が開けた現場</strong>から入ると、手順を身体に入れやすい。育苗中のハウスは1棟にそのシーズンの苗が集中しているので、要領が固まってから受ける。営業したい順番と、慣熟の順番は必ずしも一致しない。</p>
+    </div>
+  </div>
+</section>
+
+<section class="osec" id="o-alt">
+  <div class="ow">
+    <div class="ohd"><span class="on">02 ／ ALTITUDE</span><span class="orr"></span></div>
+    <h2>高度をどう作るか</h2>
+    <p class="oprose">農業ドローンは機体下部のレーダーで地面までの距離を測り、地形追従モードで対地高度を保つ<a class="cit" href="#c-agl">[2]</a>。ハウスの上ではこの前提が崩れる可能性があるので、<strong>高度の作り方を最初に設計しておく。</strong></p>
+
+    <div class="oprocs">
+      <article class="oproc">
+        <div class="oh"><div class="obd"><b>1</b></div><div class="oht"><h3>レーダーがフィルムをどう扱うかを、機種ごとに実測する</h3></div></div>
+        <div class="obody">
+          <div class="oblk">
+            <h4>背景</h4>
+            <p>ミリ波レーダーのレドーム（カバー）は樹脂で作られる。<strong>電波を透過することが樹脂を選ぶ条件</strong>だからだ<a class="cit" href="#c-radome">[3]</a>。ハウスの農ビ・農POは0.1mm前後の樹脂膜なので、レーダーがフィルムを素通りして地面を測る可能性がある。<br><br>実機で確かめた公開データは見当たらなかったので、<strong>自社で測って、自社の数字で運用を決める。</strong></p>
+          </div>
+          <div class="oblk">
+            <h4>やること</h4>
+            <ul>
+              <li>フィルム試験体の上でホバリングし、表示される対地高度を読む（後述TEST 1）</li>
+              <li>使用する<strong>全機種で</strong>実施し、結果を機体ごとに記録する</li>
+              <li>フィルムの種類・厚さ・濡れの有無で条件を変える</li>
+            </ul>
+          </div>
+          <div class="orule">
+            <b>運用ルール</b>フィルム面で止まるなら、地形追従モードを条件付きで使える。<strong>地面まで抜けるなら、地形追従モードは使わず、固定高度＋目視で組む。</strong>どちらでも飛ばせる——測って決めるだけ。
+          </div>
+        </div>
+      </article>
+
+      <article class="oproc">
+        <div class="oh"><div class="obd"><b>2</b></div><div class="oht"><h3>屋根の最高点を基準に、固定高度で組む</h3></div></div>
+        <div class="obody">
+          <div class="oblk">
+            <h4>設計</h4>
+            <ul>
+              <li>離陸地点の地面を基準に、<strong>屋根の最高点＋余裕高</strong>を計算して固定高度を決める</li>
+              <li>連棟の谷に落とさない。屋根の凹凸に合わせず、<strong>いちばん高い面の上を一定高度で飛ぶ</strong></li>
+              <li>散布幅は高度で決まるので、余裕高を取った分だけ幅の設定を見直す</li>
+            </ul>
+          </div>
+          <div class="oblk">
+            <h4>1回目の進入</h4>
+            <p><strong>塗る前のフィルムは透明</strong>で、ビジョンセンサーがもっとも苦手な対象。塗って白くなれば視認性は上がる。<br><br>だから<strong>初回の進入は余裕高を大きめに取り、手動で1往復してから</strong>本来の高度に下げる。2往復目以降は白い面が基準として使える。</p>
+          </div>
+          <div class="orule">
+            <b>運用ルール</b>センサーは判断の補助であって、依存する対象ではない<a class="cit" href="#c-vision">[1]</a>。<strong>高度は自分で作る。</strong>センサーが止めてくれることを前提にした経路は組まない。
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="osec" id="o-pos">
+  <div class="ow">
+    <div class="ohd"><span class="on">03 ／ POSITION</span><span class="orr"></span></div>
+    <h2>立ち位置と目視の設計</h2>
+    <p class="oprose">水田では機体は常に自分の目線より下か同じ高さにいる。ハウスは違って、<strong>屋根の向こう側に回った瞬間に見えなくなる</strong>。その数秒を作らない経路を先に決めておく。</p>
+
+    <div class="otw">
       <table>
-        <thead><tr><th>損害の種類</th><th class="nm">金額の目安</th><th>備考</th></tr></thead>
+        <thead><tr><th>設計項目</th><th>やり方</th></tr></thead>
         <tbody>
-          <tr><td>フィルムの張替え（単価）</td><td class="nm">100〜600円／m²</td><td>硬質フィルム・フッ素フィルムは1,000円/m²以上</td></tr>
-          <tr><td>被覆部材 10a分</td><td class="nm">40〜50万円</td><td>標準的な構成の場合</td></tr>
-          <tr><td>ハウス本体の建設費</td><td class="nm">3,000〜20,000円／m²</td><td>10aで約500万〜1,900万円。骨材まで壊せばこの単価が効いてくる</td></tr>
-          <tr><td><strong>ハウス内の作物・育苗中の苗</strong></td><td class="nm"><strong>算定困難</strong></td><td>いちごの育苗ハウスに突っ込めば、その年の作付けそのものが失われる。<strong>建物損害より大きくなり得る</strong></td></tr>
-          <tr><td>栽培の中断・出荷できなかった損失</td><td class="nm"><strong>算定困難</strong></td><td>逸失利益の扱いは契約と保険次第</td></tr>
-          <tr><td>ドリフトによる第三者被害</td><td class="nm">個別</td><td>隣家の車・洗濯物・隣接ハウス。<strong>遮光剤は白く残るので、被害が目に見える</strong></td></tr>
+          <tr><td><strong>経路の向き</strong></td><td>常に<strong>自分側から奥へ</strong>。屋根の向こう側に機体を置く時間を最小にする。奥まで行ったら戻してから隣の列へ移る</td></tr>
+          <tr><td><strong>屋根端の扱い</strong></td><td>屋根の端の手前に<strong>仮想の停止線</strong>を引き、そこで必ず一時停止してから折り返す。外側へ出る経路を作らない</td></tr>
+          <tr><td><strong>補助者の配置</strong></td><td>ハウスの反対側に立ち、<strong>「見えている／見えていない」を声に出して宣言</strong>する。無線で常時つなぐ</td></tr>
+          <tr><td><strong>立ち位置の高さ</strong></td><td>脚立・法面・農道の高い場所を下見で確保しておく。低い位置からしか見えない現場は、経路を短く区切って対応する</td></tr>
+          <tr><td><strong>電線</strong></td><td>細い物体はセンサーで検知できない<a class="cit" href="#c-vision">[1]</a>。下見で位置を記録し、<strong>経路が交差しないルートを机上で作ってから</strong>現場に入る</td></tr>
+          <tr><td><strong>中断の合図</strong></td><td>補助者が「見えない」と言ったら、操縦者は<strong>その場でホバリングして待つ</strong>。降下も前進もしない。合図を1つに統一しておく</td></tr>
         </tbody>
-        <caption>単価は公開されている相場情報から。実際の賠償額は損害の範囲・過失割合・契約内容で変わる。<a class="cit" href="#c-house">[12]</a></caption>
       </table>
     </div>
 
-    <div class="rnote ng">
-      <b class="lb">いちばん危ない現場が、いちばん売りたい現場だった</b>
-      <p>前回、遮光剤の本命ターゲットを<strong>「いちご（あまおう）の育苗・定植期」</strong>としました。しかし冷静に見ると、育苗ハウスは<strong>1棟の中にそのシーズンの苗が全部入っている</strong>場所です。ここに機体を落とせば、フィルム代では済みません。<br><br>検証が終わるまでは、<strong>作物が入っていない空のハウス、または価値の低い作物のハウスから</strong>始めるべきです。売りたい順番と、安全に始められる順番は逆になります。</p>
+    <div class="onote g">
+      <b class="lb">オーバーランは経路設計で潰す</b>
+      <p>ハウスをオーバーランしてしまうという課題は業界でも挙がっている<a class="cit" href="#c-toyota">[4]</a>。逆に言えば、<strong>停止線と補助者の宣言をルール化しているだけで、他社と差がつく</strong>ということ。当日その場で決めるのではなく、下見の段階で経路図を紙に書いておく。</p>
     </div>
   </div>
 </section>
 
-<section class="rsec" id="r-test">
-  <div class="rw">
-    <div class="rhd"><span class="rn">TESTS</span><span class="rr"></span></div>
-    <h2>受注の前に、自社で確かめること</h2>
-    <p class="rprose">未確認の項目は、他人の情報を待つのではなく自分で測る。<strong>この5つが終わるまでは有償案件を受けない</strong>——という線を引いておくと、判断がぶれません。</p>
+<section class="osec" id="o-mc">
+  <div class="ow">
+    <div class="ohd"><span class="on">04 ／ MACHINE</span><span class="orr"></span></div>
+    <h2>機体を固着させない運用</h2>
+    <p class="oprose">遮光剤は炭酸カルシウムとアクリル系樹脂の被覆材で<a class="cit" href="#c-achilles">[5]</a>、<strong>乾いて固まることが製品の目的そのもの</strong>。農薬の希釈液とは付着後の挙動が違うので、運用でカバーする。</p>
 
-    <div class="rtests">
-      <div class="rtest">
-        <div class="rtn"><em>TEST</em><b>1</b></div>
-        <div class="rtc">
-          <h3>レーダーはフィルムを見るか、素通りするか</h3>
-          <ul>
-            <li>使わなくなったハウス、または農ビ／農POフィルムを地上1〜2mに水平に張った試験体を用意する</li>
-            <li>その上をホバリングさせ、<strong>アプリに表示される対地高度を読む</strong></li>
-            <li>フィルム面までの距離を示すか、フィルムを無視して地面までの距離を示すかを記録</li>
-            <li>フィルムの種類（農ビ／農PO／厚さ）、濡れている／乾いている、で条件を変える</li>
-            <li><strong>使う機種すべてで実施する。</strong>機種が違えば結果も違う</li>
-          </ul>
-          <div class="pass"><b>判定</b>地面まで抜けるなら、地形追従モードは<strong>使ってはいけない</strong>。固定高度＋目視で組み直す</div>
-        </div>
-      </div>
-      <div class="rtest">
-        <div class="rtn"><em>TEST</em><b>2</b></div>
-        <div class="rtc">
-          <h3>ビジョンセンサーは透明なフィルムに反応するか</h3>
-          <ul>
-            <li>同じ試験体に対し、<strong>塗る前（透明）</strong>と<strong>塗った後（白）</strong>で障害物検知が働くかを比較</li>
-            <li>逆光・曇天・朝夕など光条件を変えて再現性を見る</li>
-            <li>周囲の電線を模した細いロープでも検知の可否を確認</li>
-          </ul>
-          <div class="pass"><b>判定</b>透明時に反応しないなら、<strong>1回目の進入は必ず手動・高めの高度で</strong>という運用ルールにする</div>
-        </div>
-      </div>
-      <div class="rtest">
-        <div class="rtn"><em>TEST</em><b>3</b></div>
-        <div class="rtc">
-          <h3>遮光剤はモーターにどれだけ入るか</h3>
-          <ul>
-            <li>試験体に実際に遮光剤を散布し、<strong>散布1回・3回・5回でモーター周りを分解点検</strong>する</li>
-            <li>各回でモーター温度と、ホバリング時の出力（スロットル％）を記録</li>
-            <li>プロペラ裏・モーター側面の付着状態を写真で残す</li>
-          </ul>
-          <div class="pass"><b>判定</b>出力が有意に上がる／温度が上がるなら、<strong>1日あたりの散布回数に上限</strong>を設ける</div>
-        </div>
-      </div>
-      <div class="rtest">
-        <div class="rtn"><em>TEST</em><b>4</b></div>
-        <div class="rtc">
-          <h3>正規の洗浄手順をメーカーから取る</h3>
-          <ul>
-            <li>機体メーカーに「遮光剤散布後の推奨洗浄手順」を<strong>書面で</strong>問い合わせる</li>
-            <li>遮光剤メーカー（アキレス等）にも、機体への影響と除去方法を問い合わせる</li>
-            <li>高圧洗浄の可否、使用可能な溶剤、分解を伴う清掃の範囲を確認</li>
-          </ul>
-          <div class="pass"><b>判定</b>回答が得られない＝メーカーも想定していない。その場合は<strong>保証が効かない前提</strong>で機体を消耗品として原価に入れる</div>
-        </div>
-      </div>
-      <div class="rtest">
-        <div class="rtn"><em>TEST</em><b>5</b></div>
-        <div class="rtc">
-          <h3>保険の適用範囲を書面で確認する</h3>
-          <ul>
-            <li>代理店に想定を文章で示す：「遮光剤の塗布作業中に、その対象であるハウスの屋根フィルムを機体が破損させた場合」</li>
-            <li>あわせて「ハウス内の育苗中の苗が損害を受けた場合」「隣接する第三者のハウス・車両に遮光剤が飛散した場合」</li>
-            <li>農薬以外の資材散布が用途として認められるかも確認</li>
-            <li>免責金額・支払限度額・「仕事の目的物」の扱いを明示してもらう</li>
-          </ul>
-          <div class="pass"><b>判定</b>「仕事の目的物」が免責のままなら、<strong>特約を追加できるか</strong>を交渉。できないなら受注しない</div>
-        </div>
-      </div>
+    <div class="otw">
+      <table>
+        <thead><tr><th>タイミング</th><th>やること</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td><strong>散布中</strong></td><td>一定間隔で降ろし、<strong>モーター側面とプロペラ裏</strong>を拭き取る</td><td>薬液の固着で放熱性が損なわれ、モーター出力低下が起こる<a class="cit" href="#c-sekido">[6]</a>。乾く前に取るのが唯一の対策</td></tr>
+          <tr><td><strong>散布後・当日中</strong></td><td>清水ですすぎ洗い。<strong>持ち帰ってからでは固まる</strong></td><td>作業後の清水すすぎはメーカー系の解説でも推奨されている<a class="cit" href="#c-sekido">[6]</a></td></tr>
+          <tr><td><strong>洗浄方法</strong></td><td>高圧洗浄は使わない</td><td>IP等級の試験は真水基準で、高圧の打ち付けは別問題<a class="cit" href="#c-ip">[7]</a>。固着を落とそうとして防水を壊しては本末転倒</td></tr>
+          <tr><td><strong>点検記録</strong></td><td>散布回数ごとに<strong>モーター温度とホバリング時の出力</strong>を記録し、傾向を見る</td><td>数値が動き始めたら、それが自社の運用上限のサイン</td></tr>
+          <tr><td><strong>携行品</strong></td><td>予備プロペラ、予備モーター、ウエス、清水タンク、エアダスター</td><td>現場で交換して続行できるようにしておく</td></tr>
+          <tr><td><strong>メーカー確認</strong></td><td>機体メーカーと遮光剤メーカーに<strong>正規の洗浄手順を書面で照会</strong></td><td>回答が取れれば、それがそのまま顧客への説明材料になる</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="onote">
+      <b class="lb">原価に入れておく</b>
+      <p>遮光剤散布は機体の消耗が水田散布より速いと見ておくのが安全。<strong>プロペラ・モーターの交換頻度を最初から原価に織り込む</strong>と、単価の設計がぶれない。前に出した提示単価（材料込み60〜70円/m²）は、この消耗分を見込んだうえで再計算すること。</p>
     </div>
   </div>
 </section>
 
-<section class="rsec" id="r-cond">
-  <div class="rw">
-    <div class="rhd"><span class="rn">CRITERIA</span><span class="rr"></span></div>
-    <h2>受ける現場・受けない現場</h2>
-    <p class="rprose">検証を終えた後も、すべての現場を受けるわけではありません。<strong>断る基準を先に決めておくと、現場で迷わずに済みます。</strong></p>
-
-    <div class="rcond">
-      <div class="rci y"><span class="mk">○</span><div>屋根の<strong>四隅と稜線が見える立ち位置</strong>が確保できる</div></div>
-      <div class="rci y"><span class="mk">○</span><div>単棟、または谷の構造が単純な連棟</div></div>
-      <div class="rci y"><span class="mk">○</span><div>ハウス周囲に<strong>電線がない</strong>、または飛行経路と交差しない</div></div>
-      <div class="rci y"><span class="mk">○</span><div>隣接ハウス・住宅・道路・駐車車両まで<strong>十分な距離</strong>がある</div></div>
-      <div class="rci y"><span class="mk">○</span><div>施主が屋根の現況（劣化・穴・張力）を申告し、書面で確認済み</div></div>
-      <div class="rci y"><span class="mk">○</span><div>作物が入っていない、または価値の低い作物（検証初期）</div></div>
-      <div class="rci n"><span class="mk">✕</span><div>屋根の向こう側が<strong>まったく見えない</strong>配置</div></div>
-      <div class="rci n"><span class="mk">✕</span><div>飛行経路上または直近に<strong>電線・支線</strong>がある</div></div>
-      <div class="rci n"><span class="mk">✕</span><div>風速が基準を超えている／屋根が濡れている</div></div>
-      <div class="rci n"><span class="mk">✕</span><div>フィルムがすでに劣化・破損しており、<strong>接触前から穴がある</strong></div></div>
-      <div class="rci n"><span class="mk">✕</span><div>隣が<strong>有機・特別栽培</strong>、または住宅・駐車場が至近</div></div>
-      <div class="rci n"><span class="mk">✕</span><div>保険の適用に<strong>書面の確認が取れていない</strong></div></div>
-    </div>
-
-    <div class="rnote ok">
-      <b class="lb">断ることは、営業上マイナスではない</b>
-      <p>むしろ逆です。<strong>「この現場は危ないので受けられません」と言える業者</strong>は、地域で信用されます。前に出した営業の階段でも、2段目の合格条件を「飛ばせない圃場は飛ばせないと言うこと」に置きました。遮光剤ではこれがさらに重い。無理をして1棟壊せば、その地域では二度と仕事が来ません。</p>
-    </div>
-  </div>
-</section>
-
-<section class="rsec" id="r-contract">
-  <div class="rw">
-    <div class="rhd"><span class="rn">CONTRACT</span><span class="rr"></span></div>
-    <h2>契約書で先に潰しておく条項</h2>
-    <ul class="rl">
-      <li><strong>屋根の現況確認と既存劣化の免責</strong> — 作業前に施主と一緒にフィルムの状態を確認し、写真を撮り、既存の劣化・穴について責任を負わないことを明記する。<strong>これがないと「もともと開いていた穴」まで請求されます。</strong></li>
-      <li><strong>中止基準</strong> — 風速の上限、降雨、屋根が濡れている状態。中止の判断権が当方にあることを明記。</li>
-      <li><strong>損害の上限と作物損害の扱い</strong> — 賠償の上限額を合意する。特に<strong>作物・逸失利益を含むのか含まないのか</strong>を明確に。ここが曖昧なままだと、事故時に青天井になります。</li>
-      <li><strong>ドリフトによる第三者被害の対応主体</strong> — 近隣への事前周知を誰がやるか、被害が出た場合に誰が窓口になるか。</li>
-      <li><strong>事故時の手順</strong> — 国交省への報告義務があること、保険会社への連絡が必要なことを、あらかじめ施主にも共有しておく。「黙って直してほしい」と言われても応じられない理由を先に説明しておく。</li>
-      <li><strong>使用資材の指定責任</strong> — 遮光剤の銘柄・希釈をどちらが決めたか。効果不足のクレームを避けるため。</li>
+<section class="osec" id="o-drift">
+  <div class="ow">
+    <div class="ohd"><span class="on">05 ／ DRIFT</span><span class="orr"></span></div>
+    <h2>ドリフト管理</h2>
+    <p class="oprose">遮光剤は<strong>白く残る</strong>。飛べば見える形でクレームになるので、農薬より管理はむしろ簡単——見えるものは事前に防げる。</p>
+    <ul class="ol2">
+      <li><strong>風速の中止基準を数値で決める。</strong>下見の時点で施主と合意し、当日は現場で測って判断する。基準を超えたら日を改める。これを最初に伝えておくと、当日の延期がトラブルにならない</li>
+      <li><strong>隣接方向を風下にしない。</strong>風上側から順に塗り、隣接ハウス・住宅側は風向きが変わるのを待つ</li>
+      <li><strong>事前周知。</strong>近隣への声かけと、駐車車両の移動依頼。洗濯物の時間帯も伝える</li>
+      <li><strong>養生。</strong>至近距離に守るものがある場合はシートをかける。作業前後の写真を残す</li>
+      <li><strong>実測しておく。</strong>風速別にどこまで飛ぶかを自社で測っておけば、下見のときに「この距離なら大丈夫です」と根拠を持って言える</li>
     </ul>
   </div>
 </section>
 
-<section class="rsec" id="r-alt">
-  <div class="rw">
-    <div class="rhd"><span class="rn">ALTERNATIVE</span><span class="rr"></span></div>
-    <h2>ドローンを使わない選択肢も持っておく</h2>
-    <p class="rprose">この商売の本体は「遮光剤をドローンで撒くこと」ではなく、<strong>「屋根に人を上げないこと」</strong>でした。それなら手段はドローンだけではありません。</p>
-    <ul class="rl">
-      <li><strong>高所作業車＋人で塗る</strong> — 屋根に乗らずに塗れます。ドローンより時間はかかりますが、レーダーもモーター固着も関係ない。<strong>検証が終わるまでの現実解</strong>として、これで受注を取ることはできます。</li>
-      <li><strong>除去だけ請ける</strong> — 前回書いたとおり、除去は塗布への入口になります。ただし<strong>除去剤の散布がドローンで可能かは未確認</strong>のままです。人手でやるなら安全上の問題は小さくなります。</li>
-      <li><strong>遮光ネットの展張・撤去</strong> — 資材は違いますが、顧客の困りごと（高温対策と高所作業）は同じです。</li>
-      <li><strong>他社に紹介して手数料を取る</strong> — 検証が終わるまで、自社では飛ばさずに実績のある業者へ橋渡しする。顧客との関係は維持できます。</li>
-    </ul>
-    <div class="rnote">
-      <b class="lb">当面の方針</b>
-      <p><strong>主力は麦・水稲の防除に置く。</strong>遮光剤は、上記TEST 1〜5を完了させる検証プロジェクトとして並走させ、検証が終わってから商材化する。9月の営業では、遮光剤は「来季に向けて準備している」と正直に伝えるほうが、無理に受けて事故を起こすよりはるかに良い結果になります。</p>
+<section class="osec" id="o-test">
+  <div class="ow">
+    <div class="ohd"><span class="on">06 ／ TESTS</span><span class="orr"></span></div>
+    <h2>事前実測メニュー</h2>
+    <p class="oprose">分からないことは、他人の情報を待たずに自分で測る。この5つを済ませれば<strong>自社の運航条件が数字で決まり、同時に他社が持っていない根拠が手に入る。</strong></p>
+
+    <div class="otests">
+      <div class="otest">
+        <div class="otn"><em>TEST</em><b>1</b></div>
+        <div class="otc">
+          <h3>レーダーの対地高度表示を読む</h3>
+          <ul>
+            <li>使わなくなったハウス、または農ビ／農POフィルムを地上1〜2mに水平に張った試験体を用意</li>
+            <li>その上でホバリングし、<strong>アプリの対地高度表示</strong>を読む。フィルム面までか、地面までか</li>
+            <li>フィルムの種類・厚さ・濡れ／乾きで条件を変える。使用する全機種で実施</li>
+          </ul>
+          <div class="use"><b>使い道</b>地形追従モードを使うか、固定高度で組むかがこれで決まる</div>
+        </div>
+      </div>
+      <div class="otest">
+        <div class="otn"><em>TEST</em><b>2</b></div>
+        <div class="otc">
+          <h3>ビジョンセンサーの反応を見る</h3>
+          <ul>
+            <li>同じ試験体で、<strong>塗る前（透明）と塗った後（白）</strong>の障害物検知を比較</li>
+            <li>逆光・曇天・朝夕で再現性を確認</li>
+            <li>細いロープで電線相当の検知可否も見ておく</li>
+          </ul>
+          <div class="use"><b>使い道</b>初回進入の余裕高と、手動／自動の切り分けが決まる</div>
+        </div>
+      </div>
+      <div class="otest">
+        <div class="otn"><em>TEST</em><b>3</b></div>
+        <div class="otc">
+          <h3>散布回数とモーターの関係を測る</h3>
+          <ul>
+            <li>試験体に実際に散布し、<strong>1回・3回・5回でモーター周りを分解点検</strong></li>
+            <li>各回でモーター温度とホバリング出力（スロットル％）を記録</li>
+            <li>付着状態を写真で残す</li>
+          </ul>
+          <div class="use"><b>使い道</b>1日あたりの散布上限と、拭き取りの間隔が決まる</div>
+        </div>
+      </div>
+      <div class="otest">
+        <div class="otn"><em>TEST</em><b>4</b></div>
+        <div class="otc">
+          <h3>洗浄手順をメーカーから取る</h3>
+          <ul>
+            <li>機体メーカーへ「遮光剤散布後の推奨洗浄手順」を書面で照会</li>
+            <li>遮光剤メーカーへ機体への影響と除去方法を照会</li>
+            <li>使用可能な溶剤、分解清掃の範囲、高圧洗浄の可否</li>
+          </ul>
+          <div class="use"><b>使い道</b>整備手順書に落とす。顧客への説明材料にもなる</div>
+        </div>
+      </div>
+      <div class="otest">
+        <div class="otn"><em>TEST</em><b>5</b></div>
+        <div class="otc">
+          <h3>ドリフトの到達距離を測る</h3>
+          <ul>
+            <li>風速別に、機体からどの距離まで白い粒が届くかを実測</li>
+            <li>感水紙または黒い板を並べて付着を確認</li>
+          </ul>
+          <div class="use"><b>使い道</b>下見で「この距離なら問題ありません」と数字で言える</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="rsec" id="r-src">
-  <div class="rw">
-    <div class="rhd"><span class="rn">SOURCES</span><span class="rr"></span></div>
+<section class="osec" id="o-ins">
+  <div class="ow">
+    <div class="ohd"><span class="on">07 ／ COVER</span><span class="orr"></span></div>
+    <h2>保険と契約を先に固める</h2>
+    <p class="oprose">受けるための準備であって、受けない理由ではない。<strong>ここを固めた業者だけが、安心して受注できる。</strong></p>
+
+    <h3>保険で確認すること</h3>
+    <p class="oprose">賠償責任保険では、所有・使用・管理財物および「仕事の目的物」が普通保険約款で免責とされるのが一般的で、作業範囲によって免責の境目が不明確になりやすいため、<strong>あらかじめ特定しておくことが重要</strong>とされている<a class="cit" href="#c-ukeoi">[8]</a>。ハウス散布では<strong>塗る対象がそのまま賠償対象になり得る</strong>ので、ここは代理店に文章で聞く。</p>
+    <div class="ock">
+      <div class="ockh">代理店に文書で確認する項目</div>
+      <div class="oci"><input type="checkbox" id="i1"><label for="i1">遮光剤の塗布作業中に、その対象であるハウスの屋根フィルムを機体が破損させた場合、支払対象になるか</label></div>
+      <div class="oci"><input type="checkbox" id="i2"><label for="i2">ハウス内の作物・育苗中の苗が損害を受けた場合の扱い</label></div>
+      <div class="oci"><input type="checkbox" id="i3"><label for="i3">隣接する第三者のハウス・車両に遮光剤が飛散した場合の扱い</label></div>
+      <div class="oci"><input type="checkbox" id="i4"><label for="i4"><strong>農薬以外の資材散布</strong>が用途として認められているか</label></div>
+      <div class="oci"><input type="checkbox" id="i5"><label for="i5">免責金額・支払限度額。必要なら特約を追加できるか</label></div>
+    </div>
+    <p class="oprose" style="font-size:14px;color:var(--op-muted)">農林水産用のドローン保険には、散布の結果に起因する第三者財物の損壊や、被保険者の管理下にある財物の滅失・損傷・汚損を補償する商品もある<a class="cit" href="#c-kyoei">[9]</a>。商品と特約の選び方で埋められる領域なので、代理店と詰める価値がある。</p>
+
+    <h3>契約書に入れる条項</h3>
+    <div class="ock">
+      <div class="ockh">見積書・契約書に明記</div>
+      <div class="oci"><input type="checkbox" id="j1"><label for="j1"><strong>屋根の現況確認</strong>：作業前に施主と一緒に確認し写真を残す。既存の劣化・穴は対象外</label></div>
+      <div class="oci"><input type="checkbox" id="j2"><label for="j2"><strong>中止基準</strong>：風速の上限、降雨、屋根が濡れている状態。判断権は当方にある</label></div>
+      <div class="oci"><input type="checkbox" id="j3"><label for="j3"><strong>延期の扱い</strong>：回数、期限、追加費用の有無</label></div>
+      <div class="oci"><input type="checkbox" id="j4"><label for="j4"><strong>損害の範囲と上限</strong>：作物・逸失利益を含むか含まないかを明確に</label></div>
+      <div class="oci"><input type="checkbox" id="j5"><label for="j5"><strong>近隣周知の主体</strong>：誰が周知し、被害が出た場合に誰が窓口になるか</label></div>
+      <div class="oci"><input type="checkbox" id="j6"><label for="j6"><strong>資材の指定責任</strong>：遮光剤の銘柄・希釈をどちらが決めたか</label></div>
+      <div class="oci"><input type="checkbox" id="j7"><label for="j7"><strong>事故時の手順</strong>：国交省への報告義務と保険会社への連絡が必要であることを事前に共有</label></div>
+    </div>
+  </div>
+</section>
+
+<section class="osec" id="o-emg">
+  <div class="ow">
+    <div class="ohd"><span class="on">08 ／ EMERGENCY</span><span class="orr"></span></div>
+    <h2>何かあったときの順番</h2>
+    <p class="oprose">起きてから考えないよう、<strong>全員がこの順番を言えるようにしておく。</strong></p>
+    <div class="otw">
+      <table>
+        <thead><tr><th class="nm">順</th><th>やること</th><th>補足</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">1</td><td><strong>飛行を中止</strong>し、電源を落としてバッテリーを外す</td><td>再飛行させない</td></tr>
+          <tr><td class="nm">2</td><td><strong>負傷者の救護</strong>と安全確保</td><td>救護等の必要な措置を怠ると2年以下の懲役または100万円以下の罰金<a class="cit" href="#c-report">[10]</a></td></tr>
+          <tr><td class="nm">3</td><td>現場周辺への<strong>立入制限</strong></td><td>二次被害を防ぐ</td></tr>
+          <tr><td class="nm">4</td><td><strong>写真で記録</strong></td><td>機体、破損箇所、周囲の状況、気象</td></tr>
+          <tr><td class="nm">5</td><td><strong>施主へ報告</strong></td><td>その場で隠さない。隠すほうが必ず高くつく</td></tr>
+          <tr><td class="nm">6</td><td><strong>保険会社・代理店へ連絡</strong></td><td>初動が遅れると支払に影響することがある</td></tr>
+          <tr><td class="nm">7</td><td><strong>国土交通省へ報告</strong></td><td>第三者の所有物の損壊は損傷規模・損害額を問わず報告対象。制御不能・飛行中の発火は重大インシデント。報告しない／虚偽報告は30万円以下の罰金<a class="cit" href="#c-report">[10]</a></td></tr>
+          <tr><td class="nm">8</td><td><strong>原因究明と手順の更新</strong></td><td>この要領書に反映してチームへ再共有する</td></tr>
+        </tbody>
+        <caption>「小さいから黙って直す」という選択肢は取らない。報告義務の対象になり得るうえ、隠したことが後から出れば信用を失う。<strong>報告できる体制があること自体が、プロの条件。</strong></caption>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="osec" id="o-brief">
+  <div class="ow">
+    <div class="ohd"><span class="on">09 ／ BRIEFING</span><span class="orr"></span></div>
+    <h2>チームで共有する</h2>
+
+    <h3>出発前ブリーフィング</h3>
+    <div class="ock">
+      <div class="ockh">車を出す前に、全員で読み合わせ</div>
+      <div class="oci"><input type="checkbox" id="k1"><label for="k1">今日の現場：ハウスの形状、屋根の高さ、フィルムの状態</label></div>
+      <div class="oci"><input type="checkbox" id="k2"><label for="k2">今日の高度設定と、その根拠（地形追従を使うか／固定高度か）</label></div>
+      <div class="oci"><input type="checkbox" id="k3"><label for="k3">飛行経路図と、屋根端の停止線</label></div>
+      <div class="oci"><input type="checkbox" id="k4"><label for="k4">操縦者と補助者の立ち位置、合図の取り決め</label></div>
+      <div class="oci"><input type="checkbox" id="k5"><label for="k5">電線・隣接・第三者の位置</label></div>
+      <div class="oci"><input type="checkbox" id="k6"><label for="k6">中止基準の数値と、誰が判断するか</label></div>
+      <div class="oci"><input type="checkbox" id="k7"><label for="k7">事故時の連絡先（施主・保険代理店・国交省）</label></div>
+      <div class="oci"><input type="checkbox" id="k8"><label for="k8">携行品確認：予備プロペラ、ウエス、清水、感水紙、保険証券の写し</label></div>
+    </div>
+
+    <h3>現場KY（30秒）</h3>
+    <p class="oprose">機体を降ろす前に、その場で全員が輪になって一言ずつ。<strong>「今日いちばん危ないのはどこか」を各自の口から出させる。</strong>下見と違う点が見つかることが多く、30秒の価値はそこにある。</p>
+
+    <h3>終了後</h3>
+    <ul class="ol2">
+      <li>飛行日誌・散布記録・作業前後の写真をその日のうちに整える</li>
+      <li>ヒヤリとした場面があれば、事故に至らなくても記録して共有する</li>
+      <li>モーター温度・出力の記録を蓄積し、傾向を見る</li>
+      <li><strong>この要領書を更新する。</strong>現場で分かったことを次の現場に渡す</li>
+    </ul>
+
+    <div class="onote g">
+      <b class="lb">記録は、いちばん強い営業資料になる</b>
+      <p>顧客がドローン業者に対して本当に不安なのは「うちのハウスを壊されないか」の一点。<strong>下見のチェックシート、経路図、飛行記録、作業前後の写真</strong>をひと揃い出せる業者は、価格の比較から抜けられる。安全のためにやっていることが、そのまま受注理由になる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="osec" id="o-src">
+  <div class="ow">
+    <div class="ohd"><span class="on">SOURCES</span><span class="orr"></span></div>
     <h2>出典</h2>
-    <p class="rprose" style="font-size:14px;color:var(--rk-muted)">「分かっていること」は出典に基づく記述。「分かっていないこと」は今回のWeb調査で確認できなかった事項であり、<strong>存在しないという意味ではありません</strong>。メカニズムの説明と検証手順は本資料の構成です。安全と賠償に関わる判断は、必ずメーカー・保険代理店・行政への直接確認で裏付けてください。</p>
-    <ol class="rsrc">
-      <li id="c-toyota">豊田種苗「ドローンによる遮光剤の散布」 <a href="https://www.toyotane.co.jp/blog/chlorophyll/002228.html">toyotane.co.jp</a>（本文はアクセス制限のため検索結果の要約に基づく）</li>
-      <li id="c-mazex">マゼックス「【モニター急募】ビニールハウス内の暑さにお困りの方、ドローンで遮光剤散布いたします【無料】」 <a href="https://mazex.jp/blog/sunscreen-tester.html">mazex.jp</a></li>
-      <li id="c-sekido">セキド「DJI 農業ドローン 農薬・薬液散布後の機体メンテナンスについて」 <a href="https://sekido-rc.com/blog/technical/faq_221014_002/">sekido-rc.com</a>／マゼックス「産業用ドローンの耐用年数」 <a href="https://mazex.jp/blog/proper-maintenance-5year.html">mazex.jp</a></li>
-      <li id="c-achilles">アキレス「ファインシェードスカイ」 <a href="https://www.achilles.jp/product/agriculture/horticulture/fine-shade-sky/">achilles.jp</a></li>
-      <li id="c-ip">ユニテック「防水モータの選び方｜IP規格・防水等級」 <a href="https://www.unitec-mt.com/waterproof/">unitec-mt.com</a>／Drone Journal「ドローン防水モデルの実力！IP等級と運用時の注意点」 <a href="https://ciida-t.jp/archives/625">ciida-t.jp</a></li>
+    <p class="oprose" style="font-size:14px;color:var(--op-muted)">技術的な記述は各出典の公表内容に基づく。運航手順・チェック項目は本要領書の構成であり、現場での実測と、メーカー・保険代理店・行政への確認で更新していくこと。</p>
+    <ol class="osrc">
+      <li id="c-vision">セキド「DJIドローン 障害物センサーがうまく反応しません・障害物センサーの注意点」 <a href="https://sekido-rc.com/blog/technical/faq_230703_002/">sekido-rc.com</a>／DJI「ドローン製品の障害物感知システムの紹介&amp;よくある質問」 <a href="https://repair.dji.com/help/content?customId=01700006547&amp;spaceId=17&amp;re=JP&amp;lang=ja">repair.dji.com</a></li>
       <li id="c-agl">農業ドローンの自動航行設定と対地高度・地形追従モードの解説 <a href="https://uitec.net/nougyoudoronnojdenorutosakuseitejun.html">uitec.net</a>／sola agri「農業用ドローンの自動飛行の特徴や課題」 <a href="https://www.sola-agri.com/basic_knowledge/automatic-flight.html">sola-agri.com</a></li>
-      <li id="c-radome">古河電気工業「レドーム材料へのご提案」 <a href="https://www.furukawaelectric.com/scb/suggestion/radome.html">furukawaelectric.com</a>／ポリプラスチックス「デンソー様のミリ波レーダーへの採用」 <a href="https://www.polyplastics-global.com/jp/csr/highlight/2018_02.html">polyplastics-global.com</a>／スーパーレジン工業「電波応用分野のGFRP製品実績」 <a href="https://www.super-resin.co.jp/manufacturing/radio-wave/">super-resin.co.jp</a></li>
-      <li id="c-vision">セキド「DJIドローン 障害物センサーがうまく反応しません・障害物センサーの注意点」 <a href="https://sekido-rc.com/blog/technical/faq_230703_002/">sekido-rc.com</a>／DJI「ドローン製品の障害物感知システムの紹介&amp;よくある質問」 <a href="https://repair.dji.com/help/content?customId=01700006547&amp;spaceId=17&amp;re=JP&amp;lang=ja">repair.dji.com</a>（アクセス制限のため検索結果の要約に基づく）</li>
-      <li id="c-ukeoi">鴻上喜芳「請負業者賠償責任保険管理財物免責の現状と課題」保険学雑誌 <a href="https://www.jstage.jst.go.jp/article/giiij/79/3/79_53/_pdf">jstage.jst.go.jp</a>／東京海上日動「請負業者賠償責任保険」 <a href="https://www.tokiomarine-nichido.co.jp/hojin/baiseki/ukeoi/">tokiomarine-nichido.co.jp</a>／日新火災「賠償責任保険の種類」 <a href="https://media.nisshinfire.co.jp/biz/product/baisyo-ins01/">nisshinfire.co.jp</a></li>
-      <li id="c-kyoei">共栄火災「ドローン総合保険 農林水産用」 <a href="https://www.kyoeikasai.co.jp/pdf/ag/agriculture/drone.pdf">kyoeikasai.co.jp</a>（アクセス制限のため検索結果の要約に基づく）／ACSL「ドローンの保険を検討すべき理由」 <a href="https://product.acsl.co.jp/useful/post-2605/">acsl.co.jp</a></li>
-      <li id="c-report">国土交通省「無人航空機の事故等の報告及び負傷者救護義務」 <a href="https://www.mlit.go.jp/koku/accident_report.html">mlit.go.jp</a>／事故・重大インシデントの報告義務の解説 <a href="https://drone-shugyo.com/rule-jiko-report.html">drone-shugyo.com</a></li>
-      <li id="c-house">イノチオアグリ「ビニールハウスの値段・価格の相場」 <a href="https://inochio.co.jp/column/71/">inochio.co.jp</a>／イノチオグループ「ビニールハウスの張り替え方法」 <a href="https://inochio.co.jp/column/36/">inochio.co.jp</a>／MEGADERU「ビニールハウスのフィルム張替え費用相場」 <a href="https://www.megaderu.net/supplier/publicNews/38">megaderu.net</a></li>
+      <li id="c-radome">古河電気工業「レドーム材料へのご提案」 <a href="https://www.furukawaelectric.com/scb/suggestion/radome.html">furukawaelectric.com</a>／ポリプラスチックス「デンソー様のミリ波レーダーへの採用」 <a href="https://www.polyplastics-global.com/jp/csr/highlight/2018_02.html">polyplastics-global.com</a></li>
+      <li id="c-toyota">豊田種苗「ドローンによる遮光剤の散布」 <a href="https://www.toyotane.co.jp/blog/chlorophyll/002228.html">toyotane.co.jp</a></li>
+      <li id="c-achilles">アキレス「ファインシェードスカイ」 <a href="https://www.achilles.jp/product/agriculture/horticulture/fine-shade-sky/">achilles.jp</a></li>
+      <li id="c-sekido">セキド「DJI 農業ドローン 農薬・薬液散布後の機体メンテナンスについて」 <a href="https://sekido-rc.com/blog/technical/faq_221014_002/">sekido-rc.com</a>／マゼックス「産業用ドローンの耐用年数」 <a href="https://mazex.jp/blog/proper-maintenance-5year.html">mazex.jp</a></li>
+      <li id="c-ip">ユニテック「防水モータの選び方｜IP規格・防水等級」 <a href="https://www.unitec-mt.com/waterproof/">unitec-mt.com</a>／Drone Journal「ドローン防水モデルの実力！IP等級と運用時の注意点」 <a href="https://ciida-t.jp/archives/625">ciida-t.jp</a></li>
+      <li id="c-ukeoi">鴻上喜芳「請負業者賠償責任保険管理財物免責の現状と課題」保険学雑誌 <a href="https://www.jstage.jst.go.jp/article/giiij/79/3/79_53/_pdf">jstage.jst.go.jp</a>／東京海上日動「請負業者賠償責任保険」 <a href="https://www.tokiomarine-nichido.co.jp/hojin/baiseki/ukeoi/">tokiomarine-nichido.co.jp</a></li>
+      <li id="c-kyoei">共栄火災「ドローン総合保険 農林水産用」 <a href="https://www.kyoeikasai.co.jp/pdf/ag/agriculture/drone.pdf">kyoeikasai.co.jp</a>／ACSL「ドローンの保険を検討すべき理由」 <a href="https://product.acsl.co.jp/useful/post-2605/">acsl.co.jp</a></li>
+      <li id="c-report">国土交通省「無人航空機の事故等の報告及び負傷者救護義務」 <a href="https://www.mlit.go.jp/koku/accident_report.html">mlit.go.jp</a></li>
+      <li id="c-house">イノチオアグリ「ビニールハウスの値段・価格の相場」 <a href="https://inochio.co.jp/column/71/">inochio.co.jp</a>／MEGADERU「ビニールハウスのフィルム張替え費用相場」 <a href="https://www.megaderu.net/supplier/publicNews/38">megaderu.net</a>（賠償額の規模感の参考：フィルム張替え100〜600円/m²、10a分の被覆部材40〜50万円）</li>
     </ol>
   </div>
 </section>
@@ -584,5 +594,23 @@ footer{padding:36px 0 60px;font-size:12.5px;color:var(--rk-muted);font-family:"R
 </main>
 
 <footer>
-  <div class="rw">遮光剤散布のリスク検証 ／ 2026年8月作成 ／ 「分かっていないこと」は自社での実測に置き換えること。安全と賠償の判断は必ず一次確認を。</div>
+  <div class="ow">ハウス散布 運航要領 ／ 2026年8月作成 ／ 現場で得た知見を反映して更新すること。この要領書は使いながら育てる。</div>
 </footer>
+
+<script>
+(function(){
+  var KEY='op-greenhouse-ops-v1';
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ saved={}; }
+  var inputs=document.querySelectorAll('.oci input[type=checkbox]');
+  function persist(){
+    var st={};
+    Array.prototype.forEach.call(inputs,function(i){ if(i.checked) st[i.id]=1; });
+    try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){}
+  }
+  Array.prototype.forEach.call(inputs,function(el){
+    if(saved[el.id]) el.checked=true;
+    el.addEventListener('change',persist);
+  });
+})();
+</script>
