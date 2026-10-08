@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>院内体外循環 育成モデル</title>
+<style>
+:root{
+  --bg:#eef0f3; --surface:#fff; --surface2:#f4f6f9; --ink:#161a22; --ink2:#3d4452; --muted:#6a7183;
+  --line:#d8dce5; --navy:#1f2b4d; --green:#2f6b46; --green-bg:#e1eee6; --blue:#2b5878; --blue-bg:#e1eaf1;
+  --red:#b83a2c; --red-bg:#f8e7e4; --amber:#8a6410; --amber-bg:#f7edd6;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d0f14; --surface:#161923; --surface2:#1d212d; --ink:#e9ebf1; --ink2:#bfc4d2; --muted:#8b91a4;
+    --line:#2a2f3d; --navy:#aab6dc; --green:#82c39a; --green-bg:#18291f; --blue:#7fb2d6; --blue-bg:#16242e;
+    --red:#e8705f; --red-bg:#33201d; --amber:#d9b455; --amber-bg:#2b2417;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d0f14; --surface:#161923; --surface2:#1d212d; --ink:#e9ebf1; --ink2:#bfc4d2; --muted:#8b91a4;
+  --line:#2a2f3d; --navy:#aab6dc; --green:#82c39a; --green-bg:#18291f; --blue:#7fb2d6; --blue-bg:#16242e;
+  --red:#e8705f; --red-bg:#33201d; --amber:#d9b455; --amber-bg:#2b2417;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 72px}
+header h1{font-size:1.65rem;line-height:1.4;margin:.2em 0;color:var(--navy)}
+header p{color:var(--ink2);margin:.3em 0}
+.tag{display:inline-block;font-size:.75rem;padding:1px 10px;border-radius:99px;background:var(--blue-bg);color:var(--blue);font-weight:700}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin:16px 0;display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav a{flex:none;text-decoration:none;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:.85rem}
+nav a b{color:var(--navy)}
+section{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0;scroll-margin-top:64px}
+section>h2{margin:0 0 4px;font-size:1.25rem;color:var(--navy)}
+.step{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--green)}
+h3{font-size:1rem;margin:1.4em 0 .3em}
+.lead{color:var(--ink2);margin:.2em 0 1em}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h4{margin:0 0 4px;font-size:.92rem;color:var(--navy)}
+.card p,.card ul{margin:0;font-size:.9rem;color:var(--ink2)}
+.card ul{padding-left:1.1em}
+.call{border-left:4px solid var(--amber);background:var(--amber-bg);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:.92rem}
+.call.red{border-color:var(--red);background:var(--red-bg)}
+.call.green{border-color:var(--green);background:var(--green-bg)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--surface2);color:var(--navy)}
+.ok{color:var(--green);font-weight:700}.ng{color:var(--red);font-weight:700}.q{color:var(--amber);font-weight:700}
+svg{width:100%;height:auto;display:block;margin:10px 0}
+svg text{font-family:inherit;fill:var(--ink)}
+.s-box{fill:var(--surface2);stroke:var(--line)}
+.s-g{fill:var(--green-bg);stroke:var(--green)}
+.s-b{fill:var(--blue-bg);stroke:var(--blue)}
+.s-r{fill:var(--red-bg);stroke:var(--red)}
+.s-a{fill:var(--amber-bg);stroke:var(--amber)}
+.s-line{stroke:var(--muted);fill:none;stroke-width:1.5}
+.s-sm{font-size:11px;fill:var(--muted)}
+.s-h{font-size:13px;font-weight:700}
+.say{background:var(--surface2);border:1px dashed var(--line2,var(--line));border-radius:10px;padding:10px 14px;font-size:.92rem;margin:8px 0}
+.say b{color:var(--green)}
+.two{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+footer{color:var(--muted);font-size:.8rem;margin-top:28px}
+a.src{color:var(--blue)}
+@media print{nav{display:none}section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">STEP方式 ビジネスモデル設計</span>
+  <h1>「主体性で何とかして」を<br>仕組みに変える：院内 体外循環 育成モデル</h1>
+  <p>出発点：人工心肺(体外循環)を扱いたいと伝えても「今の業務を」「もっと主体性を」で止まってしまう。<br>
+  → 個人の根性ではなく、<b>病院にとって得になる“育成の入口”</b>を設計し、積小為大で進める。</p>
+</header>
+
+<nav>
+  <a href="#s0"><b>0</b> 前提</a><a href="#s1"><b>1</b> 課題</a><a href="#s2"><b>2</b> 関係者</a>
+  <a href="#s3"><b>3</b> モデル図</a><a href="#s4"><b>4</b> 段階はしご</a><a href="#s5"><b>5</b> 提案</a>
+  <a href="#s6"><b>6</b> 反対意見</a><a href="#s7"><b>7</b> 事実確認</a><a href="#s8"><b>8</b> 次の一歩</a>
+</nav>
+
+<section id="s0">
+  <div class="step">STEP 0</div><h2>前提と置いた仮定</h2>
+  <p class="lead">会話から読み取れたことと、読み取れなかったことを分けます。</p>
+  <div class="two">
+    <div class="card"><h4>会話から言えること</h4><ul>
+      <li>相手は麻酔補助の業務を担い、心肺(体外循環)を「やりたい」と継続的に表明している</li>
+      <li>上の人から「行動でも示すべき」「時間がある時は心外のオペを見に行く」と言われた</li>
+      <li>他部署派遣はあるが<b>教育体制が整っていない</b></li>
+      <li>「主体性」と「体制の欠如」が混ざって語られている</li></ul></div>
+    <div class="card"><h4>わからないこと(仮定)</h4><ul>
+      <li>職種(看護師か臨床工学技士か等)が不明 → <b>職種中立</b>で設計。職種で担える範囲が変わるため後述の確認が必要</li>
+      <li>病院の心臓血管外科の症例数・体外循環の担当体制</li>
+      <li>上司が「止めている」のか「本気度を見ている」のか</li></ul></div>
+  </div>
+</section>
+
+<section id="s1">
+  <div class="step">STEP 1</div><h2>課題の再定義：何が起きているか</h2>
+  <p class="lead">「主体性が足りない」ではなく、<b>主体性の“受け皿”がない</b>という構造問題として捉え直します。</p>
+  <svg viewBox="0 0 760 210" role="img" aria-label="現状の構造図">
+    <rect class="s-g" x="10" y="70" width="140" height="64" rx="10"/><text class="s-h" x="80" y="98" text-anchor="middle">本人</text><text class="s-sm" x="80" y="118" text-anchor="middle">「心肺をやりたい」</text>
+    <rect class="s-a" x="300" y="70" width="160" height="64" rx="10"/><text class="s-h" x="380" y="98" text-anchor="middle">上司・現場</text><text class="s-sm" x="380" y="118" text-anchor="middle">「主体性を出して」</text>
+    <rect class="s-r" x="610" y="70" width="140" height="64" rx="10"/><text class="s-h" x="680" y="98" text-anchor="middle">結果</text><text class="s-sm" x="680" y="118" text-anchor="middle">挫けそう・動けない</text>
+    <path class="s-line" d="M150 102 H300"/><path class="s-line" d="M460 102 H610"/>
+    <rect class="s-box" x="190" y="150" width="380" height="46" rx="8" stroke-dasharray="5 4"/>
+    <text class="s-sm" x="380" y="170" text-anchor="middle">欠けているもの：教育体制 / 時間の確保 / 到達基準 / 評価 / 担当者</text>
+    <text class="s-sm" x="380" y="186" text-anchor="middle">→ 個人の根性に依存(属人的)</text>
+    <path class="s-line" d="M380 134 V150"/>
+  </svg>
+  <div class="call"><b>観察：</b>「見学に行け」は、<b>誰が時間を空け・誰が受け入れ・何をもって前進とするか</b>が決まっていない指示です。時間のある人だけが有利になる(会話の指摘どおり)公平性の問題も含みます。</div>
+</section>
+
+<section id="s2">
+  <div class="step">STEP 2</div><h2>関係者と「それぞれの得」</h2>
+  <p class="lead">相手が動くのは、正論より<b>自分の得</b>が見えたときです。</p>
+  <table>
+    <tr><th>関係者</th><th>関心・不安</th><th>提供できる価値</th></tr>
+    <tr><td>本人(希望者)</td><td>学びたいが時間・教育がない</td><td>意欲、麻酔補助で培った周術期の理解、継続性</td></tr>
+    <tr><td>心臓血管外科・体外循環担当</td><td>人手・属人化・教える負担</td><td>将来の担当者候補、夜間休日の備え、後進育成</td></tr>
+    <tr><td>麻酔科・上司</td><td>本業の穴、シフト調整</td><td>抜けても回る段取り、ローテの透明化</td></tr>
+    <tr><td>病院経営・管理部門</td><td>人員配置、安全、コスト</td><td>体外循環要員の複線化(リスク低減)、定着率向上</td></tr>
+    <tr><td>患者</td><td>安全な手術</td><td>人員冗長性と教育された担当者</td></tr>
+  </table>
+  <div class="call green"><b>核心の価値：</b>本人の希望の話を、<b>「体外循環を担える人を院内で複線化する育成プロジェクト」</b>という病院側の価値に翻訳する。</div>
+</section>
+
+<section id="s3">
+  <div class="step">STEP 3</div><h2>ビジネスモデル図(院内版キャンバス)</h2>
+  <p class="lead">営利ではなく「院内の育成事業」として、キャンバスの9要素に当てはめます。</p>
+  <svg viewBox="0 0 760 330" role="img" aria-label="院内ビジネスモデルキャンバス">
+    <rect class="s-b" x="5" y="5" width="145" height="200" rx="8"/><text class="s-h" x="15" y="26">主要パートナー</text>
+    <text class="s-sm" x="15" y="48">・心臓血管外科医</text><text class="s-sm" x="15" y="66">・体外循環担当者</text><text class="s-sm" x="15" y="84">・麻酔科責任者</text><text class="s-sm" x="15" y="102">・看護/技士の部門長</text><text class="s-sm" x="15" y="120">・学会/セミナー</text>
+    <rect class="s-box" x="155" y="5" width="145" height="98" rx="8"/><text class="s-h" x="165" y="26">主要活動</text>
+    <text class="s-sm" x="165" y="48">・見学→補助→実習</text><text class="s-sm" x="165" y="66">・到達度チェック</text><text class="s-sm" x="165" y="84">・月次振り返り</text>
+    <rect class="s-box" x="155" y="107" width="145" height="98" rx="8"/><text class="s-h" x="165" y="128">主要資源</text>
+    <text class="s-sm" x="165" y="150">・指導者の時間</text><text class="s-sm" x="165" y="168">・症例/シミュレータ</text><text class="s-sm" x="165" y="186">・手順書・教材</text>
+    <rect class="s-g" x="305" y="5" width="160" height="200" rx="8"/><text class="s-h" x="315" y="26">価値提案</text>
+    <text class="s-sm" x="315" y="50">病院へ：</text><text class="s-sm" x="315" y="68">体外循環要員の複線化</text><text class="s-sm" x="315" y="86">属人化・退職リスク低減</text>
+    <text class="s-sm" x="315" y="112">本人へ：</text><text class="s-sm" x="315" y="130">段階的な学びと到達点</text><text class="s-sm" x="315" y="148">意欲が評価される道筋</text>
+    <text class="s-sm" x="315" y="174">他職員へ：</text><text class="s-sm" x="315" y="192">公平な参加ルール</text>
+    <rect class="s-box" x="470" y="5" width="145" height="98" rx="8"/><text class="s-h" x="480" y="26">関係性</text>
+    <text class="s-sm" x="480" y="48">・担当メンター制</text><text class="s-sm" x="480" y="66">・定期面談(四半期)</text><text class="s-sm" x="480" y="84">・成果の見える化</text>
+    <rect class="s-box" x="470" y="107" width="145" height="98" rx="8"/><text class="s-h" x="480" y="128">経路</text>
+    <text class="s-sm" x="480" y="150">・科内カンファ</text><text class="s-sm" x="480" y="168">・院内の人材委員会</text><text class="s-sm" x="480" y="186">・上司への1枚提案</text>
+    <rect class="s-a" x="620" y="5" width="135" height="200" rx="8"/><text class="s-h" x="630" y="26">顧客</text>
+    <text class="s-sm" x="630" y="48">・心臓血管外科</text><text class="s-sm" x="630" y="66">・手術部門</text><text class="s-sm" x="630" y="84">・病院管理者</text><text class="s-sm" x="630" y="110">受益者：</text><text class="s-sm" x="630" y="128">・本人</text><text class="s-sm" x="630" y="146">・患者</text>
+    <rect class="s-r" x="5" y="212" width="370" height="112" rx="8"/><text class="s-h" x="15" y="233">コスト</text>
+    <text class="s-sm" x="15" y="255">・指導者の時間(最大の負担)</text><text class="s-sm" x="15" y="273">・本人の本務を抜ける間の人員調整</text><text class="s-sm" x="15" y="291">・研修費・受験費用(施設負担か個人か要交渉)</text><text class="s-sm" x="15" y="309">・安全面の管理コスト</text>
+    <rect class="s-g" x="380" y="212" width="375" height="112" rx="8"/><text class="s-h" x="390" y="233">収益(=院内リターン)</text>
+    <text class="s-sm" x="390" y="255">・要員冗長化による手術枠の安定</text><text class="s-sm" x="390" y="273">・離職・燃え尽きの抑制</text><text class="s-sm" x="390" y="291">・教育体制の再利用(他の希望者にも展開)</text><text class="s-sm" x="390" y="309">・施設基準や認定要件への寄与(要確認：STEP7)</text>
+  </svg>
+  <div class="call"><b>設計の肝：</b>最大のコストは「指導者の時間」です。ここを軽くする設計(短時間・固定枠・手順書化)でないと、現場は首を縦に振りません。</div>
+</section>
+
+<section id="s4">
+  <div class="step">STEP 4</div><h2>段階はしご：積小為大で進める</h2>
+  <p class="lead">一足飛びに「操作したい」ではなく、<b>低コスト・低リスクの小さな段から</b>。各段に「通過条件」を置いて、主体性を“見える化”します。</p>
+  <svg viewBox="0 0 760 300" role="img" aria-label="5段階のはしご">
+    <g>
+      <rect class="s-b" x="10" y="230" width="140" height="60" rx="6"/><text class="s-h" x="80" y="255" text-anchor="middle">Lv1 学ぶ</text><text class="s-sm" x="80" y="274" text-anchor="middle">自習・院外セミナー</text>
+      <rect class="s-b" x="160" y="185" width="140" height="105" rx="6"/><text class="s-h" x="230" y="210" text-anchor="middle">Lv2 見る</text><text class="s-sm" x="230" y="229" text-anchor="middle">月1回の見学枠</text><text class="s-sm" x="230" y="245" text-anchor="middle">所見をメモ提出</text>
+      <rect class="s-g" x="310" y="140" width="140" height="150" rx="6"/><text class="s-h" x="380" y="165" text-anchor="middle">Lv3 補助</text><text class="s-sm" x="380" y="184" text-anchor="middle">準備・回路・記録</text><text class="s-sm" x="380" y="200" text-anchor="middle">指導者の下で</text>
+      <rect class="s-g" x="460" y="95" width="140" height="195" rx="6"/><text class="s-h" x="530" y="120" text-anchor="middle">Lv4 実習</text><text class="s-sm" x="530" y="139" text-anchor="middle">手順書に沿い</text><text class="s-sm" x="530" y="155" text-anchor="middle">監督下で部分担当</text><text class="s-sm" x="530" y="171" text-anchor="middle">(範囲は法令・院規で確認)</text>
+      <rect class="s-a" x="610" y="50" width="140" height="240" rx="6"/><text class="s-h" x="680" y="75" text-anchor="middle">Lv5 担当</text><text class="s-sm" x="680" y="94" text-anchor="middle">認定・院内承認後</text><text class="s-sm" x="680" y="110" text-anchor="middle">独立して担当</text>
+    </g>
+    <path class="s-line" d="M30 220 L690 40"/><text class="s-sm" x="420" y="60">積小為大 →</text>
+  </svg>
+  <table>
+    <tr><th>段</th><th>期間の目安*</th><th>通過条件(例)</th><th>病院側の負担</th></tr>
+    <tr><td>Lv1 学ぶ</td><td>〜3か月</td><td>基礎資料の読了・要点レポート</td><td>ほぼなし</td></tr>
+    <tr><td>Lv2 見る</td><td>3〜6か月</td><td>見学3〜5件・所見メモ・質問リスト</td><td>見学許可と枠の確保</td></tr>
+    <tr><td>Lv3 補助</td><td>6〜12か月</td><td>準備物の確認を指導者が承認</td><td>指導者の時間(中)</td></tr>
+    <tr><td>Lv4 実習</td><td>1〜2年</td><td>チェックリスト合格・症例記録</td><td>指導・監督(大)</td></tr>
+    <tr><td>Lv5 担当</td><td>要相談</td><td>院内の承認・必要な認定</td><td>承認手続き</td></tr>
+  </table>
+  <p style="font-size:.8rem;color:var(--muted)">*期間は仮置きの設計案で、実在の標準期間ではありません。病院の症例数に合わせて調整してください。</p>
+  <div class="call red"><b>注意：</b>どの段までを職種として行ってよいかは、資格・法令・院内規程で決まります。Lv4以降は、必ず院内の責任者と法令上の範囲を確認してから設計してください(STEP 7)。</div>
+</section>
+
+<section id="s5">
+  <div class="step">STEP 5</div><h2>上司への提案：1枚の骨子と話し方</h2>
+  <p class="lead">「やりたい」ではなく「こうすれば病院も助かる」という<b>提案</b>の形にします。</p>
+  <div class="card"><h4>提案書の骨子(A4・1枚)</h4><ul>
+    <li><b>目的</b>：体外循環に関わる人材の複線化(安全性・継続性)</li>
+    <li><b>現状</b>：希望者がいるが、育成の入口と基準がない</li>
+    <li><b>提案</b>：Lv2見学を月1回・固定枠で試行(3か月)</li>
+    <li><b>本業への配慮</b>：抜けるときの代替案を本人が先に用意</li>
+    <li><b>評価</b>：見学記録の提出、3か月後に面談して次の段へ</li>
+    <li><b>お願い</b>：受け入れ窓口となる担当者を1名決めてほしい</li></ul></div>
+  <h3>伝え方の例</h3>
+  <div class="say"><b>NG</b>：「心肺をやりたいんですが、教育体制がなくて…」(課題の提示で終わる)</div>
+  <div class="say"><b>OK</b>：「体外循環の担当を院内で増やす試みを、まず3か月、月1回の見学から試したいです。抜ける時間帯の代わりは私が調整案を出します。窓口になっていただける方を決めていただけませんか」</div>
+  <div class="call green"><b>ポイント：</b>「主体性を出せ」と言われたら、<b>主体性の実例として提案書を出す</b>。相手の言葉を、そのまま次の一手の根拠にします。</div>
+</section>
+
+<section id="s6">
+  <div class="step">STEP 6</div><h2>反対意見と、それへの備え</h2>
+  <p class="lead">多角的に見るため、あえて反対側の論点を並べます。</p>
+  <table>
+    <tr><th>想定される反論</th><th>一理ある点</th><th>備え</th></tr>
+    <tr><td>「まず今の業務を完璧に」</td><td>本務の信頼が前提。穴が空くと周囲の負担が増える</td><td>本務の実績を数字・事例で示し、代替案を先に出す</td></tr>
+    <tr><td>「本気なら自分で時間を作れ」</td><td>意欲の確認として見学は低コスト</td><td>見学は実施済みの記録で示す。ただし<b>個人の時間外に頼る形は公平性を欠く</b>ので勤務内の枠を提案</td></tr>
+    <tr><td>「体外循環は専門職の業務」</td><td>資格・責任・安全の問題は現実にある</td><td>範囲を確認し、職種に応じた形(補助/周辺業務/認定取得)に調整</td></tr>
+    <tr><td>「症例数が少なく教える余裕がない」</td><td>教育は症例とマンパワーを要する</td><td>Lv1〜2中心に始め、負担の小さい段で実績を作る</td></tr>
+    <tr><td>「他にもやりたい人が出たら?」</td><td>前例が増えるのは管理負担</td><td>それこそ<b>制度化</b>する理由。公募・基準・枠の仕組みにする</td></tr>
+  </table>
+  <div class="call"><b>もう一つの見方：</b>上司の言葉は意地悪ではなく、「やる気を測る簡単な方法」として出た可能性もあります。意図を一度確認する(例：「何をもって主体性と見ていただけますか」)のも有効です。これは私の推測で、事実とは限りません。</div>
+</section>
+
+<section id="s7">
+  <div class="step">STEP 7</div><h2>ファクトチェック</h2>
+  <p class="lead">調べて確認できたことと、できなかったことを分けて示します。</p>
+  <table>
+    <tr><th>項目</th><th>判定</th><th>内容・出典</th></tr>
+    <tr><td>臨床工学技士は国家資格で、医師の指示の下に生命維持管理装置を操作・保守点検する職種</td><td class="ok">確認</td><td>検索結果の複数施設資料に記載(例：<a class="src" href="https://www.pref.chiba.lg.jp/junkan/shinryoka/me/index.html">千葉県</a>)</td></tr>
+    <tr><td>人工心肺は医師の指示のもと複数の技士が担当する形が取られている</td><td class="ok">確認(施設例)</td><td>施設資料の記載。全国一律とは言い切れない</td></tr>
+    <tr><td>体外循環技術認定士制度は4学会(胸部外科・心臓血管外科・人工臓器・体外循環技術医学会)が設置</td><td class="ok">確認</td><td>沖縄県資料など(<a class="src" href="https://byoinjigyokyoku.pref.okinawa.jp/userfiles/files/recruit/training/06_clinical_engineering_technician_certifications.pdf">資料</a>)</td></tr>
+    <tr><td>認定士の受験資格(対象職種・経験年数・単位)</td><td class="q">未確認</td><td>今回の検索では正式な条件を確認できず。4学会合同認定委員会の最新要項を要確認</td></tr>
+    <tr><td>看護師が人工心肺を操作できるか、役割分担</td><td class="q">未確認</td><td>検索で具体的な記述を確認できず。法令・院内規程・所属長に要確認</td></tr>
+    <tr><td>「心臓血管外科基幹病院の認定要件に認定士1名以上」</td><td class="q">一部確認</td><td>ある資料の記載のみ。詳細・最新条件は要確認</td></tr>
+    <tr><td>本モデルの期間・段階・効果</td><td class="ng">設計案</td><td>私が仮置きした案で、実証データはありません</td></tr>
+  </table>
+  <div class="call red"><b>正直な限界：</b>病院の事情、本人の職種、上司の真意は会話からは確定できません。モデルは「たたき台」で、効果の保証はありません。</div>
+</section>
+
+<section id="s8">
+  <div class="step">STEP 8</div><h2>次の一歩：小さく始める</h2>
+  <p class="lead">二宮尊徳の言葉に沿って、まず<b>今週できる最小の行動</b>に落とします。</p>
+  <div class="grid">
+    <div class="card"><h4>今週(至誠)</h4><ul><li>確認事項を3つ書き出す：自職種の担える範囲/受験要件/院内に認定士がいるか</li><li>上司に「主体性とは具体的に何か」を聞く面談の依頼</li></ul></div>
+    <div class="card"><h4>今月(勤労)</h4><ul><li>A4提案書を作る(STEP5)</li><li>本務の代替案を先に整える</li><li>Lv1の自習を開始(週30分でも可)</li></ul></div>
+    <div class="card"><h4>3か月(分度)</h4><ul><li>月1回の見学枠を試行</li><li>無理のない範囲で。本務と家庭を壊さない配分</li></ul></div>
+    <div class="card"><h4>その先(推譲)</h4><ul><li>うまくいけば型を他の希望者にも渡す</li><li>後から来る人の道を作る＝会話で語られていた「一番重要なこと」</li></ul></div>
+  </div>
+  <div class="call green"><b>要するに：</b>「主体性を出せ」を受け流すのではなく、<b>主体性を受け止める仕組みごと提案する側に回る</b>。その提案自体が、最も説得力のある主体性の証明になります。</div>
+</section>
+
+<footer>
+  作成：Claude Code ／ 医療行為の可否・資格要件は法令と所属施設の規程が優先します。本資料は一般的な設計案で、法的・医療的助言ではありません。
+</footer>
+</div>
+</body>
+</html>
